@@ -1,2 +1,2 @@
 # install-packages
-Installing packages in my system (linux distro)
+Installing packages in my system (ubuntu, arch)
