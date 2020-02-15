@@ -23,7 +23,6 @@ mpv
 vim
 neovim
 nodejs
-npm
 ntfs-3g
 openjdk11-src
 opera
