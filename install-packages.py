@@ -1,4 +1,4 @@
-import re
+from re import search
 from subprocess import call
 
 
@@ -11,7 +11,7 @@ def get_data_from_file(path_to_file):
 
 
 os_release = get_data_from_file('/etc/os-release')
-distro_name = re.search(r"ID=(\w+)", ' '.join(os_release)).group(1)
+distro_name = search(r"ID=(\w+)", ' '.join(os_release)).group(1)
 
 file = distro_name + '-packages.txt'
 
