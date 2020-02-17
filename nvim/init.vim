@@ -280,9 +280,3 @@ nnoremap <S-q> :q<cr>
 
 "reload vimrc
 " nnoremap <C-r> :source ~/.config/nvim/init.vim<cr>
-
-"=========================================================================
-" Macros
-
-" for css, scc
-" let @c = ''
