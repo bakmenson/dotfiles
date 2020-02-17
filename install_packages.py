@@ -25,6 +25,8 @@ elif distro_name == 'arch':
 else:
     pass
 
+call('cp -r i3 ~/.config', shell=True)
+
 # build from source
 
 # oh-my-zsh
@@ -74,6 +76,7 @@ if distro_name == 'ubuntu':
     call('make -j8', shell=True)
     call('sudo make install', shell=True)
     call('cd ~/', shell=True)
+call('', shell=True)
 
 # polybar
 if distro_name == 'ubuntu':
