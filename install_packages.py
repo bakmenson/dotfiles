@@ -76,7 +76,6 @@ if distro_name == 'ubuntu':
     call('make -j8', shell=True)
     call('sudo make install', shell=True)
     call('cd ~/', shell=True)
-call('', shell=True)
 
 # polybar
 if distro_name == 'ubuntu':
@@ -87,6 +86,7 @@ if distro_name == 'ubuntu':
          ' libxcb-composite0-dev xcb libxcb-ewmh2', shell=True)
 call('git clone https://github.com/jaagr/polybar.git', shell=True)
 call('cd polybar && ./build.sh', shell=True)
-call('cd ~/', shell=True)
+call('cd ~/install-packages', shell=True)
+call('cp -r polybar ~/.config', shell=True)
 
 call('reboot', shell=True)
