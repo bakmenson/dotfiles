@@ -28,28 +28,27 @@ else:
 # build from source
 # pyenv
 if distro_name == 'ubuntu':
-    call('sudo apt-get install -y make build-essential libssl-dev zlib1g-dev' \
-         ' libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm' \
-         ' libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev' \
+    call('sudo apt-get install -y make build-essential libssl-dev zlib1g-dev'
+         ' libbz2-dev libreadline-dev libsqlite3-dev llvm'
+         ' libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev'
          ' liblzma-dev', shell=True)
+
 call('git clone https://github.com/pyenv/pyenv.git ~/.pyenv', shell=True)
-call('echo \'export PYENV_ROOT="$HOME/.pyenv"\' >> ~/.zshrc', shell=True)
-call('echo \'export PATH="$PYENV_ROOT/bin:$PATH"\' >> ~/.zshrc', shell=True)
-call('echo -e \'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi\' >> ~/.zshrc', shell=True)
-call('exec "$SHELL"', shell=True)
 
 # pyenv-virtualenv
-call('git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv', shell=True)
-call('echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc', shell=True)
-call('exec "$SHELL"', shell=True)
+call(
+    'git clone https://github.com/pyenv/pyenv-virtualenv.git'
+    ' $(pyenv root)/plugins/pyenv-virtualenv',
+    shell=True
+)
 
 # i3-gaps for ubuntu
 if distro_name == 'ubuntu':
-    call('sudo apt install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev' \
-         ' libxcb-util0-dev libxcb-icccm4-dev libyajl-dev' \
-         ' libstartup-notification0-dev libxcb-randr0-dev libev-dev' \
-         ' libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev' \
-         ' libxkb common-dev libxkbcommon-x11-dev autoconf libxcb-xrm0' \
+    call('sudo apt install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev'
+         ' libxcb-util0-dev libxcb-icccm4-dev libyajl-dev'
+         ' libstartup-notification0-dev libxcb-randr0-dev libev-dev'
+         ' libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev'
+         ' libxkb common-dev libxkbcommon-x11-dev autoconf libxcb-xrm0'
          ' libxcb-xrm-dev automake libxcb-shape0-dev', shell=True)
     call('cd /tmp', shell=True)
     call('git clone https://www.github.com/Airblader/i3 i3-gaps', shell=True)
@@ -57,7 +56,10 @@ if distro_name == 'ubuntu':
     call('autoreconf --force --install', shell=True)
     call('rm -rf build/', shell=True)
     call('mkdir -p build && cd build/', shell=True)
-    call('../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers', shell=True)
+    call(
+        '../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers',
+        shell=True
+    )
     call('make -j8', shell=True)
     call('sudo make install', shell=True)
     call('cd ~/', shell=True)
@@ -74,6 +76,11 @@ call('cd polybar && ./build.sh', shell=True)
 call('cd ~/', shell=True)
 
 # oh-my-zsh
-call('wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh', shell=True)
+call(
+    'wget'
+    ' https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh-O'
+    ' - | zsh',
+    shell=True
+)
 call('chsh -s /bin/zsh', shell=True)
 call('reboot', shell=True)
