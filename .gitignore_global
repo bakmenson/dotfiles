@@ -1,0 +1,40 @@
+# Default
+.gulp
+.idea
+.vscode
+
+# Node
+node_modules
+
+# Dist & test
+test
+dist
+
+# BD, logs
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+# Other
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+
+# Special
+Thumbs.db
+Desktop.ini
+.DS_Store*
+ehthumbs.db
+Icon?
+
+
+### Python ###
+__pycache__
+.python-version
+.mypy_cache
+venv
+
+# Django
+migrations
