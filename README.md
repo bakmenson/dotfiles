@@ -1,2 +1,1 @@
-# install-packages
-Installing packages in my system (ubuntu, arch)
+dotfiles and python script for installing packages in my system (linux distro)
