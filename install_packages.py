@@ -83,4 +83,5 @@ call(
     shell=True
 )
 call('chsh -s /bin/zsh', shell=True)
+
 call('reboot', shell=True)
