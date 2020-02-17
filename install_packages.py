@@ -89,4 +89,6 @@ call('cd polybar && ./build.sh', shell=True)
 call('cd ~/install-packages', shell=True)
 call('cp -r polybar ~/.config', shell=True)
 
+call('cp compton.conf ~/.config', shell=True)
+
 call('reboot', shell=True)
