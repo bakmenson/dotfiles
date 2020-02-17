@@ -26,6 +26,17 @@ else:
     pass
 
 # build from source
+
+# oh-my-zsh
+call(
+    'wget'
+    ' https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh-O'
+    ' - | zsh',
+    shell=True
+)
+call('chsh -s /bin/zsh', shell=True)
+call('cp .zshrc ~/', shell=True)
+
 # pyenv
 if distro_name == 'ubuntu':
     call('sudo apt-get install -y make build-essential libssl-dev zlib1g-dev'
@@ -74,14 +85,5 @@ if distro_name == 'ubuntu':
 call('git clone https://github.com/jaagr/polybar.git', shell=True)
 call('cd polybar && ./build.sh', shell=True)
 call('cd ~/', shell=True)
-
-# oh-my-zsh
-call(
-    'wget'
-    ' https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh-O'
-    ' - | zsh',
-    shell=True
-)
-call('chsh -s /bin/zsh', shell=True)
 
 call('reboot', shell=True)
