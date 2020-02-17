@@ -90,5 +90,8 @@ call('cd ~/install-packages', shell=True)
 call('cp -r polybar ~/.config', shell=True)
 
 call('cp compton.conf ~/.config', shell=True)
+call('cp -r mpv ~/.config', shell=True)
+call('cp -r nvim ~/.config', shell=True)
+call('cp -r rofi ~/.config', shell=True)
 
 call('reboot', shell=True)
