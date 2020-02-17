@@ -26,3 +26,4 @@ vim
 virtualbox
 w3m
 w3m-img
+wget
