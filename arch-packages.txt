@@ -2,6 +2,7 @@ alsa-plugins
 alsa-utils
 arc-gtk-theme
 cmake
+curl
 dmenu
 dosfstools
 feh
