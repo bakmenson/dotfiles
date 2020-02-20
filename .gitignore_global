@@ -35,6 +35,7 @@ __pycache__
 .python-version
 .mypy_cache
 venv
+env
 
 # Django
 migrations
