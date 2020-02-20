@@ -1,7 +1,10 @@
 # Default
 .gulp
-.idea
 .vscode
+
+# idea
+.idea
+*.iml
 
 # Node
 node_modules
