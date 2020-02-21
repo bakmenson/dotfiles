@@ -136,7 +136,7 @@ alias autoremove='sudo apt autoremove && sudo apt --purge autoremove'
 
 alias upd='sudo apt update && sudo apt dist-upgrade && sudo snap refresh'
 alias c='clear'
-alias cl='sudo apt autoclean && sudo apt clean'
+alias cl='sudo apt autoclean && sudo apt clean && sudo apt autoremove'
 
 alias q='exit'
 
