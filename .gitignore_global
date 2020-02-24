@@ -38,3 +38,6 @@ venv
 
 # Django
 migrations
+
+# MPV
+watch_later
