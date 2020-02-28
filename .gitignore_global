@@ -3,6 +3,7 @@
 .vscode
 .idea
 .uuid
+.netrwhist
 *.bak
 accels.scm
 
