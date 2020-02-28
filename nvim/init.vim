@@ -21,7 +21,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'rking/ag.vim'
 Plug 'Yggdroot/indentLine'
 Plug '907th/vim-auto-save'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "HTML
 Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript'] }
@@ -66,10 +66,18 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set encoding=UTF-8
+set termencoding=UTF-8
+set fileencodings=UTF-8
 
 "set spaces for different languages
 "expandtab for tabs to spaces
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
+" delete all spaces in the end lines
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+set mousehide
+set mouse=a
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
@@ -91,7 +99,7 @@ set ttimeout
 set ttimeoutlen=50
 
 "make backspace behave properly in insert mode
-set backspace=indent,eol,start
+set backspace=indent,eol,start whichwrap+=<,>,[,]
 
 "display incomplete commands
 set showcmd
@@ -104,7 +112,9 @@ set wildmode=longest:full,full
 set hidden
 
 "disable soft wrap for lines
-set nowrap
+"set nowrap
+set wrap
+set linebreak
 
 "always display the status line
 set laststatus=2
@@ -121,6 +131,7 @@ set smartcase
 set ignorecase
 set hlsearch
 set incsearch
+set nobackup
 set noswapfile
 set completeopt-=preview
 
@@ -170,14 +181,11 @@ autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-Z>'
 
 " ycm
-let g:ycm_python_interpreter_path = ''
-let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = [
-	\  'g:ycm_python_interpreter_path',
-	\  'g:ycm_python_sys_path'
-	\]
-let g:ycm_global_ycm_extra_conf = '~/.global_extra_conf.py'
-
+let g:ycm_collect_identifiers_frm_tags_files = 1
+let g:ycm_use_ultisnips_completer = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
 
 "==========================================================================
 " run a python script
@@ -245,19 +253,19 @@ map <C-Y> <c-o>:call yapf#YAPF()<cr>
 
 " coc.nvim
 " tab for trigger completion
-inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" confirm completion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <silent><expr> <TAB>
+"		\ pumvisible() ? "\<C-n>" :
+"		\ <SID>check_back_space() ? "\<TAB>" :
+"		\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+"function! s:check_back_space() abort
+"	let col = col('.') - 1
+"	return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+"
+"" confirm completion
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "=================================================
 

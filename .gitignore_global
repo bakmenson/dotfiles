@@ -2,6 +2,9 @@
 .gulp
 .vscode
 .idea
+.uuid
+*.bak
+accels.scm
 
 # Node
 node_modules
