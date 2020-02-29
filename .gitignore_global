@@ -6,6 +6,7 @@
 .netrwhist
 *.bak
 accels.scm
+vifminfo
 
 # Node
 node_modules
