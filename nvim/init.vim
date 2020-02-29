@@ -1,50 +1,47 @@
-"====================== vim-plug ==========================================
-
 " Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
+" - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 " call plug#begin('~/.vim/plugged')
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+" Any valid git URL is allowed
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
 " On-demand loading
-"common
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-master branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+Plug 'fatih/vim-go', { 'tag': '*' }
+
+" Plugin options
+Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Unmanaged plugin (manually installed and updated)
+Plug '~/my-prototype-plugin'
+
 Plug 'Valloric/YouCompleteMe'
 Plug 'jiangmiao/auto-pairs'
-Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'jiangmiao/auto-pairs'
-Plug 'skywind3000/asyncrun.vim'
-" To use ag.vim - sudo apt-get install silversearcher-ag
-Plug 'rking/ag.vim'
-Plug 'Yggdroot/indentLine'
 Plug '907th/vim-auto-save'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-"HTML
-Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript'] }
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }
-Plug 'othree/html5.vim', { 'for': ['html', 'javascript'] }
-Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'scss'] }
-
-"CSS/LESS/Stylus/SCSS
-Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less', 'stylus'] }
-
-"JavaScript
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-Plug 'wizicer/vim-jison', { 'for': 'jison' }
-Plug 'posva/vim-vue', { 'for': ['javascript', 'typescript'] }
+Plug 'easymotion/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 "Python
-Plug 'sheerun/vim-polyglot'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'vim-python/python-syntax'
-Plug 'dense-analysis/ale', {'for': 'python'}
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 "Themes
 Plug 'vim-airline/vim-airline'
@@ -53,11 +50,11 @@ Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'ryanoasis/vim-devicons'
 
+" Initialize plugin system
 call plug#end()
 
 "==========================================================================
 
-" Initialize plugin system
 "syntax on
 syntax enable
 set t_Co=256
@@ -68,94 +65,68 @@ set softtabstop=4
 set encoding=UTF-8
 set termencoding=UTF-8
 set fileencodings=UTF-8
-
-"set spaces for different languages
-"expandtab for tabs to spaces
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
-" delete all spaces in the end lines
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-
-set mousehide
-set mouse=a
-
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-" indent when moving to the next line while writing code
 set autoindent
-
-" show the matching part of the pair for [] {} and ()
 set showmatch
-
-"show line lenght
 set colorcolumn=120
 set updatetime=100
-
-"more characters will be sent to the screen for redrawing
 set ttyfast
-
-"time waited for key press(es) to complete. It makes for a faster key response
 set ttimeout
 set ttimeoutlen=50
-
-"make backspace behave properly in insert mode
 set backspace=indent,eol,start whichwrap+=<,>,[,]
-
-"display incomplete commands
 set showcmd
-
-"a better menu in command mode
 set wildmenu
 set wildmode=longest:full,full
-
-"hide buffers instead of closing them even if they contain unwritten changes
 set hidden
-
-"disable soft wrap for lines
-"set nowrap
-set wrap
-set linebreak
-
-"always display the status line
-set laststatus=2
-
-"display line numbers on the left side
 set number relativenumber
+set laststatus=2
+set nowrap
+set nopaste
 
 set smartcase
-
-"highlight current line
-"set cursorline
-
-"searches are case insensitive unless they contain at least one capital letter
 set ignorecase
+
 set hlsearch
 set incsearch
 set nobackup
 set noswapfile
 set completeopt-=preview
-
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
-"==========================================================================
+"--------------------------
+" Python
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
+"autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+"autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-" Java syntax highlight
-let java_highlight_functions = 1
-let java_highlight_all = 1
-
-" vim-python/python-syntax
 let g:python_highlight_all = 1
 
-" ale
-let b:ale_linters = {'python': ['flake8', 'mypy']}
-let g:ale_linters_explicit = 1
+" semshi
+function MyCustomHighlights()
+	hi semshiLocal           ctermfg=209 guifg=#ff875f
+	hi semshiGlobal          ctermfg=214 guifg=#ffaf00
+	hi semshiImported        ctermfg=214 guifg=#ffaf00 cterm=bold gui=bold
+	hi semshiParameter       ctermfg=75  guifg=#5fafff
+	hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
+	hi semshiFree            ctermfg=218 guifg=#ffafd7
+	hi semshiBuiltin         ctermfg=207 guifg=#ff5fff
+	hi semshiAttribute       ctermfg=49  guifg=#00ffaf
+	hi semshiSelf            ctermfg=249 guifg=#deba78
+	hi semshiUnresolved      ctermfg=226 guifg=#ffff00 cterm=underline gui=underline
+	hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
+
+	hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+	hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+	sign define semshiError text=E> texthl=semshiErrorSign
+endfunction
+autocmd FileType python call MyCustomHighlights()
+"--------------------------
+
+"========================================================================
 
 " autosave
 let g:auto_save = 1
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_silent = 1
-
-"==========================================================================
 
 "schemes
 set background=dark
@@ -175,26 +146,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:indentLine_color_term = 239
 let g:indentLine_char = '▏'
 
-" emmet
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-let g:user_emmet_leader_key='<C-Z>'
-
-" ycm
-let g:ycm_collect_identifiers_frm_tags_files = 1
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-
 "==========================================================================
-" run a python script
-" :AsyncRun -raw python %
+"mapping
 
-"==========================================================================
-"mappings
-
-"Vim makes it possible to formally define two leaders: "," or "\<Space>"
 let mapleader="\<Space>"
 
 map <leader>s :NERDTreeToggle<cr>
@@ -202,7 +156,7 @@ map <leader>s :NERDTreeToggle<cr>
 "easymotion
 map <leader> <Plug>(easymotion-prefix)
 
-"move line
+"move lines
 nnoremap <S-k> :m+<cr>
 nnoremap <S-j> :m-2<cr>
 xnoremap <S-k> :m-2<cr>gv=gv
@@ -224,7 +178,6 @@ nnoremap <leader><leader> <c-^>
 "move tabs
 " :tabmove +1
 " :tabmove -1
-
 "move to the window in the direction shown, or create a new window
 nnoremap <silent> <C-h> :call WinMove('h')<cr>
 nnoremap <silent> <C-j> :call WinMove('j')<cr>
@@ -246,45 +199,8 @@ endfunction
 nnoremap <silent> <Leader>\ :vertical resize +5<cr>
 nnoremap <silent> <Leader>- :vertical resize -5<cr>
 
-map <C-Y> :call yapf#YAPF()<cr>
-map <C-Y> <c-o>:call yapf#YAPF()<cr>
-
-"==============================================================
-
-" coc.nvim
-" tab for trigger completion
-"inoremap <silent><expr> <TAB>
-"		\ pumvisible() ? "\<C-n>" :
-"		\ <SID>check_back_space() ? "\<TAB>" :
-"		\ coc#refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-"function! s:check_back_space() abort
-"	let col = col('.') - 1
-"	return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-"
-"" confirm completion
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-"=================================================
-
-" vertical split an existing buffer
-" :vsp - for current buffer
-" :vsp name.txt or buffer number
-
-" close buffer
-" :bw - for current buffer
-" :bw name.txt or buffer number
-
-"save file
-"nnoremap <S-s> :w<cr>
+" ultisnips
+let g:UltiSnipsExpandTrigger = "<c-j>"
 
 "exit
 nnoremap <S-q> :q<cr>
-
-"exit with save
-"nnoremap <S-e> :wq<cr>
-
-"reload vimrc
-" nnoremap <C-r> :source ~/.config/nvim/init.vim<cr>
