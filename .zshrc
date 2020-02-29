@@ -128,7 +128,7 @@ eval "$(pyenv virtualenv-init -)"
 
 alias ufetch='./.ufetch-ubuntu'
 
-alias v='vim'
+alias v='/home/solus/nvim.appimage'
 
 alias i='sudo apt install'
 alias remove='sudo apt remove'
@@ -190,5 +190,3 @@ alias gts='git status'
 alias gta='git add .'
 alias gtc='git commit -m'
 alias gtp='git push origin'
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
