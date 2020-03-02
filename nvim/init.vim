@@ -38,6 +38,7 @@ Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'dense-analysis/ale', {'for': 'python'}
 
 "Python
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
@@ -104,7 +105,7 @@ let g:python_highlight_all = 1
 function MyCustomHighlights()
 	hi semshiLocal           ctermfg=209 guifg=#ff875f
 	hi semshiGlobal          ctermfg=214 guifg=#ffaf00
-	hi semshiImported        ctermfg=214 guifg=#ffaf00 cterm=bold gui=bold
+	hi semshiImported        ctermfg=214 guifg=#deba78 cterm=bold gui=none
 	hi semshiParameter       ctermfg=75  guifg=#5fafff
 	hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
 	hi semshiFree            ctermfg=218 guifg=#ffafd7
@@ -119,6 +120,7 @@ function MyCustomHighlights()
 	sign define semshiError text=E> texthl=semshiErrorSign
 endfunction
 autocmd FileType python call MyCustomHighlights()
+
 "--------------------------
 
 "========================================================================
@@ -145,6 +147,10 @@ let g:airline#extensions#tabline#enabled = 1
 " indent line
 let g:indentLine_color_term = 239
 let g:indentLine_char = '▏'
+
+" ale
+let b:ale_linters = {'python': ['flake8', 'mypy']}
+let g:ale_linters_explicit = 1
 
 "==========================================================================
 "mapping
