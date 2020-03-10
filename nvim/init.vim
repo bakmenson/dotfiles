@@ -32,7 +32,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
 
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
+
+" coc-ultisnips and coc-neosnippet
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'jiangmiao/auto-pairs'
 Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
@@ -93,6 +97,8 @@ set noswapfile
 set completeopt-=preview
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
+set signcolumn=yes
+
 "--------------------------
 " Python
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
@@ -131,16 +137,16 @@ let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_silent = 1
 
 "schemes
-set background=dark
+"set background=dark
 colorscheme onedark
-"colorscheme gruvbox
+colorscheme gruvbox
 
 "example for xfce4-terminal
 set termguicolors
 
 "airline-themes
-"let g:airline_theme='gruvbox'
-let g:airline_theme='onedark'
+let g:airline_theme='gruvbox'
+"let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -149,7 +155,7 @@ let g:indentLine_color_term = 239
 let g:indentLine_char = '▏'
 
 " ale
-let b:ale_linters = {'python': ['flake8', 'mypy']}
+let b:ale_linters = {'python': ['mypy', 'pylint', 'flake8']}
 let g:ale_linters_explicit = 1
 
 "==========================================================================
@@ -207,6 +213,29 @@ nnoremap <silent> <Leader>- :vertical resize -5<cr>
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = "<c-j>"
+
+"----------------------------------------------
+" coc.nvim
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+		\ pumvisible() ? "\<C-n>" :
+		\ <SID>check_back_space() ? "\<TAB>" :
+		\ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+"----------------------------------------------
 
 "exit
 nnoremap <S-q> :q<cr>

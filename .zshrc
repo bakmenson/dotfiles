@@ -135,7 +135,7 @@ alias i='sudo apt install'
 alias remove='sudo apt remove'
 alias autoremove='sudo apt autoremove && sudo apt --purge autoremove'
 
-alias upd='sudo apt update && sudo apt dist-upgrade && sudo snap refresh'
+alias upd='sudo apt update && sudo apt -y dist-upgrade && sudo snap refresh'
 alias c='clear'
 alias cl='sudo apt autoclean && sudo apt clean && sudo apt autoremove'
 
