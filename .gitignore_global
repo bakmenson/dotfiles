@@ -39,6 +39,7 @@ Icon?
 __pycache__
 .python-version
 .mypy_cache
+.vim
 venv
 
 # Django
