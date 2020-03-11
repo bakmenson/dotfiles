@@ -43,6 +43,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dense-analysis/ale', {'for': 'python'}
+Plug 'Yggdroot/indentLine'
 
 "Python
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
@@ -151,7 +152,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
 " indent line
-let g:indentLine_color_term = 239
+let g:indentLine_color_term = 214
+"let g:indentLine_color_term = 239
 let g:indentLine_char = '▏'
 
 " ale
