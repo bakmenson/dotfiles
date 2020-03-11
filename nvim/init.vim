@@ -152,8 +152,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
 " indent line
-let g:indentLine_color_term = 214
-"let g:indentLine_color_term = 239
+let g:indentLine_color_term = 239
 let g:indentLine_char = '▏'
 
 " ale
