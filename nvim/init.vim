@@ -188,6 +188,9 @@ nnoremap <leader>ba :bufdo bd!<cr>
 "cycle between last two open buffers
 nnoremap <leader><leader> <c-^>
 
+" close buffers without closing window
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
 "move tabs
 " :tabmove +1
 " :tabmove -1
