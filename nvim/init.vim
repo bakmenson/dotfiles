@@ -87,6 +87,7 @@ set number relativenumber
 set laststatus=2
 set nowrap
 set nopaste
+set splitright
 
 set smartcase
 set ignorecase
