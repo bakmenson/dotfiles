@@ -16,9 +16,6 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-" Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 Plug 'fatih/vim-go', { 'tag': '*' }
 
@@ -28,27 +25,12 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
-
-"Plug 'Valloric/YouCompleteMe'
-
-" coc-ultisnips and coc-neosnippet
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug 'jiangmiao/auto-pairs'
 Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'dense-analysis/ale', {'for': 'python'}
 Plug 'Yggdroot/indentLine'
-
-"Python
-Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-
-" for nvim
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 "Themes
 Plug 'vim-airline/vim-airline'
@@ -105,37 +87,6 @@ set signcolumn=yes
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
-"--------------------------
-" Python
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
-"autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-"autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-
-let g:python_highlight_all = 1
-
-" for nvim
-" semshi
-"function MyCustomHighlights()
-"	hi semshiLocal           ctermfg=209 guifg=#ff875f
-"	hi semshiGlobal          ctermfg=214 guifg=#ffaf00
-"	hi semshiImported        ctermfg=214 guifg=#deba78 cterm=bold gui=none
-"	hi semshiParameter       ctermfg=75  guifg=#5fafff
-"	hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
-"	hi semshiFree            ctermfg=218 guifg=#ffafd7
-"	hi semshiBuiltin         ctermfg=207 guifg=#ff5fff
-"	hi semshiAttribute       ctermfg=49  guifg=#00ffaf
-"	hi semshiSelf            ctermfg=249 guifg=#deba78
-"	hi semshiUnresolved      ctermfg=226 guifg=#ffff00 cterm=underline gui=underline
-"	hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
-"
-"	hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-"	hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-"	sign define semshiError text=E> texthl=semshiErrorSign
-"endfunction
-"autocmd FileType python call MyCustomHighlights()
-
-"--------------------------
-
 "========================================================================
 
 " autosave
@@ -160,10 +111,6 @@ let g:airline#extensions#tabline#enabled = 1
 " indent line
 let g:indentLine_color_term = 239
 let g:indentLine_char = '▏'
-
-" ale
-let b:ale_linters = {'python': ['mypy', 'pylint', 'flake8']}
-let g:ale_linters_explicit = 1
 
 "==========================================================================
 "mapping
@@ -220,32 +167,6 @@ endfunction
 
 nnoremap <silent> <Leader>\ :vertical resize +5<cr>
 nnoremap <silent> <Leader>- :vertical resize -5<cr>
-
-" ultisnips
-let g:UltiSnipsExpandTrigger = "<c-j>"
-
-"----------------------------------------------
-" coc.nvim
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-"----------------------------------------------
 
 "exit
 nnoremap <S-q> :q<cr>
