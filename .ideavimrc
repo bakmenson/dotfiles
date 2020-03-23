@@ -4,3 +4,6 @@ nnoremap <S-j> :m+<cr>
 nnoremap <S-k> :m-2<cr>
 xnoremap <S-j> :m-2<cr>gv=gv
 xnoremap <S-k> :m'>+<cr>gv=gv
+
+let mapleader=","
+set easymotion
