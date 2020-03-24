@@ -246,6 +246,9 @@ bindsym $mod+F12 exec scrot
 # Suspend
 bindsym $alt+s exec systemctl suspend
 
+# cmatrix in fullscreen
+bindsym $alt+c exec --no-startup-id xfce4-terminal --fullscreen -e cmatrix 
+
 # =============================================================================
 
 # switch to workspace with urgent window automatically
@@ -327,7 +330,9 @@ exec_always --no-startup-id fix_xcursor
 # --bg-fill, --bg-scale
 # exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*; compton -b
 #exec_always feh --bg-fill /run/media/solus/hdd/Pictures/wallpapers/59.jpg; compton -b
-exec_always feh --bg-fill /media/solus/hdd/Pictures/wallpapers/63.png; compton -b
+exec --no-startup-id compton --config ~/.config/compton.conf
+#exec_always feh --bg-fill /media/solus/hdd/Pictures/wallpapers/63.png; compton -b
+exec_always feh --bg-fill /media/solus/hdd/Pictures/wallpapers/63.png
 
 exec --no-startup-id unclutter
 exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
@@ -337,7 +342,7 @@ exec --no-startup-id "sleep 5; i3-msg 'workspace 2; exec xfce4-terminal'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 3; exec xfce4-terminal'"
 exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec firefox'"
 exec --no-startup-id "sleep 7; i3-msg 'workspace 5; exec telegram-desktop'"
-exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
+#exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
 exec --no-startup-id exec transmission-gtk -m
 
 #exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec code'"
