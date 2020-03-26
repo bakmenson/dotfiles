@@ -340,7 +340,7 @@ exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_togg
 exec --no-startup-id "sleep 4; i3-msg 'workspace 1; exec xfce4-terminal -e vifm'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 2; exec xfce4-terminal'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 3; exec xfce4-terminal'"
-exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec google-chrome'"
 exec --no-startup-id "sleep 7; i3-msg 'workspace 5; exec telegram-desktop'"
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
 exec --no-startup-id exec transmission-gtk -m
@@ -350,7 +350,7 @@ exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 4; i3-msg 'workspace 1; exec urxvt -e ranger'"
 #exec --no-startup-id "sleep 9; i3-msg 'workspace 3; exec eclipse'"
 #exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec /home/solus/pycharm-community/bin/pycharm.sh'"
-#exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec google-chrome'"
+#exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec firefox'"
 
 ###########################################################################################
 
