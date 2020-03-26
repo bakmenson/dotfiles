@@ -247,7 +247,7 @@ bindsym $mod+F12 exec scrot
 bindsym $alt+s exec systemctl suspend
 
 # cmatrix in fullscreen
-bindsym $alt+c exec --no-startup-id xfce4-terminal --fullscreen -e cmatrix 
+bindsym $alt+c exec --no-startup-id xfce4-terminal --fullscreen -e cmatrix
 
 # =============================================================================
 
