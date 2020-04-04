@@ -72,7 +72,7 @@ ZSH_THEME="wezm"
 # Add wisely, as too many plugins slow down shell startup.
 
 plugins=(
-	poetry
+	# poetry
 	git
 )
 
