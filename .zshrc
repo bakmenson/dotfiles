@@ -129,8 +129,8 @@ eval "$(pyenv virtualenv-init -)"
 
 alias ufetch='~/.ufetch'
 
-alias v='~/nvim.appimage'
-alias vup='~/nvim.appimage +PlugUpdate +PlugUpgrade +qa'
+alias v='nvim'
+alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
 
 alias i='sudo apt install'
 alias remove='sudo apt remove'
