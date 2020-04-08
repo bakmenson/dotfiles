@@ -132,12 +132,20 @@ alias ufetch='~/.ufetch'
 alias v='nvim'
 alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
 
+# arch
 alias i='sudo pacman -S'
 alias remove='sudo pacman -Rs'
-
 alias upd='sudo pacman -Syu'
-alias c='clear'
 alias cl='sudo pacman -Scc'
+
+# deb
+#alias i='sudo apt install'
+#alias remove='sudo apt remove'
+#alias autoremove='sudo apt autoremove && sudo apt --purge autoremove'
+#alias upd='sudo apt update && sudo apt dist-upgrade && sudo snap refresh'
+#alias cl='sudo apt autoclean && sudo apt clean'
+
+alias c='clear'
 
 alias q='exit'
 
