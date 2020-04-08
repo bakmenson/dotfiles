@@ -111,9 +111,9 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
-mount-1 = /media/solus/hdd
+;mount-1 = /media/solus/hdd
 ;for arch
-;mount-1 = /run/media/solus/hdd
+mount-1 = /run/media/solus/hdd
 
 label-mounted =  %free%
 label-unmounted = %mountpoint% not mounted

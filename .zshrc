@@ -132,13 +132,12 @@ alias ufetch='~/.ufetch'
 alias v='nvim'
 alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
 
-alias i='sudo apt install'
-alias remove='sudo apt remove'
-alias autoremove='sudo apt autoremove && sudo apt --purge autoremove'
+alias i='sudo pacman -S'
+alias remove='sudo pacman -Rs'
 
-alias upd='sudo apt update && sudo apt -y dist-upgrade && sudo snap refresh'
+alias upd='sudo pacman -Syu'
 alias c='clear'
-alias cl='sudo apt autoclean && sudo apt clean && sudo apt autoremove'
+alias cl='sudo pacman -Scc'
 
 alias q='exit'
 
@@ -163,8 +162,8 @@ alias s3='sleep 10800 && systemctl suspend'
 ###############################################################
 # python
 alias pp='pyenv activate python-pyenv'
-alias py='python3'
-alias ipy='pyenv activate python-pyenv && ipython'
+alias py='python'
+alias ipy='python -m IPython'
 
 # pyenv
 alias pa='pyenv activate'

@@ -11,7 +11,7 @@
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
 
-set vicmd=vim
+set vicmd=nvim
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
 
@@ -117,9 +117,9 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 mark b ~/bin/
 mark h ~/
-mark v /media/solus/hdd/Videos/
-mark u /media/solus/hdd/
-mark w /media/solus/hdd/code_videos/GB/django/
+mark v /run/media/solus/hdd/Videos/
+mark u /run/media/solus/hdd/
+mark w /run/media/solus/hdd/code_videos/
 
 " ------------------------------------------------------------------------------
 
