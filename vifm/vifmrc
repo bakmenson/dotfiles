@@ -117,9 +117,16 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 mark b ~/bin/
 mark h ~/
+
+" for arch
 mark v /run/media/solus/hdd/Videos/
 mark u /run/media/solus/hdd/
 mark w /run/media/solus/hdd/code_videos/
+
+" for deb distro
+"mark v /media/solus/hdd/Videos/
+"mark u /media/solus/hdd/
+"mark w /media/solus/hdd/code_videos/
 
 " ------------------------------------------------------------------------------
 
