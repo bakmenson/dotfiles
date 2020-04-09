@@ -201,3 +201,6 @@ alias gtc='git commit -m'
 alias gtp='git push origin'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# turf off highlighting directories are writable by other
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
