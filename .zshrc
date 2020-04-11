@@ -172,7 +172,6 @@ alias s1='sleep 3600 && systemctl suspend'
 alias s2='sleep 7200 && systemctl suspend'
 alias s3='sleep 10800 && systemctl suspend'
 
-###############################################################
 # python
 alias pp='pyenv activate python-pyenv'
 alias py='python'
@@ -187,12 +186,9 @@ alias pi='pyenv install'
 alias dsp='django-admin startproject'
 alias dsa='python manage.py startapp'
 alias drs='python manage.py runserver'
-
 alias dm='python manage.py migrate'
 alias dmm='python manage.py makemigrations'
 alias ds='python manage.py shell'
-
-###############################################################
 
 # tmux
 alias ta='tmux a -t' # attach to a session with the name mysession
