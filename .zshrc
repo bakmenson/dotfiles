@@ -128,6 +128,11 @@ eval "$(pyenv virtualenv-init -)"
 # alias
 
 alias ufetch='~/.ufetch'
+alias inxi='~/.inxi'
+
+alias zc='nvim ~/.zshrc'
+alias ic='nvim ~/.config/i3/config'
+alias nvi='nvim ~/.config/nvim/init.vim'
 
 alias v='nvim'
 alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
