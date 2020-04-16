@@ -119,16 +119,16 @@ mark b ~/bin/
 mark h ~/
 
 " for arch
-"mark v /run/media/solus/hdd/Videos/
-"mark u /run/media/solus/hdd/
-"mark w /run/media/solus/hdd/code_videos/
-"mark d /home/solus/Dev/
+mark v /run/media/solus/hdd/Videos/
+mark u /run/media/solus/hdd/
+mark w /run/media/solus/hdd/code_videos/
+mark d /home/solus/Dev/
 
 " for deb distro
-mark v /media/solus/hdd/Videos/
-mark u /media/solus/hdd/
-mark w /media/solus/hdd/code_videos/
-mark d /home/solus/Dev/
+"mark v /media/solus/hdd/Videos/
+"mark u /media/solus/hdd/
+"mark w /media/solus/hdd/code_videos/
+"mark d /home/solus/Dev/
 
 " ------------------------------------------------------------------------------
 
