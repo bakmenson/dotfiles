@@ -1,3 +1,4 @@
 rofi.combi-modi:    window,run
 rofi.modi:          combi
-rofi.theme: ~/.config/rofi/aesthetics.rasi
+# rofi.theme: ~/.config/rofi/aesthetics.rasi
+rofi.theme: ~/.config/rofi/nord.rasi
