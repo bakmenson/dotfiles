@@ -106,7 +106,6 @@ source $ZSH/oh-my-zsh.sh
 #######################################################################3
 # aliases
 alias ufetch='~/.ufetch'
-alias inxi='~/.inxi'
 
 alias zc='nvim ~/.zshrc'
 alias ic='nvim ~/.config/i3/config'
