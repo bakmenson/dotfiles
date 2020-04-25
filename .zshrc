@@ -138,6 +138,7 @@ alias rb='reboot'
 alias sdn='shutdown now'
 alias sdh='shutdown -h'
 alias sdc='shutdown -c'
+alias sn='sleep 2699 && shutdown now' # 44 min 59 sec
 
 alias sh='systemctl hibernate'
 
