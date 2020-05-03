@@ -157,7 +157,8 @@ alias s3='sleep 10800 && systemctl suspend'
 # python
 alias pp='pyenv activate python-pyenv'
 alias py='python3'
-alias ipy='python -m IPython'
+alias ipy='ipython'
+# alias ipy='python -m IPython'
 # alias ipy='pyenv activate python-pyenv && ipython'
 
 # pyenv
