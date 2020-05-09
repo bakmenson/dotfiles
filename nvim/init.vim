@@ -11,7 +11,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -34,7 +34,7 @@ Plug '~/my-prototype-plugin'
 
 "Plug 'Valloric/YouCompleteMe'
 
-" coc-ultisnips and coc-neosnippet
+" coc-pyright, coc-ultisnips and coc-neosnippet
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'jiangmiao/auto-pairs'
@@ -47,7 +47,7 @@ Plug 'Yggdroot/indentLine'
 
 "Python
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 "Themes
 Plug 'vim-airline/vim-airline'
@@ -110,24 +110,24 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 
 let g:python_highlight_all = 1
 
 " semshi
-function MyCustomHighlights()
-	hi semshiLocal           ctermfg=209 guifg=#ff875f
-	hi semshiGlobal          ctermfg=214 guifg=#ffaf00
-	hi semshiImported        ctermfg=214 guifg=#deba78 cterm=bold gui=none
-	hi semshiParameter       ctermfg=75  guifg=#5fafff
-	hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
-	hi semshiFree            ctermfg=218 guifg=#ffafd7
-	hi semshiBuiltin         ctermfg=207 guifg=#ff5fff
-	hi semshiAttribute       ctermfg=49  guifg=#00ffaf
-	hi semshiSelf            ctermfg=249 guifg=#deba78
-	hi semshiUnresolved      ctermfg=226 guifg=#ffff00 cterm=underline gui=underline
-	hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
-
-	hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-	hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-	sign define semshiError text=E> texthl=semshiErrorSign
-endfunction
-autocmd FileType python call MyCustomHighlights()
+"function MyCustomHighlights()
+"	hi semshiLocal           ctermfg=209 guifg=#ff875f
+"	hi semshiGlobal          ctermfg=214 guifg=#ffaf00
+"	hi semshiImported        ctermfg=214 guifg=#deba78 cterm=bold gui=none
+"	hi semshiParameter       ctermfg=75  guifg=#5fafff
+"	hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
+"	hi semshiFree            ctermfg=218 guifg=#ffafd7
+"	hi semshiBuiltin         ctermfg=207 guifg=#ff5fff
+"	hi semshiAttribute       ctermfg=49  guifg=#00ffaf
+"	hi semshiSelf            ctermfg=249 guifg=#deba78
+"	hi semshiUnresolved      ctermfg=226 guifg=#ffff00 cterm=underline gui=underline
+"	hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
+"
+"	hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+"	hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+"	sign define semshiError text=E> texthl=semshiErrorSign
+"endfunction
+"autocmd FileType python call MyCustomHighlights()
 
 "--------------------------
 
@@ -217,7 +217,7 @@ nnoremap <silent> <Leader>\ :vertical resize +5<cr>
 nnoremap <silent> <Leader>- :vertical resize -5<cr>
 
 " ultisnips
-let g:UltiSnipsExpandTrigger = "<c-j>"
+"let g:UltiSnipsExpandTrigger = "<c-j>"
 
 "----------------------------------------------
 " coc.nvim
