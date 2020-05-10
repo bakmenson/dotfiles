@@ -62,9 +62,9 @@ font-3 = FontAwesome5Brands:style=Solid:size=11;3
 font-4 = siji:pixelsize=10;3
 
 ;ulseaudio powermenu wlan xbacklight bspwm mpd
-modules-left = filesystem memory cpu eth temperature alsa check-updates
+modules-left = filesystem memory cpu eth temperature alsa
 modules-center = i3
-modules-right = xkeyboard date gmail
+modules-right = xkeyboard date check-updates gmail
 
 
 tray-position = right
