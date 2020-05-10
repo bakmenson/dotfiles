@@ -62,7 +62,7 @@ font-3 = FontAwesome5Brands:style=Solid:size=11;3
 font-4 = siji:pixelsize=10;3
 
 ;ulseaudio powermenu wlan xbacklight bspwm mpd
-modules-left = filesystem memory cpu eth temperature alsa
+modules-left = filesystem memory cpu eth temperature alsa check-updates
 modules-center = i3
 modules-right = xkeyboard date gmail
 
@@ -473,5 +473,11 @@ type = custom/script
 exec = ~/.config/polybar-gmail/launch.py
 tail = true
 click-left = xdg-open https://mail.google.com
+
+[module/check-updates]
+type = custom/script
+exec = sh ~/.config/polybar/check-updates.sh
+;interval = 360
+interval = 10
 
 ; vim:ft=dosini
