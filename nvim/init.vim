@@ -44,6 +44,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dense-analysis/ale', {'for': 'python'}
 Plug 'Yggdroot/indentLine'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 "Python
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
