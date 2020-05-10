@@ -64,7 +64,7 @@ font-4 = siji:pixelsize=10;3
 ;ulseaudio powermenu wlan xbacklight bspwm mpd
 modules-left = filesystem memory cpu eth temperature alsa
 modules-center = i3
-modules-right = xkeyboard date
+modules-right = xkeyboard date gmail
 
 
 tray-position = right
@@ -467,5 +467,11 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
+[module/gmail]
+type = custom/script
+exec = ~/.config/polybar-gmail/launch.py
+tail = true
+click-left = xdg-open https://mail.google.com
 
 ; vim:ft=dosini
