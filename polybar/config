@@ -482,7 +482,7 @@ interval = 360
 [module/windows-count]
 type = custom/script
 format-prefix = "  "
-exec = ~/.config/polybar/windows_count.sh
+exec = ~/.config/polybar/windows-count.sh
 interval = 3
 
 ; vim:ft=dosini
