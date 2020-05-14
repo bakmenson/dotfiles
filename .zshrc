@@ -122,6 +122,7 @@ alias tl='telegram-cli -N'
 alias i='sudo pacman -S'
 alias remove='sudo pacman -Rs'
 alias upd='sudo pacman -Syu'
+alias yupd='yay -Syu'
 alias cl='sudo pacman -Scc'
 
 # deb
