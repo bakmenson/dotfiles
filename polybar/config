@@ -63,7 +63,7 @@ font-4 = siji:pixelsize=10;3
 
 ;ulseaudio powermenu wlan xbacklight bspwm mpd
 modules-left = filesystem memory cpu eth temperature alsa
-modules-center = i3
+modules-center = i3 windows-count
 modules-right = xkeyboard date check-updates gmail
 
 
@@ -477,7 +477,12 @@ click-left = xdg-open https://mail.google.com
 [module/check-updates]
 type = custom/script
 exec = sh ~/.config/polybar/check-updates.sh
-;interval = 360
-interval = 10
+interval = 360
+
+[module/windows-count]
+type = custom/script
+format-prefix = "  "
+exec = ~/.config/polybar/windows_count.sh
+interval = 3
 
 ; vim:ft=dosini
