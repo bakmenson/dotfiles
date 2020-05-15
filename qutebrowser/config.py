@@ -1687,6 +1687,7 @@ config.bind('<Shift-s>', 'config-cycle tabs.show always never')
 config.bind('<Shift-q>', 'quit')
 config.bind('v', 'hint links spawn mpv --ytdl-format=bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a] --force-window=immediate {hint-url}')
 config.bind('V', 'hint links spawn mpv --ytdl-format=bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a] --loop-file="inf" --force-window=immediate {hint-url}')
+config.bind('W', 'hint links spawn mpv --force-window=immediate {hint-url}')
 
 config.bind("'", 'enter-mode jump_mark')
 config.bind('+', 'zoom-in')
