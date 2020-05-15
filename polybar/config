@@ -62,10 +62,13 @@ font-3 = FontAwesome5Brands:style=Solid:size=11;3
 font-4 = siji:pixelsize=10;3
 
 ;ulseaudio powermenu wlan xbacklight bspwm mpd
+;modules-left = i3 windows-count xwindow
+;modules-center =
+;modules-right = xkeyboard alsa filesystem memory cpu eth temperature date check-updates gmail
+
 modules-left = filesystem memory cpu eth temperature alsa
 modules-center = i3 windows-count
 modules-right = xkeyboard date check-updates gmail
-
 
 tray-position = right
 tray-padding = 1
@@ -87,7 +90,8 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:50:...%
+format-foreground = #e1d9c4
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -299,7 +303,7 @@ label-disconnected = %ifname% disconnected
 type = internal/date
 interval = 5
 
-date =   %A, %d %B
+date = |    %A, %d %B
 date-alt = " %Y-%m-%d"
 
 ;time = |   %l:%M %P  |
@@ -473,16 +477,18 @@ type = custom/script
 exec = ~/.config/polybar-gmail/launch.py --nosound
 tail = true
 click-left = xdg-open https://mail.google.com
+format-foreground = #e1d9c4
 
 [module/check-updates]
 type = custom/script
 exec = sh ~/.config/polybar/check-updates.sh
-interval = 360
+interval = 10
 
 [module/windows-count]
 type = custom/script
-format-prefix = "  "
+format-prefix = "  "
 exec = ~/.config/polybar/windows-count.sh
 interval = 3
+format-foreground = #e1d9c4
 
 ; vim:ft=dosini
