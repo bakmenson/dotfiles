@@ -46,3 +46,6 @@ migrations
 
 # MPV
 watch_later
+
+# qutebrowser
+qsettings
