@@ -67,7 +67,7 @@ font-4 = siji:pixelsize=10;3
 ;modules-right = xkeyboard alsa filesystem memory cpu eth temperature date check-updates gmail
 
 modules-left = filesystem memory cpu eth temperature alsa
-modules-center = i3 windows-count
+modules-center = i3
 modules-right = xkeyboard date check-updates gmail
 
 tray-position = right
