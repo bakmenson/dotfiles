@@ -143,7 +143,7 @@ alias rb='reboot'
 alias sdn='shutdown now'
 alias sdh='shutdown -h'
 alias sdc='shutdown -c'
-alias sn='sleep 2699 && shutdown now' # 44 min 59 sec
+alias sn='sleep 2099 && shutdown now' # 34 min 59 sec
 
 alias sh='systemctl hibernate'
 
@@ -204,3 +204,6 @@ eval "$(pyenv virtualenv-init -)"
 
 # turf off highlighting directories are writable by other
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+
+export DP_ROOT="$HOME/.django_project"
+export PATH="$PATH:/$HOME/.django_project"
