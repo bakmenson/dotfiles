@@ -50,6 +50,9 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 "Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
+" SQL
+Plug 'alcesleo/vim-uppercase-sql'
+
 "Themes
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
