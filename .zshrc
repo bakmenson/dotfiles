@@ -145,8 +145,6 @@ alias sdh='shutdown -h'
 alias sdc='shutdown -c'
 alias sn='sleep 2099 && shutdown now' # 34 min 59 sec
 
-alias sh='systemctl hibernate'
-
 alias ss='systemctl suspend'
 # 3600 == one hour
 alias s30='sleep 1800 && systemctl suspend'
