@@ -111,6 +111,9 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 
 "autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 "autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
+" SQL
+autocmd Filetype sql setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
 let g:python_highlight_all = 1
 
 " semshi
