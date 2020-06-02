@@ -114,6 +114,8 @@ alias nvi='nvim ~/.config/nvim/init.vim'
 alias v='nvim'
 alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
 
+alias ms='mpv --no-video https://www.youtube.com/playlist\?list\=PL_qai6_KDPhqqIfG_r8Qeg5p_ZEzUJJ4S'
+
 # arch
 alias i='sudo pacman -S'
 alias remove='sudo pacman -Rs'
