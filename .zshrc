@@ -114,10 +114,6 @@ alias nvi='nvim ~/.config/nvim/init.vim'
 alias v='nvim'
 alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
 
-# alias tcli='telegram-cli --permanent-msg-ids'
-# alias tcli='telegram-cli --enable-msg-id'
-alias tl='telegram-cli -N'
-
 # arch
 alias i='sudo pacman -S'
 alias remove='sudo pacman -Rs'
