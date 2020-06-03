@@ -203,7 +203,3 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 export DP_ROOT="$HOME/.django_project"
 export PATH="$PATH:/$HOME/.django_project"
-
-# deno
-export DENO_INSTALL="/home/solus/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
