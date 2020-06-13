@@ -1570,12 +1570,14 @@ c.tabs.title.alignment = 'left'
 ## `{protocol}`: Protocol (http/https/...) of the current web page. *
 ## `{audio}`: Indicator for audio/mute status.
 ## Type: FormatString
-c.tabs.title.format = '{audio}{index}: {current_title}'
+#c.tabs.title.format = '{audio}{index}: {current_title}'
+c.tabs.title.format = '{audio} {current_title}'
 
 ## Format to use for the tab title for pinned tabs. The same placeholders
 ## like for `tabs.title.format` are defined.
 ## Type: FormatString
-c.tabs.title.format_pinned = '{index}'
+#c.tabs.title.format_pinned = '{index}'
+c.tabs.title.format_pinned = ''
 
 ## Show tooltips on tabs. Note this setting only affects windows opened
 ## after it has been set.
@@ -1644,8 +1646,8 @@ c.url.open_base_url = False
 ## qutebrowser`.
 ## Type: Dict
 c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}',
-                       'dk': 'https://duckduckgo.com/?q={}',
-                       'yt': 'https://youtube.com/results?search_query={}',}
+                       # 'dk': 'https://duckduckgo.com/?q={}',
+                       'yt': 'https://youtube.com/results?search_query={}'}
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
