@@ -15,8 +15,7 @@ c.aliases = {'w': 'session-save',
              'qa': 'quit',
              'wq': 'quit --save',
              'wqa': 'quit --save',
-             'sb': 'config-cycle statusbar.hide',
-             'th': 'config-cycle tabs.show always never'}
+             'sb': 'config-cycle statusbar.hide'}
 
 ## Time interval (in milliseconds) between auto-saves of
 ## config/cookies/etc.
