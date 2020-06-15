@@ -14,8 +14,7 @@ c.aliases = {'w': 'session-save',
              'q': 'close',
              'qa': 'quit',
              'wq': 'quit --save',
-             'wqa': 'quit --save',
-             'sb': 'config-cycle statusbar.hide'}
+             'wqa': 'quit --save'}
 
 ## Time interval (in milliseconds) between auto-saves of
 ## config/cookies/etc.
@@ -1685,6 +1684,7 @@ c.zoom.text_only = False
 
 ## Bindings for normal mode
 config.bind('<Shift-s>', 'config-cycle tabs.show always never')
+config.bind('<Shift-t>', 'config-cycle statusbar.hide')
 config.bind('<Shift-q>', 'quit')
 config.bind('v', 'hint links spawn mpv --ytdl-format=bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a] --force-window=immediate {hint-url}')
 config.bind('V', 'hint links spawn mpv --ytdl-format=bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a] --loop-file="inf" --force-window=immediate {hint-url}')
