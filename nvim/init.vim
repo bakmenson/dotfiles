@@ -146,8 +146,8 @@ let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_silent = 1
 
 "schemes
-"set background=dark
-colorscheme onedark
+set background=dark
+"colorscheme onedark
 colorscheme gruvbox
 
 "example for xfce4-terminal
