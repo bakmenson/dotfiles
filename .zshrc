@@ -115,6 +115,7 @@ alias v='nvim'
 alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
 
 alias ms='mpv --no-video https://www.youtube.com/playlist\?list\=PL_qai6_KDPhqqIfG_r8Qeg5p_ZEzUJJ4S'
+alias nv='mpv --no-video --loop'
 
 # arch
 alias i='sudo pacman -S'
