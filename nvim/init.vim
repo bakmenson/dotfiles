@@ -106,8 +106,6 @@ set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁ
 
 set signcolumn=yes
 
-"set showtabline=0
-
 "--------------------------
 " Python
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
@@ -211,23 +209,16 @@ map <leader>q :bp<bar>sp<bar>bn<bar>bd<cr>
 "move tabs
 " :tabmove +1
 " :tabmove -1
-"move to the window in the direction shown, or create a new window
-nnoremap <silent> <C-h> :call WinMove('h')<cr>
-nnoremap <silent> <C-j> :call WinMove('j')<cr>
-nnoremap <silent> <C-k> :call WinMove('k')<cr>
-nnoremap <silent> <C-l> :call WinMove('l')<cr>
-function! WinMove(key)
-	let t:curwin = winnr()
-	exec "wincmd ".a:key
-	if (t:curwin == winnr())
-		if (match(a:key,'[jk]'))
-			wincmd v
-		else
-			wincmd s
-		endif
-		exec "wincmd ".a:key
-	endif
-endfunction
+
+" moving between windows
+nnoremap <leader>h :wincmd h<cr>
+nnoremap <leader>j :wincmd j<cr>
+nnoremap <leader>l :wincmd l<cr>
+nnoremap <leader>k :wincmd k<cr>
+
+" split exists window
+nnoremap <C-l> :wincmd v<cr>
+nnoremap <C-j> :wincmd s<cr>
 
 nnoremap <silent> <Leader>\ :vertical resize +5<cr>
 nnoremap <silent> <Leader>- :vertical resize -5<cr>
