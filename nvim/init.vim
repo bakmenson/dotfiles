@@ -256,6 +256,7 @@ endfunction
 
 " fzf.vim
 nnoremap <C-p> :GFiles<cr>
+nnoremap <C-f> :Files<cr>
 
 "exit
 nnoremap <S-q> :q<cr>
