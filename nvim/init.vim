@@ -106,6 +106,8 @@ set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁ
 
 set signcolumn=yes
 
+"set showtabline=0
+
 "--------------------------
 " Python
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
@@ -168,9 +170,11 @@ let g:indentLine_char = '▏'
 let b:ale_linters = {'python': ['mypy', 'pylint', 'flake8']}
 let g:ale_linters_explicit = 1
 
-
+" fzf.vim
 " Always enable preview window on the right with 60% width
 let g:fzf_preview_window = 'right:60%'
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
 
 "==========================================================================
 "mapping
@@ -257,6 +261,7 @@ endfunction
 " fzf.vim
 nnoremap <C-p> :GFiles<cr>
 nnoremap <C-f> :Files<cr>
+nnoremap <S-b> :Buffers<cr>
 
 "exit
 nnoremap <S-q> :q<cr>
