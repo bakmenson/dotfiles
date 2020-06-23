@@ -28,6 +28,7 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
@@ -167,6 +168,10 @@ let g:indentLine_char = '▏'
 let b:ale_linters = {'python': ['mypy', 'pylint', 'flake8']}
 let g:ale_linters_explicit = 1
 
+
+" Always enable preview window on the right with 60% width
+let g:fzf_preview_window = 'right:60%'
+
 "==========================================================================
 "mapping
 
@@ -197,7 +202,7 @@ nnoremap <leader>ba :bufdo bd!<cr>
 nnoremap <leader><leader> <c-^>
 
 " close buffers without closing window
-map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<cr>
 
 "move tabs
 " :tabmove +1
@@ -248,6 +253,9 @@ function! s:check_back_space() abort
 endfunction
 
 "----------------------------------------------
+
+" fzf.vim
+nnoremap <C-p> :GFiles<cr>
 
 "exit
 nnoremap <S-q> :q<cr>
