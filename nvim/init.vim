@@ -111,6 +111,12 @@ set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁ
 set signcolumn=yes
 
 "--------------------------
+" i3 config
+aug i3config_ft_detection
+	au!
+	au BufNewFile,BufRead ~/dotfiles/i3/config set filetype=i3config
+aug end
+
 " Python
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
 "autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
