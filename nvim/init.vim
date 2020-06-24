@@ -41,11 +41,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs'
 Plug '907th/vim-auto-save'
 Plug 'easymotion/vim-easymotion'
-Plug 'airblade/vim-gitgutter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dense-analysis/ale', {'for': 'python'}
 Plug 'Yggdroot/indentLine'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 "Python
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
