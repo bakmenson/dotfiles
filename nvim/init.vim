@@ -44,6 +44,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'dense-analysis/ale', {'for': 'python'}
 Plug 'Yggdroot/indentLine'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'sheerun/vim-polyglot'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -176,6 +177,22 @@ let g:ale_linters_explicit = 1
 let g:fzf_preview_window = 'right:60%'
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
+
+" vim-polyglot
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_auto_sameids = 1
 
 "==========================================================================
 "mapping
