@@ -252,6 +252,12 @@ endfunction
 
 "----------------------------------------------
 
+" Git
+nnoremap <leader>gs :G<cr>
+nnoremap <leader>gj :diffget //3<cr>
+nnoremap <leader>gf :diffget //2<cr>
+nnoremap <leader>gc :Gcommit<cr>
+
 " fzf.vim
 nnoremap <C-p> :GFiles<cr>
 nnoremap <C-f> :Files<cr>
