@@ -76,6 +76,7 @@ plugins=(
 	zsh-syntax-highlighting
 	history-substring-search
 	zsh-autosuggestions
+	poetry
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -204,3 +205,6 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 export DP_ROOT="$HOME/.django_project"
 export PATH="$PATH:/$HOME/.django_project"
+
+# poetry
+source $HOME/.poetry/env
