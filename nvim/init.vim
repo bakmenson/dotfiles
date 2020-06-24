@@ -119,8 +119,6 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 
 " SQL
 autocmd Filetype sql setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
-let g:python_highlight_all = 1
-
 " semshi
 "function MyCustomHighlights()
 "	hi semshiLocal           ctermfg=209 guifg=#ff875f
@@ -179,6 +177,7 @@ let g:fzf_preview_window = 'right:60%'
 let g:fzf_buffers_jump = 1
 
 " vim-polyglot
+let g:python_highlight_all = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
