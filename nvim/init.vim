@@ -266,6 +266,12 @@ nnoremap <leader>gj :diffget //3<cr>
 nnoremap <leader>gf :diffget //2<cr>
 nnoremap <leader>gc :Gcommit<cr>
 
+" GitGutter
+nnoremap ]h <Plug>(GitGutterNextHunk)
+nnoremap [h <Plug>(GitGutterPreviewHunk)
+nnoremap ghs <Plug>(GitGutterStageHunk)
+nnoremap ghu <Plug>(GitGutterUndoHunk)
+
 " fzf.vim
 nnoremap <C-p> :GFiles<cr>
 nnoremap <C-f> :Files<cr>
