@@ -644,7 +644,6 @@ linux/ubuntu - remove the title bar in Xubuntu https://superuser.com/questions/3
 linux/Playonlinux - Проблемы с кодировкой https://900913.ru/2014/05/17/problemy-s-kodirovkoj-v-programmax-pod-wine/
 linux/Installation Powerline https://powerline.readthedocs.io/en/latest/installation/linux.html
 linux/install OTF fonts https://askubuntu.com/questions/18357/how-to-install-otf-fonts
-linux/Установить palemoon https://software.opensuse.org/download.html?project=home:stevenpusser&package=palemoon
 linux/How to apt-delete-repository? https://unix.stackexchange.com/questions/219341/how-to-apt-delete-repository
 linux/Class names for assigning workspaces : i3wm https://www.reddit.com/r/i3wm/comments/59ah1s/class_names_for_assigning_workspaces/
 linux/devicons: Ranger plugin https://github.com/alexanderjeurissen/ranger_devicons
@@ -929,3 +928,4 @@ py/real_py/python and sql https://realpython.com/python-sql-libraries/
 py/structure python project https://cjolowicz.github.io/posts/hypermodern-python-01-setup/
 code/db/dbdiagram https://dbdiagram.io/home
 code/db/sql style guide https://www.sqlstyle.guide/ru/
+django/django-stubs (missing-imports) https://pypi.org/project/django-stubs/
