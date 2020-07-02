@@ -57,6 +57,9 @@ Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 " SQL
 Plug 'alcesleo/vim-uppercase-sql'
 
+" html, css
+Plug 'mattn/emmet-vim'
+
 "Themes
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -81,7 +84,7 @@ set termencoding=UTF-8
 set fileencodings=UTF-8
 set autoindent
 set showmatch
-set colorcolumn=120
+"set colorcolumn=120
 set updatetime=100
 set ttyfast
 set ttimeout
@@ -118,6 +121,11 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 
 " SQL
 autocmd Filetype sql setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 "--------------------------
+
+" HTML, CSS
+let g:user_emmet_install_global = 0
+autocmd FileType html,htmldjango,css EmmetInstall
+"let g:user_emmet_leader_key='<C-Y>'
 
 "========================================================================
 
@@ -230,6 +238,7 @@ inoremap <silent><expr> <TAB>
 		\ <SID>check_back_space() ? "\<TAB>" :
 		\ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 function! s:check_back_space() abort
 	let col = col('.') - 1
