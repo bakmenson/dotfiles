@@ -771,7 +771,7 @@ c.content.netrc_file = None
 ##   - true
 ##   - false
 ##   - ask
-c.content.notifications = 'ask'
+c.content.notifications = False
 
 ## Allow pdf.js to view PDF files in the browser. Note that the files can
 ## still be downloaded by clicking the download button in the pdf.js
@@ -1049,7 +1049,7 @@ c.hints.border = '1px solid #E3BE23'
 
 ## Characters used for hint strings.
 ## Type: UniqueCharString
-c.hints.chars = 'asdfghjklmnpoe'
+c.hints.chars = 'asdfgewvhjklmnopu'
 
 ## Dictionary file to be used by the word hints.
 ## Type: File
