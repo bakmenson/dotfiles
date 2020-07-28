@@ -153,7 +153,7 @@ let g:indentLine_color_term = 239
 let g:indentLine_char = '▏'
 
 " ale
-let b:ale_linters = {'python': ['mypy', 'pylint', 'flake8']}
+let g:ale_linters = {'python': ['mypy', 'pylint', 'flake8']}
 let g:ale_linters_explicit = 1
 
 " fzf.vim
