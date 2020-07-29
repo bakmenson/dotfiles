@@ -76,6 +76,7 @@ call plug#end()
 syntax enable
 set t_Co=256
 filetype plugin on
+set background=dark
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -135,7 +136,6 @@ let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_silent = 1
 
 "schemes
-set background=dark
 "colorscheme onedark
 colorscheme gruvbox
 
