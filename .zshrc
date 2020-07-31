@@ -119,9 +119,9 @@ alias ms='mpv --no-video https://www.youtube.com/playlist\?list\=PL_qai6_KDPhqqI
 alias nv='mpv --no-video --loop'
 
 # arch
-alias i='sudo pacman -S'
+alias i='sudo pacman -S --noconfirm'
 alias remove='sudo pacman -Rs'
-alias upd='sudo pacman -Syu && yay -Sua'
+alias upd='sudo pacman -Syu --noconfirm && yay -Sua'
 alias yupd='yay -Syu'
 alias cl='sudo pacman -Scc'
 
@@ -189,7 +189,6 @@ alias gtp='git push origin'
 
 export TERM=xterm-256color
 
-
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -208,3 +207,7 @@ export PATH="$PATH:/$HOME/.django_project"
 
 # poetry
 source $HOME/.poetry/env
+
+# Java
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
+export PATH="$JAVA_HOME/bin:$PATH"
