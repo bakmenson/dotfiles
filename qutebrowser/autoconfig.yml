@@ -10,8 +10,8 @@ settings:
     https://www.reddit.com: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
-  statusbar.hide:
-    global: true
+  statusbar.show:
+    global: never
   tabs.position:
     global: left
   tabs.show:
