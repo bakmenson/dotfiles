@@ -984,10 +984,6 @@ c.fonts.prompts = 'default_size sans-serif'
 ## Type: Font
 c.fonts.statusbar = 'default_size default_family'
 
-## Font used in the tab bar.
-## Type: QtFont
-c.fonts.tabs = 'default_size default_family'
-
 ## Font family for cursive fonts.
 ## Type: FontFamily
 c.fonts.web.family.cursive = ''
@@ -1049,7 +1045,8 @@ c.hints.border = '1px solid #E3BE23'
 
 ## Characters used for hint strings.
 ## Type: UniqueCharString
-c.hints.chars = 'asdfgewvhjklmnopu'
+#c.hints.chars = 'ahsjdkflgwueo'
+c.hints.chars = 'sadfjklewcmpgh'
 
 ## Dictionary file to be used by the word hints.
 ## Type: File
@@ -1163,11 +1160,6 @@ c.input.links_included_in_focus_chain = True
 ## cleared after this time.
 ## Type: Int
 c.input.partial_timeout = 5000
-
-## Enable Opera-like mouse rocker gestures. This disables the context
-## menu.
-## Type: Bool
-c.input.rocker_gestures = False
 
 ## Enable spatial navigation. Spatial navigation consists in the ability
 ## to navigate between focusable elements in a Web page, such as
@@ -1300,7 +1292,7 @@ c.scrolling.bar = 'when-searching'
 ## Enable smooth scrolling for web pages. Note smooth scrolling does not
 ## work with the `:scroll-px` command.
 ## Type: Bool
-c.scrolling.smooth = False
+c.scrolling.smooth = True
 
 ## When to find text on a page case-insensitively.
 ## Type: IgnoreCase
@@ -1364,10 +1356,6 @@ c.search.incremental = True
 ##   - uk-UA: Ukrainian (Ukraine)
 ##   - vi-VN: Vietnamese (Viet Nam)
 c.spellcheck.languages = []
-
-## Hide the statusbar unless a message is shown.
-## Type: Bool
-c.statusbar.hide = True
 
 ## Padding (in pixels) for the statusbar.
 ## Type: Padding
