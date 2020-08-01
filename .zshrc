@@ -119,9 +119,9 @@ alias ms='mpv --no-video https://www.youtube.com/playlist\?list\=PL_qai6_KDPhqqI
 alias nv='mpv --no-video --loop'
 
 # arch
-alias i='sudo pacman -S --noconfirm'
+alias i='sudo pacman -S'
 alias remove='sudo pacman -Rs'
-alias upd='sudo pacman -Syu --noconfirm && yay -Sua'
+alias upd='sudo pacman -Syu && yay -Sua'
 alias yupd='yay -Syu'
 alias cl='sudo pacman -Scc'
 
