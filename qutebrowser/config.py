@@ -1671,7 +1671,7 @@ c.zoom.mouse_divider = 512
 c.zoom.text_only = False
 
 ## Bindings for normal mode
-config.bind('<Shift-s>', 'config-cycle tabs.show always never')
+config.bind('<F2>', 'config-cycle tabs.show always never')
 config.bind('<Shift-t>', 'config-cycle statusbar.hide')
 config.bind('<Shift-q>', 'quit')
 config.bind('v', 'hint links spawn mpv --ytdl-format=bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a] --force-window=immediate {hint-url}')
