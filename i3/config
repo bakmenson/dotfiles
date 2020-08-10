@@ -337,12 +337,12 @@ exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_togg
 exec --no-startup-id "sleep 4; i3-msg 'workspace 1; exec emacsclient -c -a emacs'"
 exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec xfce4-terminal'"
 exec --no-startup-id "sleep 1; i3-msg 'workspace 3; exec emacs'"
-exec --no-startup-id "sleep 7; i3-msg 'workspace 4; exec qutebrowser'"
-exec --no-startup-id "sleep 17; i3-msg 'workspace 5; exec telegram-desktop'"
+exec --no-startup-id "sleep 7; i3-msg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 15; i3-msg 'workspace 5; exec telegram-desktop'"
 exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
 
-#exec --no-startup-id "sleep 7; i3-msg 'workspace 4; exec firefox'"
+#exec --no-startup-id "sleep 7; i3-msg 'workspace 4; exec qutebrowser'"
 #exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec alacritty'"
 #exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec xfce4-terminal -e vifm'"
 #exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec /home/solus/idea/bin/idea.sh'"
