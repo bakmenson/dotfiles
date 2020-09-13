@@ -136,8 +136,8 @@ bindsym $alt+k workspace next
 bindsym $alt+j workspace prev
 
 # alternatively navigate workspaces next / previous
-bindsym $alt+Right workspace next
-bindsym $alt+Left workspace prev
+#bindsym $alt+Right workspace next
+#bindsym $alt+Left workspace prev
 
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
@@ -335,8 +335,8 @@ exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 exec --no-startup-id unclutter
 exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
 
-exec --no-startup-id "sleep 3; i3-msg 'workspace 1; exec emacsclient -c -a emacs'"
-exec --no-startup-id "sleep 1; i3-msg 'workspace 2; exec emacs'"
+exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec emacs'"
+exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec emacsclient -c -a emacs'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 3; exec firefox'"
 exec --no-startup-id "sleep 10; i3-msg 'workspace 4; exec telegram-desktop'"
 exec --no-startup-id exec transmission-gtk -m
