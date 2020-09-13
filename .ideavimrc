@@ -1,4 +1,6 @@
 set ideajoin
+set number relativenumber
+
 "move line
 nnoremap <S-j> :m+<cr>
 nnoremap <S-k> :m-2<cr>
