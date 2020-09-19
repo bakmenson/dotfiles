@@ -112,7 +112,8 @@ alias zc='nvim ~/.zshrc'
 alias ic='nvim ~/.config/i3/config'
 alias nvi='nvim ~/.config/nvim/init.vim'
 
-alias v='nvim'
+#alias v='nvim'
+alias v='~/tools/nvim.appimage'
 alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
 
 alias ms='mpv --no-video https://www.youtube.com/playlist\?list\=PL_qai6_KDPhqqIfG_r8Qeg5p_ZEzUJJ4S'
@@ -195,7 +196,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
 	eval "$(pyenv init -)"
 fi
 eval "$(pyenv virtualenv-init -)"
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
