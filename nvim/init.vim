@@ -36,7 +36,7 @@ Plug '~/my-prototype-plugin'
 "Plug 'Valloric/YouCompleteMe'
 
 " coc-pyright, coc-ultisnips and coc-neosnippet
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'jiangmiao/auto-pairs'
 Plug '907th/vim-auto-save'
