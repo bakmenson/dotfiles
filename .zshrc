@@ -108,13 +108,17 @@ source $ZSH/oh-my-zsh.sh
 # aliases
 alias ufetch='~/.ufetch'
 
-alias zc='nvim ~/.zshrc'
-alias ic='nvim ~/.config/i3/config'
-alias nvi='nvim ~/.config/nvim/init.vim'
-
+# untill nvim 5 not release
 #alias v='nvim'
-alias v='~/tools/nvim.appimage'
-alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
+#alias zc='nvim ~/.zshrc'
+#alias ic='nvim ~/.config/i3/config'
+#alias nvi='nvim ~/.config/nvim/init.vim'
+#alias vup='nvim +PlugUpdate +PlugUpgrade +qa'
+
+alias v='~/nvim.appimage'
+alias zc='~/nvim.appimage ~/.zshrc'
+alias ic='~/nvim.appimage ~/dotfiles/i3/config'
+alias nvi='~/nvim.appimage ~/dotfiles/nvim/init.vim'
 
 alias ms='mpv --no-video https://www.youtube.com/playlist\?list\=PL_qai6_KDPhqqIfG_r8Qeg5p_ZEzUJJ4S'
 alias nv='mpv --no-video --loop'
