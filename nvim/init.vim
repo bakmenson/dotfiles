@@ -1,76 +1,42 @@
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-" call plug#begin('~/.vim/plugged')
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
-
-" Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Multiple Plug commands can be written in a single line using | separators
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
-
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+" zo： Open fold in current cursor postion
+" zO： Open fold and sub-fold in current cursor postion recursively
+" zc： Close the fold in current cursor position
+" zC： Close the fold and sub-fold in current cursor position recursively
+Plug 'tmhedberg/SimpylFold'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
-
-"Plug 'Valloric/YouCompleteMe'
-
-" coc-pyright, coc-ultisnips and coc-neosnippet
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'jiangmiao/auto-pairs'
-Plug '907th/vim-auto-save'
+" Common
 Plug 'easymotion/vim-easymotion'
-Plug 'dense-analysis/ale', {'for': 'python'}
 Plug 'Yggdroot/indentLine'
-"Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'sheerun/vim-polyglot'
+Plug '907th/vim-auto-save'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'Yggdroot/indentLine'
 
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-"Python
-Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-
-" SQL
-Plug 'alcesleo/vim-uppercase-sql'
-
-" html, css
-Plug 'mattn/emmet-vim'
-
-"Themes
+" Themes
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox'
 Plug 'ryanoasis/vim-devicons'
 
-" Initialize plugin system
-call plug#end()
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
-"==========================================================================
+
+call plug#end()
 
 "syntax on
 syntax enable
@@ -81,12 +47,15 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set encoding=UTF-8
+"set colorcolumn=120
+set textwidth=120
+set noswapfile
+set number relativenumber
 set termencoding=UTF-8
 set fileencodings=UTF-8
 set autoindent
 set showmatch
-"set colorcolumn=120
-set updatetime=100
+set updatetime=50
 set ttyfast
 set ttimeout
 set ttimeoutlen=50
@@ -95,66 +64,50 @@ set showcmd
 set wildmenu
 set wildmode=longest:full,full
 set hidden
-set number relativenumber
 set laststatus=2
 set nowrap
 set nopaste
 set splitright
-
 set smartcase
 set ignorecase
-
 set hlsearch
 set incsearch
 set nobackup
-set noswapfile
-set completeopt-=preview
+"set completeopt-=preview
+set completeopt=menuone,noinsert,noselect
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+"set signcolumn=yes
 
-set signcolumn=yes
 
-"--------------------------
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
 " Python
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 colorcolumn=80
-"autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-"autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-
-" SQL
-autocmd Filetype sql setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-"--------------------------
-
-" HTML, CSS
-let g:user_emmet_install_global = 0
-autocmd FileType html,htmldjango,css EmmetInstall
-"let g:user_emmet_leader_key='<C-Y>'
-
-"========================================================================
+" colorcolumn=80
+autocmd Filetype python setlocal expandtab textwidth=79
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " autosave
 let g:auto_save = 1
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_silent = 1
 
+"example for xfce4-terminal
+set termguicolors
+
+let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_invert_selection='0'
+
 "schemes
 "colorscheme onedark
 colorscheme gruvbox
 
-"example for xfce4-terminal
-set termguicolors
-
-"airline-themes
 let g:airline_theme='gruvbox'
-"let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1
-
-" indent line
-let g:indentLine_color_term = 239
-let g:indentLine_char = '▏'
-
-" ale
-let g:ale_linters = {'python': ['mypy', 'pylint', 'flake8']}
-let g:ale_linters_explicit = 1
 
 " fzf.vim
 " Always enable preview window on the right with 60% width
@@ -162,21 +115,21 @@ let g:fzf_preview_window = 'right:60%'
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
-" vim-polyglot
-let g:python_highlight_all = 1
+" indent line
+let g:indentLine_color_term = 239
+let g:indentLine_char = '▏'
 
-" vim-polyglot for i3 config
-aug i3config_ft_detection
-	au!
-	au BufNewFile,BufRead ~/dotfiles/i3/config set filetype=i3config
-aug end
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
+lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
 
 "==========================================================================
 "mapping
 
 let mapleader="\<Space>"
 
-map <leader>s :NERDTreeToggle<cr>
+"map <leader>s :NERDTreeToggle<cr>
+map <F2> :NERDTreeToggle<cr>
 
 "easymotion
 map <leader> <Plug>(easymotion-prefix)
@@ -203,10 +156,6 @@ nnoremap <leader><leader> <c-^>
 " close buffers without closing window
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<cr>
 
-"move tabs
-" :tabmove +1
-" :tabmove -1
-
 " moving between windows
 nnoremap <leader>h :wincmd h<cr>
 nnoremap <leader>j :wincmd j<cr>
@@ -219,33 +168,6 @@ nnoremap <C-j> :wincmd s<cr>
 
 nnoremap <silent> <Leader>\ :vertical resize +5<cr>
 nnoremap <silent> <Leader>- :vertical resize -5<cr>
-
-" ultisnips
-"let g:UltiSnipsExpandTrigger = "<c-j>"
-
-"----------------------------------------------
-" coc.nvim
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-"----------------------------------------------
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
