@@ -337,10 +337,10 @@ exec --no-startup-id unclutter
 exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
 
 exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec alacritty -e ranger'"
-#exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec alacritty'"
-exec --no-startup-id "sleep 10; i3-msg 'workspace 3; exec /home/solus/idea/bin/idea.sh'"
-exec --no-startup-id "sleep 3; i3-msg 'workspace 4; exec firefox'"
-exec --no-startup-id "sleep 7; i3-msg 'workspace 5; exec telegram-desktop'"
+exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec alacritty -e /home/solus/nvim.appimage'"
+exec --no-startup-id "sleep 13; i3-msg 'workspace 3; exec /home/solus/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 5; i3-msg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 10; i3-msg 'workspace 5; exec telegram-desktop'"
 exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
 
