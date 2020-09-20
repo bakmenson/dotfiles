@@ -23,6 +23,8 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
 
+Plug 'norcalli/nvim-colorizer.lua'
+
 " Python
 Plug 'dense-analysis/ale', {'for': 'python'}
 
@@ -134,6 +136,8 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
 lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
 lua require'nvim_lsp'.jdtls.setup{ on_attach=require'completion'.on_attach }
+
+lua require'colorizer'.setup()
 
 "==========================================================================
 "mapping
