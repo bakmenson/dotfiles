@@ -6,6 +6,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 " zC： Close the fold and sub-fold in current cursor position recursively
 Plug 'tmhedberg/SimpylFold'
 
+" To comment out a single line, use <leader>cc
+" To un-comment a line, use <leader>cu
+Plug 'scrooloose/nerdcommenter'
+
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
