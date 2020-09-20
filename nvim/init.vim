@@ -19,6 +19,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
 
+" Python
+Plug 'dense-analysis/ale', {'for': 'python'}
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -119,6 +122,10 @@ let g:fzf_buffers_jump = 1
 let g:indentLine_color_term = 239
 let g:indentLine_char = '▏'
 
+" ale
+let g:ale_linters = {'python': ['mypy']}
+let g:ale_linters_explicit = 1
+
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
 lua require'nvim_lsp'.pyls.setup{ on_attach=require'completion'.on_attach }
@@ -190,6 +197,15 @@ nnoremap ghu <Plug>(GitGutterUndoHunk)
 nnoremap <C-p> :GFiles<cr>
 nnoremap <C-f> :Files<cr>
 nnoremap <S-b> :Buffers<cr>
+
+" LSP keys
+nnoremap <leader>vd :lua vim.lsp.buf.definition()<cr>
+nnoremap <leader>vi :lua vim.lsp.buf.implementation()<cr>
+nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<cr>
+nnoremap <leader>vrr :lua vim.lsp.buf.references()<cr>
+nnoremap <leader>vrn :lua vim.lsp.buf.rename()<cr>
+nnoremap <leader>vh :lua vim.lsp.buf.hover()<cr>
+nnoremap <leader>vca :lua vim.lsp.buf.code_action()<cr>
 
 "exit
 nnoremap <S-q> :q<cr>
