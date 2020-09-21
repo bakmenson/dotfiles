@@ -2,7 +2,6 @@ source $HOME/dotfiles/nvim/general/settings.vim
 
 source $HOME/dotfiles/nvim/plugins.vim
 
-source $HOME/dotfiles/nvim/plugin_configs/auto_save.vim
 source $HOME/dotfiles/nvim/plugin_configs/fzf.vim
 source $HOME/dotfiles/nvim/plugin_configs/indent_line.vim
 source $HOME/dotfiles/nvim/plugin_configs/ale.vim

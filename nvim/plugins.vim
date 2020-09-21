@@ -22,6 +22,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'jiangmiao/auto-pairs'
 "Plug 'Yggdroot/indentLine'
 Plug 'liuchengxu/vim-which-key'
+Plug 'voldikss/vim-floaterm'
 
 Plug 'norcalli/nvim-colorizer.lua'
 
