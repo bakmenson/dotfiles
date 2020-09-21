@@ -27,7 +27,7 @@ let g:startify_lists = [
 	\ { 'header': ['        Files'],                  'type': 'files' },
 	\ { 'header': ['        Current Dir '. getcwd()], 'type': 'dir' },
 	\ { 'header': ['        Sessions'],               'type': 'sessions' },
-	\ { 'header': ['        Bookmarks'],				 'type': 'bookmarks' },
+	\ { 'header': ['        Bookmarks'],			  'type': 'bookmarks' },
 	\ ]
 
 let g:startify_bookmarks = [
