@@ -3,8 +3,8 @@ let mapleader="\<Space>"
 "map <leader>s :NERDTreeToggle<cr>
 "map <F2> :NERDTreeToggle<cr>
 
-"easymotion
-map <leader> <Plug>(easymotion-prefix)
+""easymotion
+"map <leader> <Plug>(easymotion-prefix)
 
 "move lines
 nnoremap <S-k> :m+<cr>
@@ -20,8 +20,8 @@ vnoremap > >gv
 "nnoremap <leader>T :enew<cr>
 "nnoremap <Tab> :bnext<cr>
 "nnoremap <S-Tab> :bprevious<cr>
-"nnoremap <leader>bq :bp <bar> bd! #<cr>
-"nnoremap <leader>ba :bufdo bd!<cr>
+nnoremap <leader>bd :bp <bar> bd! #<cr>
+"nnoremap <leader>bq :bufdo bd!<cr>
 ""cycle between last two open buffers
 "nnoremap <leader><leader> <c-^>
 
