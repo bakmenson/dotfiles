@@ -14,3 +14,4 @@ source $HOME/dotfiles/nvim/themes/airline.vim
 source $HOME/dotfiles/nvim/themes/gruvbox.vim
 
 source $HOME/dotfiles/nvim/keys/mappings.vim
+source $HOME/dotfiles/nvim/keys/which_key.vim
