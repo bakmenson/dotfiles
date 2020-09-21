@@ -44,6 +44,9 @@ set termguicolors
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
+" cd for current file
+autocmd BufEnter * silent! lcd %:p:h
+
 " Python
 " colorcolumn=80
 autocmd Filetype python setlocal expandtab textwidth=79
