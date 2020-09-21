@@ -16,7 +16,6 @@ Plug 'junegunn/fzf.vim'
 
 " Common
 Plug 'easymotion/vim-easymotion'
-Plug '907th/vim-auto-save'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'jiangmiao/auto-pairs'
