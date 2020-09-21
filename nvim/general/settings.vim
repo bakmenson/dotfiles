@@ -18,7 +18,8 @@ set showmatch
 set updatetime=50
 set ttyfast
 set ttimeout
-set ttimeoutlen=50
+"set ttimeoutlen=50
+set ttimeoutlen=500
 set backspace=indent,eol,start whichwrap+=<,>,[,]
 set showcmd
 set wildmenu
