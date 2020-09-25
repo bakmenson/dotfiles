@@ -18,7 +18,6 @@ let g:startify_relative_path       = 1
 let g:startify_update_oldfiles     = 1
 let g:startify_session_autoload    = 1
 let g:startify_session_persistence = 1
-
 let g:startify_fortune_use_unicode = 1
 let g:startify_change_to_dir       = 1
 let g:startify_padding_left = 12
