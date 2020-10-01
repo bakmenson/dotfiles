@@ -229,10 +229,10 @@ bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # pycharm
-bindsym $alt+p exec /home/solus/pycharm-community/bin/pycharm.sh
+bindsym $alt+p exec ~/pycharm-community/bin/pycharm.sh
 
 # idea
-bindsym $alt+i exec /home/solus/idea/bin/idea.sh
+bindsym $alt+i exec ~/idea/bin/idea.sh
 
 # =============================================================================
 
@@ -248,7 +248,7 @@ bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
 #bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs --eval '(dired nil)'
 bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs
 
-bindsym $alt+y exec /home/solus/.mpv_youtube.sh
+bindsym $alt+v exec alacritty -e ~/nvim.appimage
 
 # =============================================================================
 
@@ -337,8 +337,8 @@ exec --no-startup-id unclutter
 exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
 
 exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec alacritty -e ranger'"
-exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec alacritty -e /home/solus/nvim.appimage'"
-exec --no-startup-id "sleep 13; i3-msg 'workspace 3; exec /home/solus/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec alacritty -e ~/nvim.appimage'"
+exec --no-startup-id "sleep 13; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 4; exec firefox'"
 exec --no-startup-id "sleep 10; i3-msg 'workspace 5; exec telegram-desktop'"
 exec --no-startup-id exec transmission-gtk -m
