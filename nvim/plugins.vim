@@ -1,5 +1,4 @@
 call plug#begin('~/.local/share/nvim/plugged')
-
 " zo： Open fold in current cursor postion
 " zO： Open fold and sub-fold in current cursor postion recursively
 " zc： Close the fold in current cursor position
@@ -19,7 +18,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'jiangmiao/auto-pairs'
-"Plug 'Yggdroot/indentLine'
 Plug 'liuchengxu/vim-which-key'
 Plug 'voldikss/vim-floaterm'
 
@@ -27,8 +25,12 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 Plug 'mhinz/vim-startify'
 
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+
 " Python
-Plug 'dense-analysis/ale', {'for': 'python'}
+"Plug 'dense-analysis/ale', {'for': 'python'}
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -42,9 +44,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 
-" LSP
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
 
+"<leader>d: go to definition
+"K: check documentation of class or method
+"<leader>n: show the usage of a name in current file
+"<leader>r: rename a name
+Plug 'davidhalter/jedi-vim'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+
+Plug 'neomake/neomake'
 
 call plug#end()
