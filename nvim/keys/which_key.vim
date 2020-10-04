@@ -26,6 +26,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 " Single mappings
 let g:which_key_map['.'] = [ ':e $MYVIMRC'                        , 'open init' ]
+let g:which_key_map[','] = [ 'Buffers'                            , 'open buffers' ]
 let g:which_key_map[';'] = [ ':Commands'                          , 'commands' ]
 let g:which_key_map['q'] = [ 'q'                                  , 'quit' ]
 let g:which_key_map['u'] = [ ':UndotreeToggle'                    , 'undo tree']
