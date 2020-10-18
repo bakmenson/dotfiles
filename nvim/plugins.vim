@@ -30,7 +30,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
 " Python
-"Plug 'dense-analysis/ale', {'for': 'python'}
+Plug 'dense-analysis/ale', {'for': 'python'}
 
 " Git
 Plug 'tpope/vim-fugitive'
