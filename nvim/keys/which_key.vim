@@ -182,7 +182,7 @@ let g:which_key_map['l'] = {
 
 let g:which_key_map['o'] = {
 	\ 'name' : '+open' ,
-	\ 'n' : [':NERDTreeToggle'  , 'NERDTreeToggle'],
+	\ 'r' : [':Rexplore'  , 'open/close netrw'],
 	\ }
 
 
