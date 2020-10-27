@@ -250,6 +250,8 @@ bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs
 
 bindsym $alt+v exec alacritty -e ~/nvim.appimage
 
+bindsym $alt+o exec --no-startup-id opera
+
 # =============================================================================
 
 # switch to workspace with urgent window automatically
