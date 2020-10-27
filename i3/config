@@ -248,7 +248,7 @@ bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
 #bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs --eval '(dired nil)'
 bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs
 
-bindsym $alt+v exec alacritty -e ~/nvim.appimage
+bindsym $alt+v exec --no-startup-id alacritty -e ~/nvim.appimage
 
 bindsym $alt+o exec --no-startup-id opera
 
