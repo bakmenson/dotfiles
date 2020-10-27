@@ -38,6 +38,7 @@ set nobackup
 set completeopt=menuone,noinsert,noselect
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 "set signcolumn=yes
+set path+=**
 
 "example for xfce4-terminal
 set termguicolors
