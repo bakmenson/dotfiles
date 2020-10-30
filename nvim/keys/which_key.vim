@@ -66,8 +66,8 @@ let g:which_key_map['f']= {
 
 let g:which_key_map['g'] = {
 	\ 'name' : '+git' ,
-	\ 'a' : [':Git add .'                        , 'add all'],
-	\ 'A' : [':Git add %'                        , 'add current'],
+	\ 'A' : [':Git add .'                        , 'add all'],
+	\ 'a' : [':Git add %'                        , 'add current'],
 	\ 'b' : [':Git blame'                        , 'blame'],
 	\ 'c' : [':Gcommit'                          , 'commit'],
 	\ 'd' : {
