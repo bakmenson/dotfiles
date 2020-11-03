@@ -252,6 +252,8 @@ bindsym $alt+v exec --no-startup-id alacritty -e ~/nvim.appimage
 
 bindsym $alt+o exec --no-startup-id opera
 
+bindsym $alt+w exec --no-startup-id ~/WarThunder/launcher
+
 # =============================================================================
 
 # switch to workspace with urgent window automatically
