@@ -29,8 +29,8 @@ font xft:URWGothic-Book 0
 floating_modifier $mod
 
 # start a terminal
-#bindsym $alt+0 exec xfce4-terminal
-bindsym $alt+0 exec alacritty
+bindsym $alt+0 exec xfce4-terminal
+#bindsym $alt+0 exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
