@@ -106,9 +106,6 @@ source $ZSH/oh-my-zsh.sh
 # aliases
 alias ufetch='~/.ufetch'
 
-alias ms='mpv --no-video https://www.youtube.com/playlist\?list\=PL_qai6_KDPhqqIfG_r8Qeg5p_ZEzUJJ4S'
-alias nv='mpv --no-video --loop'
-
 # arch
 alias i='sudo pacman -S'
 alias remove='sudo pacman -Rs'
