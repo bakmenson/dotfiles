@@ -161,11 +161,6 @@ alias dm='python manage.py migrate'
 alias dmm='python manage.py makemigrations'
 alias ds='python manage.py shell'
 
-# tmux
-alias ta='tmux a -t' # attach to a session with the name mysession
-alias tal='tmux a' # attach to last session
-alias tns='tmux new -s' # start new session + session name
-
 # git
 alias gts='git status'
 alias gta='git add .'
