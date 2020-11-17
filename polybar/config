@@ -476,7 +476,7 @@ margin-bottom = 5
 [module/check-updates]
 type = custom/script
 exec = sh ~/.config/polybar/check-updates.sh
-interval = 36000
+interval = 3600
 
 [module/windows-count]
 type = custom/script
