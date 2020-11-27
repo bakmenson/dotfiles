@@ -54,6 +54,9 @@
 
 (setq treemacs-git-mode 'deferred)
 
+(after! flycheck
+        (add-to-list 'flycheck-check-syntax-automatically 'idle-change))
+
 ;; similar vim-easymotion
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 
