@@ -37,7 +37,7 @@ bindsym $mod+q kill
 
 # start program launcher
 # bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $mod+d exec rofi -show run -modi run
+bindsym $mod+d exec rofi -show drun -modi run
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -340,7 +340,7 @@ exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 exec --no-startup-id unclutter
 exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
 
-#exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec xfce4-terminal -e vifm'"
+exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec xfce4-terminal -e vifm'"
 exec --no-startup-id "sleep 13; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 4; exec firefox'"
 exec --no-startup-id "sleep 10; i3-msg 'workspace 5; exec telegram-desktop'"
