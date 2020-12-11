@@ -23,7 +23,7 @@
 	/*border-radius:  1;*/
 	/*border-color: @bordercolor;*/
 	padding:        5;
-	width:          20%;
+	width:          30%;
 }
 #mainbox {
 	border:  0;
