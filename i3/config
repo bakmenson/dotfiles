@@ -232,7 +232,7 @@ bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
 bindsym $alt+p exec ~/pycharm-community/bin/pycharm.sh
 
 # idea
-bindsym $alt+i exec ~/idea/bin/idea.sh
+bindsym $alt+d exec ~/idea/bin/idea.sh
 
 # =============================================================================
 
