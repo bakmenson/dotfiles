@@ -248,12 +248,6 @@ bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
 #bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs --eval '(dired nil)'
 bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs
 
-# zshrc config
-bindsym $alt+z exec --no-startup-id emacsclient -c -a emacs ~/dotfiles/zsh/.zshrc
-
-# i3 config
-bindsym $alt+i exec --no-startup-id emacsclient -c -a emacs ~/dotfiles/i3/config
-
 bindsym $alt+v exec --no-startup-id alacritty -e ~/nvim.appimage
 
 bindsym $alt+o exec --no-startup-id opera
