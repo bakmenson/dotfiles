@@ -340,8 +340,7 @@ exec_always --no-startup-id fix_xcursor
 ###########################################################################################
 
 # --bg-fill, --bg-scale
-#exec_always feh --bg-fill /run/media/solus/hdd/Pictures/wallpapers/59.jpg; compton -b
-exec --no-startup-id compton --config ~/.config/compton.conf
+exec --no-startup-id picom --config ~/.config/picom.conf
 exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 
 exec --no-startup-id unclutter
