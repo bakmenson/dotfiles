@@ -29,8 +29,8 @@ font xft:URWGothic-Book 0
 floating_modifier $mod
 
 # start a terminal
-bindsym $alt+0 exec xfce4-terminal
-#bindsym $alt+0 exec alacritty
+#bindsym $alt+0 exec xfce4-terminal
+bindsym $alt+0 exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
@@ -215,6 +215,14 @@ for_window [class="Xfburn"] floating enable
 for_window [class="Transmission-gtk"] floating enable border pixel 1
 
 # =============================================================================
+
+# swap caps lock and escape
+exec_always --no-startup-id xmodmap -e "clear lock"
+exec_always --no-startup-id xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
+exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+
+exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
+
 # Pulse Audio controls
 #bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
 #bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
@@ -243,7 +251,8 @@ bindsym $mod+Shift+F12 exec scrot -u -e
 bindsym $mod+F12 exec scrot
 
 # bindsym $alt+c exec --no-startup-id xfce4-terminal -e cmatrix --fullscreen
-bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
+# bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
+bindsym $alt+c exec --no-startup-id feh -z -F /run/media/solus/hdd/Pictures/wallpapers/*
 
 #bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs --eval '(dired nil)'
 bindsym $alt+e exec --no-startup-id emacsclient -c -a emacs
@@ -317,7 +326,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 # exec --no-startup-id manjaro-hello
 # exec --no-startup-id nm-applet
-# exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id pamac-tray
 # exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
@@ -336,10 +345,9 @@ exec --no-startup-id compton --config ~/.config/compton.conf
 exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 
 exec --no-startup-id unclutter
-exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
 
 exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec xfce4-terminal -e vifm'"
-exec --no-startup-id "sleep 13; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 15; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 4; exec firefox'"
 exec --no-startup-id "sleep 10; i3-msg 'workspace 5; exec telegram-desktop'"
 exec --no-startup-id exec transmission-gtk -m
