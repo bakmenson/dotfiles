@@ -88,9 +88,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+# 	export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+# 	export EDITOR='nvim'
 # fi
 
 # Compilation flags
@@ -183,8 +183,6 @@ eval "$(pyenv virtualenv-init -)"
 
 # turf off highlighting directories are writable by other
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
-
-export PATH="$PATH:/$HOME/.django_project"
 
 # poetry
 source $HOME/.poetry/env
