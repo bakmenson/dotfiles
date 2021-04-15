@@ -49,8 +49,8 @@
 (add-hook 'prog-mode-hook '(lambda () (setq fill-column 120)))
 (add-hook 'python-mode-hook '(lambda () (setq fill-column 80)))
 
-(global-diff-hl-mode t)
-(diff-hl-flydiff-mode t)
+;; disable highlight current line
+(remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 
 (setq treemacs-git-mode 'deferred)
 
