@@ -3,3 +3,4 @@
 	name = bakmenson
 [core]
 	excludesfile = /home/solus/.gitignore_global
+	editor = nvim
