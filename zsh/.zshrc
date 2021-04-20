@@ -103,7 +103,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 #######################################################################3
-# aliases
+
 alias ufetch='~/.ufetch'
 
 # arch
@@ -167,7 +167,7 @@ alias gta='git add .'
 alias gtc='git commit -m'
 alias gtp='git push origin'
 
-#######################################################################3
+#######################################################################
 
 export TERM=xterm-256color
 
@@ -190,5 +190,7 @@ source $HOME/.poetry/env
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
 # export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
+
+#######################################################################
 
 colorscript random
