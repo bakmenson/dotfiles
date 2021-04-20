@@ -345,7 +345,7 @@ exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 
 exec --no-startup-id unclutter
 
-exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec xfce4-terminal -e nnn -S -a'"
+exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec xfce4-terminal'"
 exec --no-startup-id "sleep 15; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 4; exec firefox'"
 exec --no-startup-id "sleep 10; i3-msg 'workspace 5; exec telegram-desktop'"
