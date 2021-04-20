@@ -105,6 +105,7 @@ source $ZSH/oh-my-zsh.sh
 #######################################################################3
 
 alias ufetch='~/.ufetch'
+alias n="nnn -S -a"
 
 # arch
 alias i='sudo pacman -S'
