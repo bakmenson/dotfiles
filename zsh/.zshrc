@@ -187,6 +187,12 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export VISUAL="nvim"
 export EDITOR="nvim"
 
+export NNN_FIFO="/tmp/nnn.fifo"
+export NNN_PLUG="p:preview-tui-ext;i:imgview;o:fzopen;"
+export NNN_BMS="D:~/Downloads/;d:~/Dev/;v:/run/media/solus/hdd/Videos/;u:/run/media/solus/hdd/;"
+export NNN_COLORS="c136"
+export NNN_FCOLORS="c16f6f6f6f6f6f6f6f6f6f6f"
+
 # poetry
 source $HOME/.poetry/env
 
