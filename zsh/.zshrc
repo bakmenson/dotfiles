@@ -183,6 +183,9 @@ eval "$(pyenv virtualenv-init -)"
 # turf off highlighting directories are writable by other
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
+export VISUAL="nvim"
+export EDITOR="nvim"
+
 # poetry
 source $HOME/.poetry/env
 
