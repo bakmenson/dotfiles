@@ -186,6 +186,7 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 export VISUAL="nvim"
 export EDITOR="nvim"
+export TERMINAL="alacritty"
 
 export NNN_FIFO="/tmp/nnn.fifo"
 export NNN_PLUG="p:preview-tui-ext;i:imgview;o:fzopen;"
