@@ -15,6 +15,7 @@
 (package! peep-dired)
 (package! org-bullets)
 (package! mpv)
+(package! pomidor)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
