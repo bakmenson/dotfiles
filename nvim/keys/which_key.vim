@@ -36,6 +36,7 @@ let g:which_key_map['i'] = [ '<Plug>(easymotion-prefix)'          , 'easymotion'
 
 let g:which_key_map['a'] = {
 	\ 'name' : '+actions' ,
+	\ 'a' : [':MakeTags'                         , 'make tags'],
 	\ 'c' : [':ColorizerToggle'                  , 'colorizer'],
 	\ 'm' : [':MarkdownPreview'                  , 'markdown preview'],
 	\ 'M' : [':MarkdownPreviewStop'              , 'markdown preview stop'],
