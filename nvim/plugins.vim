@@ -5,8 +5,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 " zC： Close the fold and sub-fold in current cursor position recursively
 Plug 'tmhedberg/SimpylFold'
 
-" To comment out a single line, use <leader>cc
-" To un-comment a line, use <leader>cu
 Plug 'preservim/nerdcommenter'
 
 " Plugin outside ~/.vim/plugged with post-update hook
@@ -45,10 +43,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Luxed/ayu-vim'
 
 
-"<leader>d: go to definition
 "K: check documentation of class or method
-"<leader>n: show the usage of a name in current file
-"<leader>r: rename a name
 Plug 'davidhalter/jedi-vim'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
