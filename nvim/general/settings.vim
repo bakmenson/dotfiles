@@ -36,6 +36,7 @@ set incsearch
 set nobackup
 "set completeopt-=preview
 set completeopt=menuone,noinsert,noselect
+set cpt=.,w,b,u,U,i,d
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 "set signcolumn=yes
 set path+=**
