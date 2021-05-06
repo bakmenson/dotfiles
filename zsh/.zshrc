@@ -121,7 +121,7 @@ alias cl='sudo pacman -Scc'
 # alias upd='sudo apt update && sudo apt dist-upgrade && sudo snap refresh'
 # alias cl='sudo apt autoclean && sudo apt clean'
 
-alias c='clear'
+alias c='clear && colorscript random'
 
 alias q='exit'
 
