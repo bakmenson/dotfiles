@@ -36,7 +36,6 @@ let g:which_key_map['i'] = [ '<Plug>(easymotion-prefix)'          , 'easymotion'
 
 let g:which_key_map['a'] = {
 	\ 'name' : '+actions' ,
-	\ 'a' : [':MakeTags'                         , 'make tags'],
 	\ 'c' : [':ColorizerToggle'                  , 'colorizer'],
 	\ 'm' : [':MarkdownPreview'                  , 'markdown preview'],
 	\ 'M' : [':MarkdownPreviewStop'              , 'markdown preview stop'],
@@ -136,6 +135,11 @@ let g:which_key_map['k'] = {
 	\ 'p' : [':AsyncTask project-run'       , 'run project'],
 	\ 'x' : [':cclose'                      , 'close task view'],
 	\ }
+
+let g:which_key_map['p'] = {
+	\ 'name' : '+project' ,
+	\ 't' : [':MakeTags'                         , 'make tags'],
+	\}
 
 let g:which_key_map['r'] = {
 			\ 'name' : '+run',
