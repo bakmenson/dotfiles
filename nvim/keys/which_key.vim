@@ -142,10 +142,10 @@ let g:which_key_map['p'] = {
 	\}
 
 let g:which_key_map['r'] = {
-			\ 'name' : '+run',
-			\ 'p' : [':FloatermNew python %', 'run python'],
-			\ 'n' : [':FloatermNew node %', 'run nodejs'],
-			\}
+	\ 'name' : '+run',
+	\ 'p' : [':FloatermNew python %', 'run python'],
+	\ 'n' : [':FloatermNew node %', 'run nodejs'],
+	\}
 
 let g:which_key_map['s'] = {
 	\ 'name' : '+search' ,
