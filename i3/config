@@ -252,7 +252,7 @@ bindsym $mod+F12 exec scrot
 
 # bindsym $alt+c exec --no-startup-id xfce4-terminal -e cmatrix --fullscreen
 # bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
-bindsym $alt+c exec --no-startup-id feh -z -F /run/media/solus/hdd/Pictures/wallpapers/*
+bindsym $alt+f exec --no-startup-id feh -z -F /run/media/solus/hdd/Pictures/wallpapers/*
 
 bindsym $alt+e exec --no-startup-id emacsclient -c
 
