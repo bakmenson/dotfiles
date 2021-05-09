@@ -68,7 +68,7 @@ font-4 = siji:pixelsize=10;3
 
 modules-left = filesystem memory cpu eth temperature alsa
 modules-center = i3
-modules-right = xkeyboard date check-updates
+modules-right = xkeyboard weather date check-updates
 
 tray-position = right
 tray-padding = 1
@@ -477,12 +477,5 @@ margin-bottom = 5
 type = custom/script
 exec = sh ~/.config/polybar/check-updates.sh
 interval = 3600
-
-[module/windows-count]
-type = custom/script
-format-prefix = "  "
-exec = ~/.config/polybar/windows-count.sh
-interval = 3
-format-foreground = #e1d9c4
 
 ; vim:ft=dosini
