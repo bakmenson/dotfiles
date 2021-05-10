@@ -106,6 +106,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias ufetch='~/.ufetch'
 alias n="nnn -S -a"
+alias nvim="~/nvim.appimage"
 
 # arch
 alias i='sudo pacman -S'
