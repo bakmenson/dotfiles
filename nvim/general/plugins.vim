@@ -23,8 +23,8 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'mhinz/vim-startify'
 
 " LSP
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'nvim-lua/completion-nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 " Python
 Plug 'dense-analysis/ale', {'for': 'python'}
@@ -41,14 +41,5 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Luxed/ayu-vim'
-
-
-"K: check documentation of class or method
-Plug 'davidhalter/jedi-vim'
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
-
-"Plug 'neomake/neomake'
 
 call plug#end()
