@@ -109,17 +109,6 @@ let g:which_key_map['G'] = {
 	\ 'P' : [':Gist -p'                          , 'post private gist '],
 	\ }
 
-let g:which_key_map['j'] = {
-	\ 'name' : '+jedi',
-	\ 'g'    : [':call jedi#goto()'                 , 'goto_command'],
-	\ 'a'    : [':call jedi#goto_assignments()'     , 'goto_assignments'],
-	\ 'u'    : [':call jedi#usages()'               , 'usages'],
-	\ 'r'    : [':call jedi#rename()'               , 'reaname'],
-	\ 's'    : [':call jedi#goto_stubs()'           , 'stubs'],
-	\ 'd'    : [':call jedi#goto_definitions()'     , 'definition'],
-	\ 'D'    : [':call jedi#goto_documentation()'   , 'documentation'],
-	\}
-
 let g:which_key_map['k'] = {
 	\ 'name' : '+task' ,
 	\ 'c' : [':AsyncTask file-compile'      , 'compile file'],
