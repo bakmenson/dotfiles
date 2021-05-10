@@ -30,7 +30,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $alt+0 exec xfce4-terminal
-bindsym $alt+0 exec alacritty
+bindsym $alt+o exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
@@ -258,7 +258,7 @@ bindsym $alt+e exec --no-startup-id emacsclient -c
 
 bindsym $alt+v exec --no-startup-id alacritty -e nvim
 
-bindsym $alt+o exec --no-startup-id opera
+bindsym $alt+0 exec --no-startup-id opera
 
 bindsym $alt+w exec --no-startup-id ~/WarThunder/launcher
 
