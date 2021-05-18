@@ -237,7 +237,7 @@ bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
 #bindsym XF86AudioMute exec --no-startup-id "amixer -q set Master toggle"
 
 # pycharm
-bindsym $alt+p exec ~/pycharm-community/bin/pycharm.sh
+#bindsym $alt+p exec ~/pycharm-community/bin/pycharm.sh
 
 # idea
 bindsym $alt+i exec ~/idea/bin/idea.sh
