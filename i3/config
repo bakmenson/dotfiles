@@ -133,8 +133,8 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 #navigate workspaces next / previous
-bindsym $alt+k workspace next
-bindsym $alt+j workspace prev
+bindsym $alt+n workspace next
+bindsym $alt+p workspace prev
 
 # alternatively navigate workspaces next / previous
 #bindsym $alt+Right workspace next
