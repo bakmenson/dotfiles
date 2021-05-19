@@ -6,7 +6,7 @@ source $HOME/.config/nvim/plugin_configs/fzf.vim
 source $HOME/.config/nvim/plugin_configs/indent_line.vim
 source $HOME/.config/nvim/plugin_configs/ale.vim
 source $HOME/.config/nvim/plugin_configs/nvim_lsp.vim
-"source $HOME/.config/nvim/plugin_configs/colorizer.vim
+source $HOME/.config/nvim/plugin_configs/colorizer.vim
 source $HOME/.config/nvim/plugin_configs/startify.vim
 
 source $HOME/.config/nvim/themes/airline.vim
