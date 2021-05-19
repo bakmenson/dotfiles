@@ -21,6 +21,7 @@ smoke-blue = #222d31
 gruvbox = #282828
 onedark = #282c34
 yellow = #ffb52a
+dark-yellow = #bc8420
 
 ;background = ${xrdb:color0:#222}
 background = ${colors.onedark}
@@ -185,10 +186,8 @@ label-focused = %icon%
 label-focused-background = ${module/bspwm.label-focused-background}
 label-focused-underline = ${module/bspwm.label-focused-underline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
-;label-focused-foreground = #ffb549
-;label-focused-foreground = #f29c2b
-;label-focused-foreground = #bc8420
-label-focused-foreground = ${colors.yellow}
+label-focused-foreground = ${colors.dark-yellow}
+;label-focused-foreground = ${colors.yellow}
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
