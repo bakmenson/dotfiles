@@ -68,7 +68,7 @@ font-4 = siji:pixelsize=10;3
 ;modules-center =
 ;modules-right = xkeyboard alsa filesystem memory cpu eth temperature date check-updates gmail
 
-modules-left = filesystem memory cpu eth temperature alsa
+modules-left = sep filesystem sep memory sep cpu sep eth temperature sep alsa sep
 modules-center = i3
 modules-right = xkeyboard weather date check-updates
 
@@ -477,5 +477,10 @@ margin-bottom = 5
 type = custom/script
 exec = sh ~/.config/polybar/check-updates.sh
 interval = 3600
+
+[module/sep]
+type = custom/text
+content = |
+label-separator-foreground = ${colors.foreground-alt}
 
 ; vim:ft=dosini
