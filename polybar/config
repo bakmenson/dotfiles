@@ -187,7 +187,6 @@ label-focused-background = ${module/bspwm.label-focused-background}
 label-focused-underline = ${module/bspwm.label-focused-underline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 label-focused-foreground = ${colors.dark-yellow}
-;label-focused-foreground = ${colors.yellow}
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
