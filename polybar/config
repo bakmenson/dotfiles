@@ -24,10 +24,8 @@ yellow = #ffb52a
 dark-yellow = #bc8420
 light = #e1d9c4
 
-;background = ${xrdb:color0:#222}
 background = ${colors.onedark}
 background-alt = ${colors.onedark}
-;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = ${colors.light}
 primary = #ffb52a
