@@ -190,7 +190,6 @@ label-focused-foreground = ${colors.dark-yellow}
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-;label-unfocused-foreground = #e1d9c4
 label-unfocused-foreground = ${colors.foreground-alt}
 
 ; visible = Active workspace on unfocused monitor
