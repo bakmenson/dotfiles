@@ -22,13 +22,14 @@ gruvbox = #282828
 onedark = #282c34
 yellow = #ffb52a
 dark-yellow = #bc8420
+light = #e1d9c4
 
 ;background = ${xrdb:color0:#222}
 background = ${colors.onedark}
 background-alt = ${colors.onedark}
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
-foreground-alt = #e1d9c4
+foreground-alt = ${colors.light}
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
