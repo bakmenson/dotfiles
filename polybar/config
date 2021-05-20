@@ -69,7 +69,7 @@ font-4 = siji:pixelsize=10;3
 
 modules-left = sep filesystem sep memory sep cpu sep eth temperature sep alsa sep
 modules-center = i3
-modules-right = xkeyboard weather date check-updates
+modules-right = check-updates sep xkeyboard weather date
 
 tray-position = right
 tray-padding = 1
