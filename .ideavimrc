@@ -1,6 +1,9 @@
 set ideajoin
 set number relativenumber
 
+let mapleader=","
+set easymotion
+
 "move line
 nnoremap <S-j> :m+<cr>
 nnoremap <S-k> :m-2<cr>
