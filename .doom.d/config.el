@@ -92,6 +92,7 @@
 
 ;; for lsp: M-x lsp-install-server
 
+(require 'meghanada)
 (add-hook 'java-mode-hook
           (lambda ()
             (local-set-key (kbd "<f7>") 'meghanada-compile-project)
@@ -102,9 +103,20 @@
             (local-set-key (kbd "C-c k") 'meghanada-server-kill)
             (local-set-key (kbd "C-c s") 'meghanada-server-start)
             (local-set-key (kbd "C-c r") 'meghanada-restart)
-            (setq c-basic-offset 2)
-            (setq-default tab-width 2)
-            ))
+            ;; (setq c-basic-offset 4)
+            ;; (setq-default tab-width 4)
+            ;; meghanada-mode on
+            (meghanada-mode t)
+            (setq c-basic-offset 4)
+            ;; use code format
+            (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+(cond
+   ((eq system-type 'windows-nt)
+    (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
+    (setq meghanada-maven-path "mvn.cmd"))
+   (t
+    (setq meghanada-java-path "java")
+    (setq meghanada-maven-path "mvn")))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
