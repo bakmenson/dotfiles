@@ -216,10 +216,7 @@ for_window [class="Transmission-gtk"] floating enable border pixel 1
 
 # =============================================================================
 
-# swap caps lock and escape
-exec_always --no-startup-id xmodmap -e "clear lock"
-exec_always --no-startup-id xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
-exec_always --no-startup-id xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+exec_always --no-startup-id setxkbmap -option caps:swapescape
 
 exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
 
