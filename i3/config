@@ -218,7 +218,7 @@ for_window [class="Transmission-gtk"] floating enable border pixel 1
 
 exec_always --no-startup-id setxkbmap -option caps:swapescape
 
-exec --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll & --restore
+exec_always --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll
 
 # Pulse Audio controls
 #bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
