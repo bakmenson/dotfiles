@@ -13,21 +13,9 @@ Plug 'junegunn/fzf.vim'
 
 " Common
 Plug 'easymotion/vim-easymotion'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
-Plug 'folke/which-key.nvim'
 Plug 'voldikss/vim-floaterm'
-
-Plug 'norcalli/nvim-colorizer.lua'
-
 Plug 'mhinz/vim-startify'
-
-" LSP
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-
-" Python
-Plug 'dense-analysis/ale', {'for': 'python'}
 
 " Git
 Plug 'tpope/vim-fugitive'

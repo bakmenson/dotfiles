@@ -45,7 +45,7 @@ wk.register({
 		A = {"<cmd>Git add .<cr>"                     , "add all"},
 		a = {"<cmd>Git add %<cr>"                     , "add current"},
 		b = {"<cmd>Git blame<cr>"                     , "blame"},
-		c = {"<cmd>Gcommit<cr>"                       , "commit"},
+		c = {"<cmd>Git commit<cr>"                       , "commit"},
 		d = {
 			name = "+diff",
 			j = {":diffget //3"                         , "diffget //3"},
