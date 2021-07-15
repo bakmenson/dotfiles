@@ -104,9 +104,8 @@ source $ZSH/oh-my-zsh.sh
 
 #######################################################################3
 
-alias ufetch='~/.ufetch'
+alias ufetch='~/.ufetch-manjaro'
 alias n="nnn -S -a"
-alias nvim="~/nvim.appimage"
 
 # arch
 alias i='sudo pacman -S'
@@ -155,6 +154,9 @@ alias pa='pyenv activate'
 alias pd='pyenv deactivate'
 alias pi='pyenv install'
 
+# poetry
+alias rmp='rm -rf `poetry env info -p`'
+
 # django
 alias dsp='django-admin startproject'
 alias dsa='python manage.py startapp'
@@ -176,7 +178,7 @@ export TERM=xterm-256color
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
-	eval "$(pyenv init -)"
+	eval "$(pyenv init --path)"
 fi
 eval "$(pyenv virtualenv-init -)"
 
@@ -187,10 +189,11 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 
 export VISUAL="nvim"
 export EDITOR="nvim"
-export TERMINAL="alacritty"
+#export TERMINAL="alacritty"
+#export TERMINAL="kitty"
 
 export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_PLUG="p:preview-tui-ext;i:imgview;o:fzopen;"
+export NNN_PLUG="p:preview-tui-ext;i:imgview;o:fzopen"
 export NNN_BMS="D:~/Downloads/;d:~/Dev/;v:/run/media/solus/hdd/Videos/;u:/run/media/solus/hdd/;"
 export NNN_COLORS="c136"
 export NNN_FCOLORS="c16f6f6f6f6f6f6f6f6f6f6f"
