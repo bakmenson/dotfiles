@@ -42,7 +42,7 @@
 ** Polybar
 *** polybar config
 
-#+begin_src conf :tangle .config/polybar/config :noweb yes
+#+begin_src conf :tangle .config/polybar/config
 [colors]
 smoke-blue = #222d31
 gruvbox = #282828
