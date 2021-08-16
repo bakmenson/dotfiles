@@ -281,7 +281,7 @@ content = |
 label-separator-foreground = ${colors.foreground-alt}
 #+end_src
 
-** polybar.sh
+** launch polybar script
 
 #+begin_src shell :tangle .config/polybar/polybar.sh :shebang #!/usr/bin/env bash
 killall -q polybar
@@ -289,7 +289,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 polybar example &
 #+end_src
 
-** check-updates.sh
+** module check updates
 
 #+begin_src shell :tangle .config/polybar/check-updates.sh :shebang #!/bin/sh
 if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
