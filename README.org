@@ -38,7 +38,7 @@
 * Polybar
 ** polybar config
 
-#+begin_src conf :tangle .config/polybar/config
+#+begin_src conf :tangle ~/.config/polybar/config
 [colors]
 smoke-blue = #222d31
 gruvbox = #282828
@@ -283,7 +283,7 @@ label-separator-foreground = ${colors.foreground-alt}
 
 ** launch polybar script
 
-#+begin_src shell :tangle .config/polybar/polybar.sh :shebang #!/usr/bin/env bash
+#+begin_src shell :tangle ~/.config/polybar/polybar.sh :shebang #!/usr/bin/env bash
 killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 polybar example &
@@ -291,7 +291,7 @@ polybar example &
 
 ** module check updates
 
-#+begin_src shell :tangle .config/polybar/check-updates.sh :shebang #!/bin/sh
+#+begin_src shell :tangle ~/.config/polybar/check-updates.sh :shebang #!/bin/sh
 if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
 	updates_arch=0
 fi
@@ -312,7 +312,7 @@ fi
 * i3wm
 ** i3 config
 
-#+begin_src conf :tangle .config/i3/config
+#+begin_src conf :tangle ~/.config/i3/config
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $alt Mod1
@@ -721,7 +721,7 @@ mode "$mode_gaps_outer" {
 * Mpv
 ** mpv config
 
-#+begin_src conf :tangle .config/mpv/config
+#+begin_src conf :tangle ~/.config/mpv/config
 save-position-on-quit=yes
 fullscreen=no
 hwdec=vdpau
@@ -731,7 +731,7 @@ profile=opengl-hq
 
 ** mpv input
 
-#+begin_src conf :tangle .config/mpv/input.conf
+#+begin_src conf :tangle ~/.config/mpv/input.conf
 UP    add volume  1
 DOWN  add volume -1
 
@@ -751,14 +751,14 @@ ENTER cycle fullscreen
 * Rofi
 ** rofi config
 
-#+begin_src conf :tangle .config/rofi/config
+#+begin_src conf :tangle ~/.config/rofi/config
 rofi.combi-modi:    window,run
 rofi.modi:          combi
 rofi.theme: ~/.config/rofi/rofi_theme.rasi
 #+end_src
 
 ** rofi theme
-#+begin_src  conf :tangle .config/rofi/rofi_theme.rasi
+#+begin_src  conf :tangle ~/.config/rofi/rofi_theme.rasi
 *{
 	font: "Jetbrains Mono 16px";
 	foreground:		    #E6D4A3; /* white */
@@ -891,7 +891,7 @@ rofi.theme: ~/.config/rofi/rofi_theme.rasi
 
 * Picom
 
-#+begin_src conf :tangle .config/picom.conf
+#+begin_src conf :tangle ~/.config/picom.conf
 # Thank you code_nomad: http://9m.no/ꪯ鵞
 # and Arch Wiki contributors: https://wiki.archlinux.org/index.php/Compton
 
@@ -1144,7 +1144,7 @@ opacity-rule = [
 * Zsh
 ** zshrc
 
-#+begin_src sh :tangle .zshrc
+#+begin_src sh :tangle ~/.zshrc
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -1337,7 +1337,7 @@ export PATH="$JAVA_HOME/bin:$PATH"
 
 ** zsh-theme
 
-#+begin_src conf :tangle .oh-my-zsh/custom/themes/wezm.zsh-theme
+#+begin_src conf :tangle ~/.oh-my-zsh/custom/themes/wezm.zsh-theme
 PROMPT='$(git_prompt_info)%(?,,%{${fg_bold[white]}%}[%?]%{$reset_color%} )%{$fg[yellow]%}>%{$reset_color%} '
 RPROMPT='%{$fg[green]%}%~%{$reset_color%}'
 
@@ -1350,7 +1350,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 * Terminal
 ** xfce4-terminal
 
-#+begin_src conf :tangle .config/xfce4/terminal/terminalrc
+#+begin_src conf :tangle ~/.config/xfce4/terminal/terminalrc
 [Configuration]
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
@@ -1399,7 +1399,7 @@ TabActivityColor=#efef29292929
 
 * Ideavimrc
 
-#+begin_src conf :tangle .ideavimrc
+#+begin_src conf :tangle ~/.ideavimrc
 set ideajoin
 set number relativenumber
 
@@ -1416,7 +1416,7 @@ xnoremap <S-k> :m'>+<cr>gv=gv
 * Git
 ** gitconfig
 
-#+begin_src conf :tangle .gitconfig
+#+begin_src conf :tangle ~/.gitconfig
 [user]
 	email = bakmenson@gmail.com
 	name = bakmenson
@@ -1428,7 +1428,7 @@ xnoremap <S-k> :m'>+<cr>gv=gv
 
 ** gitignore_global
 
-#+begin_src conf :tangle .gitignore_global
+#+begin_src conf :tangle ~/.gitignore_global
 # Default
 .gulp
 .vscode
