@@ -1,8 +1,8 @@
 * {
-	font: "Source Code Pro 16px";
+	font: "Jetbrains Mono 16px";
 	foreground:		    #E6D4A3; /* white */
 	active-foreground:	#1E1E1E; /* dark */
-	background-color:	#222E32;
+	background-color:	#2E3440;
 	active-background:	#bc8420;
 	selected-line:	    #E1D399;
 	urgent-background:	#ff5555;
