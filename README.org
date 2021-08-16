@@ -10,37 +10,35 @@
 :TOC:      :include all :ignore this
 :END:
 :CONTENTS:
-- [[Dotfiles]]
-  - [[Polybar]]
-    - [[polybar config]]
-    - [[polybar.sh]]
-    - [[check-updates.sh]]
-  - [[i3wm]]
-    - [[i3config]]
-  - [[Mpv]]
-    - [[mpv config]]
-    - [[mpv input]]
-  - [[Rofi]]
-    - [[rofi config]]
-    - [[config.rasi]]
-    - [[rofi_config.rasi]]
-    - [[nord.rasi]]
-  - [[Picom]]
-  - [[Zsh]]
-    - [[zshrc]]
-    - [[zsh-theme]]
-  - [[Terminal]]
-    - [[xfce4-terminal]]
-  - [[Ideavimrc]]
-  - [[Git]]
-   - [[gitconfig]]
-   - [[gitignore_global]]
-  - [[Firefox]]
+ - [[Polybar]]
+   - [[polybar config]]
+   - [[polybar.sh]]
+   - [[check-updates.sh]]
+ - [[i3wm]]
+   - [[i3config]]
+ - [[Mpv]]
+   - [[mpv config]]
+   - [[mpv input]]
+ - [[Rofi]]
+   - [[rofi config]]
+   - [[config.rasi]]
+   - [[rofi_config.rasi]]
+   - [[nord.rasi]]
+ - [[Picom]]
+ - [[Zsh]]
+   - [[zshrc]]
+   - [[zsh-theme]]
+ - [[Terminal]]
+   - [[xfce4-terminal]]
+ - [[Ideavimrc]]
+ - [[Git]]
+  - [[gitconfig]]
+  - [[gitignore_global]]
+ - [[Firefox]]
 
 
-* Dotfiles
-** Polybar
-*** polybar config
+* Polybar
+** polybar config
 
 #+begin_src conf :tangle .config/polybar/config
 [colors]
@@ -285,7 +283,7 @@ content = |
 label-separator-foreground = ${colors.foreground-alt}
 #+end_src
 
-*** polybar.sh
+** polybar.sh
 
 #+begin_src shell :tangle .config/polybar/polybar.sh :shebang #!/usr/bin/env bash
 killall -q polybar
@@ -293,7 +291,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 polybar example &
 #+end_src
 
-*** check-updates.sh
+** check-updates.sh
 
 #+begin_src shell :tangle .config/polybar/check-updates.sh :shebang #!/bin/sh
 if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
@@ -313,8 +311,8 @@ else
 fi
 #+end_src
 
-** i3wm
-*** i3config
+* i3wm
+** i3config
 
 #+begin_src conf :tangle .config/i3/config
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
@@ -722,8 +720,8 @@ mode "$mode_gaps_outer" {
 }
 #+end_src
 
-** Mpv
-*** mpv config
+* Mpv
+** mpv config
 
 #+begin_src conf :tangle .config/mpv/config
 save-position-on-quit=yes
@@ -733,7 +731,7 @@ subcp=enca:ru:utf8
 profile=opengl-hq
 #+end_src
 
-*** mpv input
+** mpv input
 
 #+begin_src conf :tangle .config/mpv/input.conf
 UP    add volume  1
@@ -752,8 +750,8 @@ l cycle audio
 ENTER cycle fullscreen
 #+end_src
 
-** Rofi
-*** rofi config
+* Rofi
+** rofi config
 
 #+begin_src conf :tangle .config/rofi/config
 rofi.combi-modi:    window,run
@@ -761,7 +759,7 @@ rofi.modi:          combi
 rofi.theme: ~/.config/rofi/rofi_config.rasi
 #+end_src
 
-*** config.rasi
+** config.rasi
 
 #+begin_src conf :tangle .config/rofi/config.rasi
 configuration {
@@ -771,7 +769,7 @@ configuration {
 }
 #+end_src
 
-*** rofi_config.rasi
+** rofi_config.rasi
 #+begin_src  conf :tangle .config/rofi/rofi_config.rasi
 *{
 	font: "Source Code Pro 16px";
@@ -903,7 +901,7 @@ configuration {
 }
 #+end_src
 
-*** nord.rasi
+** nord.rasi
 
 #+begin_src  conf :tangle .config/rofi/nord.rasi
 configuration {
@@ -973,7 +971,7 @@ entry {
 }
 #+end_src
 
-** Picom
+* Picom
 
 #+begin_src conf :tangle .config/picom.conf
 # Thank you code_nomad: http://9m.no/ꪯ鵞
@@ -1225,8 +1223,8 @@ opacity-rule = [
 ];
 #+end_src
 
-** Zsh
-*** zshrc
+* Zsh
+** zshrc
 
 #+begin_src sh :tangle .zshrc
 # If you come from bash you might have to change your $PATH.
@@ -1419,7 +1417,7 @@ export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 #+end_src
 
-*** zsh-theme
+** zsh-theme
 
 #+begin_src conf :tangle .oh-my-zsh/custom/themes/wezm.zsh-theme
 PROMPT='$(git_prompt_info)%(?,,%{${fg_bold[white]}%}[%?]%{$reset_color%} )%{$fg[yellow]%}>%{$reset_color%} '
@@ -1431,8 +1429,8 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%})%{$fg[red]%}⚡%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 #+end_src
 
-** Terminal
-*** xfce4-terminal
+* Terminal
+** xfce4-terminal
 
 #+begin_src conf :tangle .config/xfce4/terminal/terminalrc
 [Configuration]
@@ -1481,7 +1479,7 @@ ColorBoldIsBright=FALSE
 TabActivityColor=#efef29292929
 #+end_src
 
-** Ideavimrc
+* Ideavimrc
 
 #+begin_src conf :tangle .ideavimrc
 set ideajoin
@@ -1497,8 +1495,8 @@ xnoremap <S-j> :m-2<cr>gv=gv
 xnoremap <S-k> :m'>+<cr>gv=gv
 #+end_src
 
-** Git
-*** gitconfig
+* Git
+** gitconfig
 
 #+begin_src conf :tangle .gitconfig
 [user]
@@ -1510,7 +1508,7 @@ xnoremap <S-k> :m'>+<cr>gv=gv
 	helper = cache
 #+end_src
 
-*** gitignore_global
+** gitignore_global
 
 #+begin_src conf :tangle .gitignore_global
 # Default
@@ -1567,7 +1565,7 @@ watch_later
 qsettings
 #+end_src
 
-** Firefox
+* Firefox
 
 #+begin_src css :tangle no
 /* hides the native tabs */
