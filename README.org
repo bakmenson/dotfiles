@@ -18,7 +18,7 @@
    - [[#i3-config][i3 config]]
  - [[#mpv][Mpv]]
    - [[#mpv-config][mpv config]]
-   - [[#mpv input][mpv input]]
+   - [[#mpv-input][mpv input]]
  - [[#rofi][Rofi]]
    - [[#rofi-config][rofi config]]
    - [[#rofi-theme][rofi theme]]
