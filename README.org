@@ -12,7 +12,10 @@
 :CONTENTS:
  - [[#polybar][Polybar]]
    - [[#polybar-config][polybar config]]
-   - [[polybar.sh][polybar.sh]]
+<<<<<<< HEAD
+=======
+   - [[#polybar-sh][polybar.sh]]
+>>>>>>> 43d6b6f6e7227ca7b0de1c614e517b7ba387cd8c
    - [[#check-updates.sh][check-updates.sh]]
  - [[#i3wm][i3wm]]
    - [[#i3config][i3config]]
