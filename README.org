@@ -1251,9 +1251,6 @@ source $ZSH/oh-my-zsh.sh
 
 #######################################################################3
 
-alias ufetch='~/.ufetch-manjaro'
-alias n="nnn -S -a"
-
 # arch
 alias i='sudo pacman -S'
 alias remove='sudo pacman -Rs'
@@ -1288,11 +1285,6 @@ alias py='python3'
 alias ipy='ipython'
 # alias ipy='python -m IPython'
 # alias ipy='pyenv activate python-pyenv && ipython'
-
-# pyenv
-alias pa='pyenv activate'
-alias pd='pyenv deactivate'
-alias pi='pyenv install'
 
 # poetry
 alias rmp='rm -rf `poetry env info -p`'
