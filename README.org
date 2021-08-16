@@ -14,7 +14,7 @@
    - [[#polybar-config][polybar config]]
    - [[#polybar-sh][polybar.sh]]
    - [[#check-updates][check-updates.sh]]
- - [[#i3wm][i3wm]]
+ - [[i3wm][i3wm]]
    - [[#i3config][i3config]]
  - [[#mpv][Mpv]]
    - [[#mpv-config][mpv config]]
