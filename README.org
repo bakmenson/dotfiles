@@ -12,18 +12,16 @@
 :CONTENTS:
  - [[#polybar][Polybar]]
    - [[#polybar-config][polybar config]]
-   - [[#polybar-sh][polybar.sh]]
-   - [[#check-updates][check-updates.sh]]
+   - [[#launch-polybar-script][launch polybar script]]
+   - [[#module-check-updates][module check updates]]
  - [[#i3wm][i3wm]]
-   - [[#i3config][i3config]]
+   - [[#i3-config][i3 config]]
  - [[#mpv][Mpv]]
    - [[#mpv-config][mpv config]]
    - [[#mpv input][mpv input]]
  - [[#rofi][Rofi]]
    - [[#rofi-config][rofi config]]
-   - [[#config.rasi][config.rasi]]
-   - [[#rofi_config.rasi][rofi_config.rasi]]
-   - [[#nord.rasi][nord.rasi]]
+   - [[#rofi_theme][rofi theme]]
  - [[#picom][Picom]]
  - [[#zsh][Zsh]]
    - [[#zshrc][zshrc]]
@@ -759,23 +757,13 @@ rofi.modi:          combi
 rofi.theme: ~/.config/rofi/rofi_config.rasi
 #+end_src
 
-** config.rasi
-
-#+begin_src conf :tangle .config/rofi/config.rasi
-configuration {
-	modi: "combi";
-	combi-modi: "window,run";
-	theme: "~/.config/rofi/rofi_config.rasi";
-}
-#+end_src
-
-** rofi_config.rasi
+** rofi theme
 #+begin_src  conf :tangle .config/rofi/rofi_config.rasi
 *{
-	font: "Source Code Pro 16px";
+	font: "Jetbrains Mono 16px";
 	foreground:		    #E6D4A3; /* white */
 	active-foreground:	#1E1E1E; /* dark */
-	background-color:	#222E32;
+	background-color:	#2E3440;
 	active-background:	#bc8420;
 	selected-line:	    #E1D399;
 	urgent-background:	#ff5555;
@@ -898,76 +886,6 @@ configuration {
 	str:        ":";
 	margin:     0px 0.3em 0em 0em ;
 	text-color: @prompt;
-}
-#+end_src
-
-** nord.rasi
-
-#+begin_src  conf :tangle .config/rofi/nord.rasi
-configuration {
-  show-icons: true;
-  icon-theme: "Papirus";
-  font: "Source Code Pro 12";
-  drun-display-format: "{icon} {name}";
-  display-run: " ";
-  display-drun: " ";
-  display-window: " ";
-}
-
-*{
-  background-color: #2E3440;
-  bg-alt: #3B4252;
-  fg: #ECEFF4;
-
-  nord-blue-light: #88C0D0;
-  nord-yellow: #EBCB8B;
-
-  border: 0;
-  lines: 9;
-  padding: 0;
-  margin: 0;
-  spacing: 0;
-}
-
-window {
-  width: 30%;
-  transparency: "real";
-}
-
-mainbox {
-  children: [inputbar, listview];
-}
-
-listview {
-  columns: 1;
-}
-
-element {
-  padding: 12;
-  orientation: vertical;
-  text-color: @fg;
-}
-
-element selected {
-  background-color: @bg-alt;
-  text-color: @nord-blue-light;
-}
-
-inputbar {
-  background-color: @background;
-  children: [prompt, entry];
-}
-
-prompt {
-  enabled: true;
-  font: "SauceCodePro Nerd Font 12";
-  padding: 12 0 0 12;
-  text-color: @nord-yellow;
-}
-
-entry {
-  padding: 12;
-  text-color: @nord-yellow;
 }
 #+end_src
 
