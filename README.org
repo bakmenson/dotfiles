@@ -21,7 +21,7 @@
    - [[#mpv input][mpv input]]
  - [[#rofi][Rofi]]
    - [[#rofi-config][rofi config]]
-   - [[#rofi_theme][rofi theme]]
+   - [[#rofi-theme][rofi theme]]
  - [[#picom][Picom]]
  - [[#zsh][Zsh]]
    - [[#zshrc][zshrc]]
