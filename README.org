@@ -32,7 +32,7 @@
  - [[#git][Git]]
   - [[#gitconfig][gitconfig]]
   - [[#gitignore_global][gitignore_global]]
-  - [[#firefox][Firefox]]
+ - [[#firefox][Firefox]]
 
 
 * Polybar
