@@ -1506,6 +1506,8 @@ xnoremap <S-k> :m'>+<cr>gv=gv
 	name = bakmenson
 [core]
 	excludesfile = /home/solus/.gitignore_global
+[credential]
+	helper = cache
 #+end_src
 
 *** gitignore_global
