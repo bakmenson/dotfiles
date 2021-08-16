@@ -310,7 +310,7 @@ fi
 #+end_src
 
 * i3wm
-** i3config
+** i3 config
 
 #+begin_src conf :tangle .config/i3/config
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
