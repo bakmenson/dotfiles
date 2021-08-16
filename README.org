@@ -1,4 +1,4 @@
-#+title: Desktop Environment
+#+title: Dotfiles
 
 #+property: header-args :mkdirp yes
 #+property: header-args:shell :tangle-mode (identity #o555)
