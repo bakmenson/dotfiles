@@ -12,7 +12,7 @@
 :CONTENTS:
  - [[#polybar][Polybar]]
    - [[#polybar-config][polybar config]]
-   - [[#polybar.sh][polybar.sh]]
+   - [[polybar.sh][polybar.sh]]
    - [[#check-updates.sh][check-updates.sh]]
  - [[#i3wm][i3wm]]
    - [[#i3config][i3config]]
