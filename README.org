@@ -27,7 +27,6 @@
    - [[#zshrc][zshrc]]
    - [[#zsh-theme][zsh-theme]]
  - [[#terminal][Terminal]]
-   - [[#xfce4-terminal][xfce4-terminal]]
  - [[#ideavimrc][Ideavimrc]]
  - [[#git][Git]]
   - [[#gitconfig][gitconfig]]
