@@ -10,10 +10,9 @@
 :TOC:      :include all :ignore this
 :END:
 :CONTENTS:
- - [[#polybar][Polybar]]
-   - [[#polybar-config][polybar config]]
-   - [[#launch-polybar-script][launch polybar script]]
-   - [[#module-check-updates][module check updates]]
+ - [[#waybar][Waybar]]
+   - [[#waybar-config][waybar config]]
+   - [[#waybar-style][waybar style]]
  - [[#sway][Sway]]
  - [[#mpv][Mpv]]
    - [[#mpv-config][mpv config]]
@@ -32,278 +31,249 @@
  - [[#firefox][Firefox]]
 
 
-* Polybar
-** polybar config
+* Waybar
+** waybar config
 
-#+begin_src conf :tangle ~/.config/polybar/config
-[colors]
-smoke-blue = #222d31
-gruvbox = #282828
-onedark = #282c34
-yellow = #ffb52a
-dark-yellow = #bc8420
-light = #e1d9c4
-
-background = ${colors.onedark}
-background-alt = ${colors.onedark}
-foreground = #dfdfdf
-foreground-alt = ${colors.light}
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
-
-[bar/example]
-width = 100%
-height = 24
-offset-x = 0
-offset-y = 0
-radius = 0
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size =
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 2
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 1
-
-font-0 = fixed:pixelsize=10;3
-font-1 = unifont:fontformat=truetype:size=10:antialias=false;3
-font-2 = FontAwesome5Free:style=Solid:size=10;3
-font-3 = FontAwesome5Brands:style=Solid:size=11;3
-font-4 = siji:pixelsize=10;3
-
-modules-left = sep filesystem sep memory sep cpu sep eth temperature sep alsa sep
-modules-center = i3
-modules-right = check-updates sep xkeyboard date
-
-tray-position = right
-tray-padding = 1
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:50:...%
-format-foreground = #e1d9c4
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-
-label-layout = %layout%
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-foreground = ${colors.foreground-alt}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-mount-1 = /run/media/solus/hdd
-
-label-mounted =  %free%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
-label-mounted-foreground = ${colors.foreground-alt}
-
-[module/i3]
-type = internal/i3
-
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;
-
-ws-icon-5 = 6;6
-ws-icon-6 = 7;7
-ws-icon-7 = 8;8
-
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %icon%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-label-focused-foreground = ${colors.dark-yellow}
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %icon%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-label-unfocused-foreground = ${colors.foreground-alt}
-
-; visible = Active workspace on unfocused monitor
-label-visible = %icon%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %icon%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-label-foreground = ${colors.foreground-alt}
-label = %percentage:2%%
-
-[module/memory]
-type = internal/memory
-interval = 3
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-label-foreground = ${colors.foreground-alt}
-label = %gb_used%
-
-[module/eth]
-type = internal/network
-interface = enp3s0
-interval = 3.0
-
-format-connected-prefix = ""
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected =
-
-format-disconnected = <label-disconnected>
-label-disconnected = %ifname% disconnected
-
-[module/date]
-type = internal/date
-interval = 5
-
-date = |    %A, %d %B
-date-alt = " %Y-%m-%d"
-
-time = |   %H:%M  |
-time-alt = %H:%M:%S
-
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-label-foreground = ${colors.foreground-alt}
-
-label = %date% %time%
-
-[module/alsa]
-type = internal/alsa
-
-format-volume = <label-volume>
-label-volume =  %percentage%%
-label-volume-foreground = ${colors.foreground-alt}
-
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = 
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
-warn-temperature = 60
-
-format-prefix = ""
-format = <ramp> <label>
-format-warn = <ramp> <label-warn>
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
-
-format-prefix-foreground = ${colors.foreground-alt}
-label-foreground = ${colors.foreground-alt}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
-
-[settings]
-screenchange-reload = true
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-
-[module/check-updates]
-type = custom/script
-exec = sh ~/.config/polybar/check-updates.sh
-interval = 3600
-
-[module/sep]
-type = custom/text
-content = |
-label-separator-foreground = ${colors.foreground-alt}
+#+begin_src conf :tangle ~/.config/waybar/config
+{
+    // "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 24, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": [
+        "disk",
+        "custom/separator",
+        "cpu",
+        "custom/separator",
+        "memory",
+        "custom/separator",
+        "temperature",
+        "custom/separator",
+        "pulseaudio",
+        "custom/separator",
+        "network",
+        "sway/mode",
+    ],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": [
+        "custom/update",
+        "custom/separator",
+        "sway/language",
+        "custom/separator",
+        "clock",
+        "custom/separator",
+        "tray"
+    ],
+    // Modules configuration
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    "sway/language": {
+        "format": "{}",
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "clock": {
+        "timezone": "Europe/Moscow",
+        "format": "{: %A, %d %B |  %H:%M}",
+        "tooltip": false,
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false
+    },
+    "memory": {
+        "format":  " {used:0.2f} GiB"
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{icon} {temperatureC}°C",
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        //"format-wifi": "{essid} ({signalStrength}%) ",
+        //"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-ethernet": "",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "disk": {
+        "interval": 30,
+        "format": " {free}",
+        "path": "/"
+    },
+    "custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/update": {
+        "format": " {}",
+        "interval": 3600,
+        "exec-if": "[ $(checkupdates | wc -l) -ne 0 ]",
+        "exec": "checkupdates | wc -l"
+    }
+}
 #+end_src
 
-** launch polybar script
+** waybar style
 
-#+begin_src shell :tangle ~/.config/polybar/polybar.sh :shebang #!/usr/bin/env bash
-killall -q polybar
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-polybar example &
-#+end_src
+#+begin_src css :tangle ~/.config/waybar/style.css
+*{
+    border: none;
+    border-radius: 0;
+    /* `otf-font-awesome` is required to be installed for icons */
+    /* font-family: "Font Awesome 5 Free", "JetBrains Mono"; */
+    font-family: monospace;
+    font-size: 14px;
+    min-height: 0;
+    background-color: #282c34;
+}
 
-** module check updates
+window#waybar {
+    background-color: #282c34;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
 
-#+begin_src shell :tangle ~/.config/polybar/check-updates.sh :shebang #!/bin/sh
-if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
-	updates_arch=0
-fi
+#workspaces button {
+    padding: 0 7px;
+    color: #e1d9c4;
+}
 
-if ! updates_aur=$(yay -Qum 2> /dev/null | wc -l); then
-	updates_aur=0
-fi
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: #282c34;
+	box-shadow: inherit;
+	text-shadow: inherit;
+}
 
-updates=$(("$updates_arch" + "$updates_aur"))
+#workspaces button.focused {
+	color: #bc8420;
+}
 
-if [ "$updates" -gt 0  ]; then
-	echo " $updates"
-else
-	echo ""
-fi
+#workspaces button.urgent {
+    color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#network,
+#pulseaudio,
+#custom-media,
+#custom-update,
+#tray,
+#mode,
+#idle_inhibitor,
+#language,
+#mpd {
+    padding: 0 7px;
+    color: #e1d9c4;
+    background-color: #282c34;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#temperature.critical {
+    color: #f53c3c;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+#keyboard-state {
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#custom-separator {
+    color: #e1d9c4;
+}
 #+end_src
 
 * Sway
