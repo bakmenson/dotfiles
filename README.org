@@ -782,6 +782,8 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 * Terminal
 
+** Alacritty
+
 #+begin_src yaml :tangle ~/.config/alacritty.yml
 scrolling:
   history: 10000
