@@ -1340,53 +1340,75 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 #+end_src
 
 * Terminal
-** xfce4-terminal
 
-#+begin_src conf :tangle ~/.config/xfce4/terminal/terminalrc
-[Configuration]
-MiscAlwaysShowTabs=FALSE
-MiscBell=FALSE
-MiscBellUrgent=FALSE
-MiscBordersDefault=TRUE
-MiscCursorBlinks=FALSE
-MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
-MiscDefaultGeometry=80x24
-MiscInheritGeometry=FALSE
-MiscMouseAutohide=FALSE
-MiscMouseWheelZoom=TRUE
-MiscToolbarDefault=FALSE
-MiscConfirmClose=TRUE
-MiscCycleTabs=TRUE
-MiscTabCloseButtons=TRUE
-MiscTabCloseMiddleClick=TRUE
-MiscTabPosition=GTK_POS_TOP
-MiscHighlightUrls=TRUE
-MiscMiddleClickOpensUri=FALSE
-MiscCopyOnSelect=FALSE
-MiscShowRelaunchDialog=TRUE
-MiscRewrapOnResize=TRUE
-MiscUseShiftArrowsToScroll=FALSE
-MiscSlimTabs=FALSE
-MiscNewTabAdjacent=FALSE
-ScrollingBar=TERMINAL_SCROLLBAR_NONE
-MiscMenubarDefault=FALSE
-FontName=JetBrains Mono 9.5
-TitleMode=TERMINAL_TITLE_REPLACE
-BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
-BackgroundDarkness=0,800000
-MiscSearchDialogOpacity=100
-MiscShowUnsafePasteDialog=TRUE
-ColorForeground=#dcdcdc
-ColorBackground=#28272c2c3434
-ColorCursor=#1a1abbbb9b9b
-ColorPalette=rgb(63,63,63);rgb(239,82,64);rgb(250,189,47);rgb(184,187,38);rgb(154,184,215);rgb(220,140,195);rgb(140,208,211);rgb(220,220,220);rgb(112,144,128);rgb(178,222,135);rgb(137,181,233);rgb(240,223,175);rgb(149,178,213);rgb(236,147,211);rgb(147,224,227);rgb(255,255,255)
-ColorCursorUseDefault=FALSE
-ColorSelectionUseDefault=FALSE
-ColorSelection=#dcdcdcdcdcdc
-ColorSelectionBackground=#88888a8a8585
-ColorCursorForeground=#000000000000
-ColorBoldIsBright=FALSE
-TabActivityColor=#efef29292929
+#+begin_src yaml :tangle ~/.config/alacritty.yml
+scrolling:
+  history: 10000
+
+font:
+  normal:
+    family: Source Code Pro
+  size: 9.5
+
+colors:
+  primary:
+    background: '#282c34'
+    foreground: '#d8d8d8'
+
+  cursor:
+    text: '#000000'
+    cursor: '#1ABB9B'
+
+  selection:
+    text: CellBackground
+    background: CellForeground
+
+  search:
+    matches:
+      foreground: '#000000'
+      background: '#ffffff'
+
+    bar:
+      background: '#c5c8c6'
+      foreground: '#1d1f21'
+
+  # Normal colors
+  normal:
+    black:   '#1d1f21'
+    #red:     '#cc6666'
+    #green:   '#b5bd68'
+    red:     '#ef5240'
+    green:   '#fabd2f'
+    yellow:  '#f0c674'
+    blue:    '#81a2be'
+    magenta: '#b294bb'
+    cyan:    '#8abeb7'
+    white:   '#c5c8c6'
+
+  # Bright colors
+  bright:
+    black:   '#666666'
+    red:     '#d54e53'
+    green:   '#b9ca4a'
+    yellow:  '#e7c547'
+    blue:    '#7aa6da'
+    magenta: '#c397d8'
+    cyan:    '#70c0b1'
+    white:   '#eaeaea'
+
+  # Dim colors
+  #
+  # If the dim colors are not set, they will be calculated automatically based
+  # on the `normal` colors.
+  dim:
+    black:   '#131415'
+    red:     '#864343'
+    green:   '#777c44'
+    yellow:  '#9e824c'
+    blue:    '#556a7d'
+    magenta: '#75617b'
+    cyan:    '#5b7d78'
+    white:   '#828482'
 #+end_src
 
 * Ideavimrc
