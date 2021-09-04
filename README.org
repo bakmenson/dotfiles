@@ -483,7 +483,7 @@ bindsym $mod+r mode "resize"
     bindsym $alt+e exec --no-startup-id emacsclient -c
 
     # Slide show in fullscreen instead of lock screen
-    bindsym $alt+f exec --no-startup-id imv -f -t 10 ~/Pictures/wallpapers
+    bindsym $alt+f exec --no-startup-id imv -f -t 10 /run/media/solus/hdd/Pictures/wallpapers
 
     # Autostart applications
     exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
