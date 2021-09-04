@@ -42,10 +42,9 @@
         "disk",
         "custom/separator",
         "cpu",
+        "temperature",
         "custom/separator",
         "memory",
-        "custom/separator",
-        "temperature",
         "custom/separator",
         "pulseaudio",
         "custom/separator",
@@ -102,7 +101,7 @@
     },
     "temperature": {
         // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
         "format-critical": "{icon} {temperatureC}°C",
         "format": "{icon} {temperatureC}°C",
@@ -163,7 +162,8 @@
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
     /* font-family: "Font Awesome 5 Free", "JetBrains Mono"; */
-    font-family: monospace;
+    font-family: "Source Code Pro";
+    /*font-family: monospace;*/
     font-size: 14px;
     min-height: 0;
     background-color: #282c34;
@@ -298,7 +298,7 @@ set $menu dmenu_path | wofi --show drun -I | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg `find ~/Pictures/wallpapers -type f | shuf -n 1` fill
+output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
 #
 # Example configuration:
 #
