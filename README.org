@@ -488,7 +488,6 @@ bindsym $mod+r mode "resize"
 
     # Autostart applications
     exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-    #exec --no-startup-id picom --config ~/.config/picom.conf
     #exec --no-startup-id emacs --daemon
 
 
