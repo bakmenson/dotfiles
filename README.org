@@ -5,29 +5,25 @@
 #+property: header-args:conf :tangle-mode (identity #o555)
 
 
-* Table of Contents
-:PROPERTIES:
-:TOC:      :include all :ignore this
-:END:
-:CONTENTS:
- - [[#waybar][Waybar]]
-   - [[#waybar-config][waybar config]]
-   - [[#waybar-style][waybar style]]
- - [[#sway][Sway]]
- - [[#mpv][Mpv]]
-   - [[#mpv-config][mpv config]]
-   - [[#mpv-input][mpv input]]
- - [[#zsh][Zsh]]
-   - [[#zshrc][zshrc]]
-   - [[#zsh-theme][zsh-theme]]
-   - [[#zshenv][zshenv]]
- - [[#terminal][Terminal]]
- - [[#ideavimrc][Ideavimrc]]
- - [[#git][Git]]
-   - [[#gitconfig][gitconfig]]
-   - [[#gitignore_global][gitignore_global]]
- - [[#firefox][Firefox]]
-
+* Table of Contents :toc:
+- [[#waybar][Waybar]]
+  - [[#waybar-config][waybar config]]
+  - [[#waybar-style][waybar style]]
+- [[#sway][Sway]]
+- [[#mpv][Mpv]]
+  - [[#mpv-config][mpv config]]
+  - [[#mpv-input][mpv input]]
+- [[#zsh][Zsh]]
+  - [[#zshrc][zshrc]]
+  - [[#zsh-theme][zsh-theme]]
+  - [[#zshenv][zshenv]]
+- [[#terminal][Terminal]]
+  - [[#alacritty][Alacritty]]
+- [[#ideavimrc][Ideavimrc]]
+- [[#git][Git]]
+  - [[#gitconfig][gitconfig]]
+  - [[#gitignore_global][gitignore_global]]
+- [[#firefox][Firefox]]
 
 * Waybar
 ** waybar config
