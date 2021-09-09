@@ -882,7 +882,6 @@ colors:
 set ideajoin
 set number relativenumber
 
-let mapleader=","
 set easymotion
 set which-key
 
