@@ -484,6 +484,8 @@ bindsym $mod+r mode "resize"
     exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     #exec --no-startup-id emacs --daemon
 
+    bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
+
 
 ### Set shut down, restart and suspend features
 #
