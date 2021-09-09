@@ -882,7 +882,6 @@ colors:
 set ideajoin
 set number relativenumber
 
-set easymotion
 set which-key
 
 "move line
