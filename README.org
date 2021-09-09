@@ -882,6 +882,7 @@ set number relativenumber
 
 let mapleader=","
 set easymotion
+set which-key
 
 "move line
 nnoremap <S-j> :m+<cr>
