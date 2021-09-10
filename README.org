@@ -560,6 +560,8 @@ for_window [class="Emacs"] opacity $opacity
 for_window [app_id="Alacritty"] opacity $opacity
 
 
+exec wmname LG3D
+
 include /etc/sway/config.d/*
 #+end_src
 
@@ -774,7 +776,7 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 source $HOME/.poetry/env
 
 # Java
-export _JAVA_AWT_WM_NONREPARENTING=1
+#export _JAVA_AWT_WM_NONREPARENTING=1
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
 # export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
