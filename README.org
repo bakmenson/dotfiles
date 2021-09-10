@@ -885,6 +885,7 @@ set number relativenumber
 let mapleader="\<Space>"
 
 set which-key
+set timeoutlen=5000
 
 "move line
 nnoremap <S-j> :m+<cr>
