@@ -887,6 +887,11 @@ let mapleader="\<Space>"
 set which-key
 set timeoutlen=5000
 
+nnoremap <leader>h <C-W>h<cr>
+nnoremap <leader>j <C-W>j<cr>
+nnoremap <leader>l <C-W>l<cr>
+nnoremap <leader>k <C-W>k<cr>
+
 "move line
 nnoremap <S-j> :m+<cr>
 nnoremap <S-k> :m-2<cr>
