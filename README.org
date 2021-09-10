@@ -882,6 +882,8 @@ colors:
 set ideajoin
 set number relativenumber
 
+let mapleader="\<Space>"
+
 set which-key
 
 "move line
