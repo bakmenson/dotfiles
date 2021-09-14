@@ -295,7 +295,9 @@ set $menu dmenu_path | wofi --show drun -I | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
+#output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
+output * bg /run/media/solus/hdd/Pictures/wallpapers/18.jpg fill
+
 #
 # Example configuration:
 #
@@ -560,6 +562,13 @@ for_window [class="Emacs"] opacity $opacity
 for_window [app_id="Alacritty"] opacity $opacity
 
 
+### Launch Apps
+#
+exec --no-startup-id "sleep 1; swaymsg 'workspace 2; exec emacs'"
+exec --no-startup-id "sleep 5; swaymsg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 10; swaymsg 'workspace 5; exec telegram-desktop'"
+
+
 exec wmname LG3D
 
 include /etc/sway/config.d/*
@@ -796,7 +805,9 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 ** zshenv
 
 #+begin_src sh :tangle ~/.zshenv
-if [ "$(tty)" = "/dev/tty1" ]; then
+#if [ "$(tty)" = "/dev/tty1" ]; then
+    #unset DISPLAY
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	exec sway
 fi
 
@@ -804,7 +815,6 @@ fi
 #+end_src
 
 * Terminal
-
 ** Alacritty
 
 #+begin_src yaml :tangle ~/.config/alacritty.yml
