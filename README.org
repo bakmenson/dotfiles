@@ -37,6 +37,7 @@
     // Choose the order of the modules
     "modules-left": [
         "disk",
+        "custom/hdd",
         "custom/separator",
         "cpu",
         "temperature",
@@ -137,6 +138,11 @@
         "format": " {free}",
         "path": "/"
     },
+    "custom/hdd": {
+        "interval": 30,
+        "format": " {}iB",
+        "exec": "df -H /run/media/solus/hdd | awk '{print $4}' | cut -d $'\n' -f 2"
+    },
     "custom/separator": {
         "format": "|",
         "interval": "once",
@@ -201,6 +207,7 @@ window#waybar {
 #cpu,
 #memory,
 #disk,
+#custom-hdd,
 #temperature,
 #network,
 #pulseaudio,
@@ -805,9 +812,9 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 ** zshenv
 
 #+begin_src sh :tangle ~/.zshenv
-#if [ "$(tty)" = "/dev/tty1" ]; then
+if [ "$(tty)" = "/dev/tty1" ]; then
     #unset DISPLAY
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+# if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 	exec sway
 fi
 
