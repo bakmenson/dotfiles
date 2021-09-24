@@ -566,6 +566,7 @@ seat * hide_cursor 1000
 #
 set $opacity 0.93
 for_window [class="Emacs"] opacity $opacity
+for_window [class="jetbrains-idea-ce"] opacity $opacity
 for_window [app_id="Alacritty"] opacity $opacity
 
 
