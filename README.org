@@ -4,12 +4,27 @@
 #+property: header-args:shell :tangle-mode (identity #o555)
 #+property: header-args:conf :tangle-mode (identity #o555)
 
-
-* Table of Contents :toc:
+* Table of Contents :toc_2:
 - [[#waybar][Waybar]]
   - [[#waybar-config][waybar config]]
   - [[#waybar-style][waybar style]]
 - [[#sway][Sway]]
+  - [[#variables][Variables]]
+  - [[#output-configuration][Output configuration]]
+  - [[#idle][Idle]]
+  - [[#input-configuration][Input configuration]]
+  - [[#key-bindings][Key bindings]]
+  - [[#status-bar][Status Bar:]]
+  - [[#gaps][Gaps]]
+  - [[#borders][Borders]]
+  - [[#open-specific-applications-in-floating-mode][Open specific applications in floating mode]]
+  - [[#colors][Colors]]
+  - [[#themes][Themes]]
+  - [[#cursor][Cursor]]
+  - [[#transparency][Transparency]]
+  - [[#support-java-apps][Support Java apps]]
+  - [[#autostart-apps][Autostart apps]]
+  - [[#include][Include]]
 - [[#mpv][Mpv]]
   - [[#mpv-config][mpv config]]
   - [[#mpv-input][mpv input]]
@@ -20,6 +35,8 @@
 - [[#terminal][Terminal]]
   - [[#alacritty][Alacritty]]
 - [[#ideavimrc][Ideavimrc]]
+  - [[#general][General]]
+  - [[#which-key-plugin][Which-Key Plugin]]
 - [[#git][Git]]
   - [[#gitconfig][gitconfig]]
   - [[#gitignore_global][gitignore_global]]
@@ -278,12 +295,9 @@ label:focus {
 #+end_src
 
 * Sway
+** Variables
 
 #+begin_src conf :tangle ~/.config/sway/config
-# Read `man 5 sway` for a complete reference.
-
-### Variables
-#
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 set $alt Mod1
@@ -298,9 +312,11 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu dmenu_path | wofi --show drun -I | xargs swaymsg exec --
+#+end_src
 
-### Output configuration
-#
+** Output configuration
+
+#+begin_src conf :tangle ~/.config/sway/config
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
 output * bg /run/media/solus/hdd/Pictures/wallpapers/18.jpg fill
@@ -310,11 +326,11 @@ output * bg /run/media/solus/hdd/Pictures/wallpapers/18.jpg fill
 #
 #output VGA-1 resolution 1920x1080 position 1920,0
 #output LVDS-1 disable
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+#+end_src
 
-### Idle configuration
-#
+** Idle
+
+#+begin_src conf :tangle ~/.config/sway/config
 # Example configuration:
 #
 # exec swayidle -w \
@@ -325,134 +341,142 @@ output * bg /run/media/solus/hdd/Pictures/wallpapers/18.jpg fill
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+#+end_src
 
-### Input configuration
-#
+** Input configuration
+
+#+begin_src conf :tangle ~/.config/sway/config
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input * {
     xkb_layout us,ru
     xkb_options grp:alt_shift_toggle,grp_led:scroll,caps:swapescape
 }
+#+end_src
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
+** Key bindings
+*** Basics
 
-    # Kill focused window
-    bindsym $mod+Shift+q kill
+#+begin_src conf :tangle ~/.config/sway/config
+# Start a terminal
+bindsym $mod+Return exec $term
 
-    # Start your launcher
-    bindsym $mod+d exec $menu
+# Kill focused window
+bindsym $mod+Shift+q kill
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+# Start your launcher
+bindsym $mod+d exec $menu
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+# Reload the configuration file
+bindsym $mod+Shift+c reload
 
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $alt+$left focus left
-    bindsym $alt+$down focus down
-    bindsym $alt+$up focus up
-    bindsym $alt+$right focus right
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+#+end_src
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+*** Moving around
 
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+#+begin_src conf :tangle ~/.config/sway/config
+# Move your focus around
+bindsym $alt+$left focus left
+bindsym $alt+$down focus down
+bindsym $alt+$up focus up
+bindsym $alt+$right focus right
 
-    #navigate workspaces next / previous
-    bindsym $alt+n workspace next
-    bindsym $alt+p workspace prev
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+#+end_src
 
-    # workspace back and forth (with/without active container)
-    workspace_auto_back_and_forth yes
-    bindsym $mod+Tab workspace back_and_forth
-    bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+*** Workspaces
 
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+#+begin_src conf :tangle ~/.config/sway/config
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
 
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+#navigate workspaces next / previous
+bindsym $alt+n workspace next
+bindsym $alt+p workspace prev
 
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+#+end_src
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+*** Layout stuff
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+#+begin_src conf :tangle ~/.config/sway/config
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
 
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
 
-#
-# Resizing containers:
-#
+# Move focus to the parent container
+bindsym $mod+a focus parent
+#+end_src
+
+*** Scratchpad
+
+#+begin_src conf :tangle ~/.config/sway/config
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+#+end_src
+
+*** Resizing containers
+
+#+begin_src conf :tangle ~/.config/sway/config
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
@@ -474,30 +498,45 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+#+end_src
 
-#
-# Custom bindings
-#
-    # Audio controls
-    bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
-    bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
-    bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
+*** Audio controls
 
-    # Emacs
-    bindsym $alt+e exec --no-startup-id emacsclient -c
+#+begin_src conf :tangle ~/.config/sway/config
+bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
+bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
+bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
+#+end_src
 
-    # Slide show in fullscreen instead of lock screen
-    bindsym $alt+f exec --no-startup-id imv -f -t 10 /run/media/solus/hdd/Pictures/wallpapers
+*** Launch apps 
 
-    # Autostart applications
-    exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-    #exec --no-startup-id emacs --daemon
+#+begin_src conf :tangle ~/.config/sway/config
+# Emacs
+bindsym $alt+e exec --no-startup-id emacsclient -c
 
-    bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
+# Slide show in fullscreen instead of lock screen
+bindsym $alt+f exec --no-startup-id imv -f -t 10 /run/media/solus/hdd/Pictures/wallpapers
 
+# IDEA
+bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
+#+end_src
 
-### Set shut down, restart and suspend features
-#
+*** Take screenshots
+
+#+begin_src conf :tangle ~/.config/sway/config
+# Whole screen
+bindsym $mod+F12 exec grim
+
+# Current window
+bindsym $mod+Shift+F12 exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')"
+
+# Part of the screen:
+bindsym $mod+F11 exec grim -g "$(slurp)"
+#+end_src
+
+*** Set shut down, restart and suspend features
+
+#+begin_src conf :tangle ~/.config/sway/config
 set $mode_system System (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
@@ -509,44 +548,52 @@ mode "$mode_system" {
     bindsym Escape mode "default"
   }
 bindsym $mod+0 mode "$mode_system"
+#+end_src
 
+** Status Bar:
 
-### Status Bar:
+#+begin_src conf :tangle ~/.config/sway/config
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     swaybar_command waybar
 }
+#+end_src
 
+** Gaps
 
-### Gaps
-#
+#+begin_src conf :tangle ~/.config/sway/config
 gaps inner 10
 gaps outer 4
 smart_gaps on
+#+end_src
 
+** Borders
 
-### Borders
-#
+#+begin_src conf :tangle ~/.config/sway/config
 default_border pixel
 smart_borders on
 for_window [tiling] border pixel 2
+#+end_src
 
+** Open specific applications in floating mode
 
-### Open specific applications in floating mode
-#
+#+begin_src conf :tangle ~/.config/sway/config
 for_window [app_id="transmission-gtk"] floating enable border pixel 1
 #for_window [class="GParted"] floating enable border normal
+#+end_src
 
+** Colors
 
-### Colors
+#+begin_src conf :tangle ~/.config/sway/config
 # class                   border  backgr. indic.   child_border
   client.focused          #556064 #556064 #FDF6E3
   client.focused_inactive #2F3D44 #2F3D44 #454948
   client.unfocused        #282c34 #282c34 #454948
+#+end_src
 
+** Themes
 
-### Themes
-#
+#+begin_src conf :tangle ~/.config/sway/config
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
@@ -555,30 +602,43 @@ exec_always {
     # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
     # gsettings set $gnome-schema font-name 'Your font name'
 }
+#+end_src
 
+** Cursor
 
-### Cursor
-#
+#+begin_src conf :tangle ~/.config/sway/config
 seat * hide_cursor 1000
+#+end_src
 
+** Transparency
 
-### Transparency
-#
+#+begin_src conf :tangle ~/.config/sway/config
 set $opacity 0.93
 for_window [class="Emacs"] opacity $opacity
-for_window [class="jetbrains-idea-ce"] opacity $opacity
+#for_window [class="jetbrains-idea-ce"] opacity $opacity
 for_window [app_id="Alacritty"] opacity $opacity
+#+end_src
 
+** Support Java apps
 
-### Launch Apps
-#
-exec --no-startup-id "sleep 1; swaymsg 'workspace 2; exec emacs'"
-exec --no-startup-id "sleep 5; swaymsg 'workspace 4; exec firefox'"
-exec --no-startup-id "sleep 10; swaymsg 'workspace 5; exec telegram-desktop'"
-
-
+#+begin_src conf :tangle ~/.config/sway/config
 exec wmname LG3D
+#+end_src
 
+** Autostart apps
+
+#+begin_src conf :tangle ~/.config/sway/config
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id emacs --daemon
+
+# exec --no-startup-id "sleep 1; swaymsg 'workspace 2; exec emacs'"
+# exec --no-startup-id "sleep 5; swaymsg 'workspace 4; exec firefox'"
+# exec --no-startup-id "sleep 10; swaymsg 'workspace 5; exec telegram-desktop'"
+#+end_src
+
+** Include
+
+#+begin_src conf :tangle ~/.config/sway/config
 include /etc/sway/config.d/*
 #+end_src
 
@@ -896,26 +956,405 @@ colors:
 #+end_src
 
 * Ideavimrc
+** General
 
-#+begin_src conf :tangle ~/.ideavimrc
+#+begin_src vimrc :tangle ~/.ideavimrc
 set ideajoin
 set number relativenumber
 
-let mapleader="\<Space>"
+" <SPC> as the leader key
+let mapleader = " "
 
+" Use the clipboard register '*' for all yank, delete, change and put operations
+" which would normally go to the unnamed register.
+set clipboard+=unnamed
+
+" Search as characters are entered
+set incsearch
+
+" Highlight search results
+set hlsearch
+
+" If a pattern contains an uppercase letter, searching is case sensitive,
+" otherwise, it is not.
+set ignorecase
+set smartcase
+
+" Emulate vim-surround. Commands: ys, cs, ds, S.
+set surround
+#+end_src
+
+** Which-Key Plugin
+*** General
+
+:TODO: fix move lines in selected mode
+
+#+begin_src vimrc :tangle ~/.ideavimrc
 set which-key
-set timeoutlen=5000
 
-nnoremap <leader>h <C-W>h<cr>
-nnoremap <leader>j <C-W>j<cr>
-nnoremap <leader>l <C-W>l<cr>
-nnoremap <leader>k <C-W>k<cr>
+"set timeoutlen=5000
+set notimeout
 
-"move line
-nnoremap <S-j> :m+<cr>
-nnoremap <S-k> :m-2<cr>
-xnoremap <S-j> :m-2<cr>gv=gv
-xnoremap <S-k> :m'>+<cr>gv=gv
+let g:WhichKey_DefaultDelay = 1000
+
+let g:WhichKey_ShowVimActions = "true"
+
+nnoremap <leader><Esc> :<Esc>
+
+" Move lines down
+nnoremap <S-j>    $:action MoveLineDown<CR>
+" xnoremap <S-j>    $:action MoveStatementDown<CR>>gv=gv
+
+" Move lines up
+nnoremap <S-k>    $:action MoveLineUp<CR>
+" xnoremap <S-k>    $:action MoveStatementUp<CR>gv=gv
+#+end_src
+
+*** Buffers
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_buffers = "<leader>b +buffers"
+
+let g:WhichKeyDesc_buffers_last_buffer = "<leader>bl switch to last buffer"
+nnoremap <leader>bl <C-S-6>
+
+let g:WhichKeyDesc_buffers_next_buffer = "<leader>bn next buffer"
+nnoremap <leader>bn :action NextTab<CR>
+
+let g:WhichKeyDesc_buffers_previous_buffer = "<leader>bp previous buffer"
+nnoremap <leader>bp :action PreviousTab<CR>
+
+let g:WhichKeyDesc_buffers_bill_buffer = "<leader>bd kill buffer"
+nnoremap <leader>bd :action CloseContent<CR>
+
+let g:WhichKeyDesc_buffers_kill_buffer_and_close_window = "<leader>bk kill buffer and close window"
+nnoremap <leader>bk :action CloseAllEditors<CR>
+
+let g:WhichKeyDesc_buffers_copy_buffer = "<leader>bY copy buffer"
+nnoremap <leader>bY :%y<CR>
+
+let g:WhichKeyDesc_buffers_kill_other_buffers = "<leader>b<C-d> kill other buffers"
+nnoremap <leader>b<C-d> :action CloseAllEditorsButActive<CR>
+
+nnoremap <leader>b<Esc> :<Esc>
+#+end_src
+
+*** Code
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_code = "<leader>c +code"
+
+let g:WhichKeyDesc_code_override_method = "<leader>co override method"
+nnoremap <leader>co :action OverrideMethods<CR>
+
+let g:WhichKeyDesc_code_reformat = "<leader>cr reformat code"
+nnoremap <leader>cr :action ReformatCode<CR>
+
+nnoremap <leader>c<Esc> :<Esc>
+#+end_src
+
+**** Comments
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_code_comments = "<leader>cc +comments"
+
+let g:WhichKeyDesc_code_comments_collapse_region = "<leader>ccr collapse region"
+nnoremap <leader>ccr :action CollapseRegion<CR>
+
+let g:WhichKeyDesc_code_comments_expand_region = "<leader>cce expand region"
+nnoremap <leader>cce :action ExpandRegion<CR>
+#+end_src
+
+**** Generate
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_code_generate = "<leader>cg +generate"
+
+let g:WhichKeyDesc_code_generate_constructor = "<leader>cge generate constructor"
+nnoremap <leader>cgc :action GenerateEquals<CR>
+
+let g:WhichKeyDesc_code_generate_getter = "<leader>cgg generate getter"
+nnoremap <leader>cgg :action GenerateGetter<CR>
+
+let g:WhichKeyDesc_code_generate_setter = "<leader>cgs generate setter"
+nnoremap <leader>cgs :action GenerateSetter<CR>
+
+let g:WhichKeyDesc_code_generate_equals = "<leader>cge generate equals"
+nnoremap <leader>cge :action GenerateEquals<CR>
+
+let g:WhichKeyDesc_code_generate_javadoc = "<leader>cge generate javadoc"
+nnoremap <leader>cgd :action GenerateJavadoc<CR>
+#+end_src
+
+**** Jump
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_code_jump = "<leader>cj +jump"
+
+let g:WhichKeyDesc_code_jump_to_last_change = "<leader>cjc to last change"
+nnoremap <leader>cjc :action JumpToLastChange<CR>
+
+let g:WhichKeyDesc_code_jump_to_last_window = "<leader>cjw to last window"
+nnoremap <leader>cjw :action JumpToLastWindow<CR>
+#+end_src
+
+**** Quick Actions
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_code_quick_actions = "<leader>ca +quick actions"
+
+let g:WhichKeyDesc_code_quick_actions_quick = "<leader>caq quick actions"
+nnoremap <leader>caq :action QuickActions<CR>
+
+let g:WhichKeyDesc_code_quick_actions_java_doc = "<leader>caj quick java doc"
+nnoremap <leader>caj :action QuickJavaDoc<CR>
+#+end_src
+
+*** Debugging
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_debug = "<leader>d +debugging"
+
+let g:WhichKeyDesc_debug_toggle_line_breakpoint = "<leader>db toggle line breakpoint"
+nnoremap <leader>db :action ToggleLineBreakpoint<CR>
+
+let g:WhichKeyDesc_debug_toggle_between_impl_and_test_file = "<leader>di toggle between impl and test file"
+nnoremap <leader>di :action GotoTest<CR>
+
+nnoremap <leader>d<Esc> :<Esc>
+#+end_src
+
+*** Files
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_files = "<leader>f +files"
+
+let g:WhichKeyDesc_files_goto_file = "<leader>fg find file"
+nnoremap <leader>fg :action GotoFile<CR>
+
+let g:WhichKeyDesc_files_rename = "<leader>fR rename file"
+nnoremap <leader>fR :action RenameFile<CR>
+
+let g:WhichKeyDesc_files_recent = "<leader>fr recent file"
+nnoremap <leader>fr :action RecentFiles<CR>
+
+let g:WhichKeyDesc_files_yank_copy = "<leader>fy +Yank/Copy"
+
+let g:WhichKeyDesc_files_yank_copy_file_path = "<leader>fyy copy file path"
+nnoremap <leader>fyy :action CopyAbsolutePath<CR>
+
+nnoremap <leader>f<Esc> :<Esc>
+#+end_src
+
+**** Open
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_files_open = "<leader>fo +open"
+
+let g:WhichKeyDesc_files_menu = "<leader>fom file menu"
+nnoremap <leader>fom :action FileMenu<CR>
+
+let g:WhichKeyDesc_files_open_file = "<leader>fof open file"
+nnoremap <leader>fo :action OpenFile<CR>
+
+let g:WhichKeyDesc_files_open_in_browser = "<leader>fob open in browser"
+nnoremap <leader>fob :action OpenInBrowser<CR>
+#+end_src
+
+**** New Files
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_files_languages = "<leader>fn +new files"
+
+let g:WhichKeyDesc_files_new_file = "<leader>fnf new file"
+nnoremap <leader>fnf :action NewFile<CR>
+
+let g:WhichKeyDesc_files_new_java_class = "<leader>fnc new java class"
+nnoremap <leader>fnc :action NewClass<CR>
+
+let g:WhichKeyDesc_files_new_html_file = "<leader>fnh new html file"
+nnoremap <leader>fnh :action NewHtmlFile<CR>
+
+let g:WhichKeyDesc_files_new_js_file = "<leader>fnj new js file"
+nnoremap <leader>fnj :action NewJavaScriptFile<CR>
+
+let g:WhichKeyDesc_files_new_python_file = "<leader>fnp new python file"
+nnoremap <leader>fnp :action NewPythonFile<CR>
+#+end_src
+
+*** Git
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_git = "<leader>g +git"
+
+" let g:WhichKeyDesc_code_comments_collapse_region = "<leader>ccr collapse region"
+" nnoremap <leader>ccr :action CollapseRegion<CR>
+
+nnoremap <leader>g<Esc> :<Esc>
+#+end_src
+
+*** Projects
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_projects = "<leader>p +projects"
+
+let g:WhichKeyDesc_projects_new_dir = "<leader>pd new dir"
+nnoremap <leader>pd :action NewDir<CR>
+
+let g:WhichKeyDesc_projects_next_project_window = "<leader>pn next project window"
+nnoremap <leader>pn :action NextProjectWindow<CR>
+
+let g:WhichKeyDesc_projects_previous_project_window = "<leader>pp previous project window"
+nnoremap <leader>pp :action PreviousProjectWindow<CR>
+
+let g:WhichKeyDesc_projects_close_project = "<leader>pc close project"
+nnoremap <leader>pc :action CloseProject<CR>
+
+let g:WhichKeyDesc_projects_tasks = "<leader>pt +tasks"
+
+nnoremap <leader>p<Esc> :<Esc>
+#+end_src
+
+*** Toggle/Open
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_toggle_open = "<leader>t +toggle/open"
+
+let g:WhichKeyDesc_toggle_open_terminal = "<leader>tt +terminal"
+
+let g:WhichKeyDesc_toggle_open_new_terminal = "<leader>ttn open new terminal"
+nnoremap <leader>ttn :action Terminal.OpenInTerminal<CR>
+
+let g:WhichKeyDesc_toggle_activate_terminal = "<leader>tto activate terminal"
+nnoremap <leader>tto :action ActivateTerminalToolWindow<CR>
+
+" Focus on project window.
+" Sadly when you are inside the project window this key binding does not work
+" anymore. You can use <A-1> if you want to close the window or <Esc> if you
+" want to leave the window opened and focus on the code.
+let g:WhichKeyDesc_toggle_open_project_tool_window = "<leader>tp project tool window"
+nnoremap <leader>tp :action ActivateProjectToolWindow<CR>
+
+nnoremap <leader>t<Esc> :<Esc>
+#+end_src
+
+*** Run
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_run = "<leader>r +run"
+
+let g:WhichKeyDesc_run_menu = "<leader>rm run menu"
+nnoremap <leader>rm :action RunMenu<CR>
+
+let g:WhichKeyDesc_run_run = "<leader>rr run"
+nnoremap <leader>rr :action Run<CR>
+
+let g:WhichKeyDesc_run_java_class = "<leader>rc run java class"
+nnoremap <leader>rc :action RunClass<CR>
+
+nnoremap <leader>r<Esc> :<Esc>
+#+end_src
+
+*** Search
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_search = "<leader>s +search"
+
+let g:WhichKeyDesc_search_clear_highlight = "<leader>sc clear highlight"
+nnoremap <leader>sc :nohlsearch<CR>
+
+let g:WhichKeyDesc_search_find_usages = "<leader>sP find usages"
+nnoremap <leader>sP :action FindUsages<CR>
+
+nnoremap <leader>s<Esc> :<Esc>
+#+end_src
+
+*** IDE
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_settings = "<leader>i +IDE"
+
+let g:WhichKeyDesc_settings_show_settings = "<leader>is show settings"
+nnoremap <leader>is :action ShowSettings<CR>
+
+let g:WhichKeyDesc_settings_show_key_bindings = "<leader>ik show key bindings"
+nnoremap <leader>ik :map<CR>
+
+let g:WhichKeyDesc_toggle_open_main = "<leader>im +main"
+
+let g:WhichKeyDesc_toggle_open_main_menu = "<leader>imm open main menu"
+nnoremap <leader>imm :action MainMenu<CR>
+
+let g:WhichKeyDesc_toggle_open_main_toolbar = "<leader>imt open main toolbar"
+nnoremap <leader>imt :action MainToolBar<CR>
+
+nnoremap <leader>i<Esc> :<Esc>
+#+end_src
+
+**** Menu
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_settings_menu = "<leader>im +tools"
+
+let g:WhichKeyDesc_settings_menu_view = "<leader>imv view menu"
+nnoremap <leader>imv :action ViewMenu<CR>
+
+let g:WhichKeyDesc_settings_menu_tools = "<leader>imt tools menu"
+nnoremap <leader>imt :action ToolsMenu<CR>
+#+end_src
+
+*** Windows
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_windows = "<leader>w +windows"
+
+let g:WhichKeyDesc_windows_delete_window = "<leader>wc close window"
+nnoremap <leader>wc :action CloseAllEditors<CR>
+
+let g:WhichKeyDesc_windows_split_window_below_and_focus = "<leader>ws split window below and focus"
+nnoremap <leader>ws <C-w>s<C-w>j
+
+let g:WhichKeyDesc_windows_split_window_right_and_focus = "<leader>wv split window right and focus"
+nnoremap <leader>wv <C-w>v<C-w>l
+
+let g:WhichKeyDesc_windows_focus_left = "<leader>wh focus window left"
+nnoremap <leader>wh <C-w>h
+
+let g:WhichKeyDesc_windows_focus_down = "<leader>wj focus window down"
+nnoremap <leader>wj <C-w>j
+
+let g:WhichKeyDesc_windows_focus_up = "<leader>wk focus window up"
+nnoremap <leader>wk <C-w>k
+
+let g:WhichKeyDesc_windows_focus_right = "<leader>wl focus window right"
+nnoremap <leader>wl <C-w>l
+
+nnoremap <leader>w<Esc> :<Esc>
+#+end_src
+
+*** Help
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_help = "<leader>h +help"
+
+nnoremap <leader>h<Esc> :<Esc>
+#+end_src
+
+*** Quit
+
+#+begin_src vimrc :tangle ~/.ideavimrc
+let g:WhichKeyDesc_quit = "<leader>q +quit"
+
+let g:WhichKeyDesc_quit_reload_ideavimrc = "<leader>qi reload ideavimrc"
+nnoremap <leader>qi :source ~/.ideavimrc<CR>
+
+let g:WhichKeyDesc_quit_exit = "<leader>qq exit"
+nnoremap <leader>qq :action Exit<CR>
+
+let g:WhichKeyDesc_quit_restart = "<leader>qr restart"
+nnoremap <leader>qr :action RestartIde<CR>
+
+nnoremap <leader>q<Esc> :<Esc>
 #+end_src
 
 * Git
