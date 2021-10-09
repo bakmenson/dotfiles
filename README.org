@@ -1416,6 +1416,7 @@ __pycache__
 .mypy_cache
 .vim
 venv
+*.lock
 
 # Django
 migrations
