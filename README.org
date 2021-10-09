@@ -578,7 +578,7 @@ for_window [tiling] border pixel 2
 ** Open specific applications in floating mode
 
 #+begin_src conf :tangle ~/.config/sway/config
-for_window [app_id="transmission-gtk"] floating enable border pixel 1
+for_window [app_id="transmission-gtk"] floating enable
 #for_window [class="GParted"] floating enable border normal
 #+end_src
 
