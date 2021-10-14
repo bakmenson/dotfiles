@@ -580,6 +580,7 @@ for_window [tiling] border pixel 2
 #+begin_src conf :tangle ~/.config/sway/config
 for_window [app_id="transmission-gtk"] floating enable
 for_window [app_id="mpv"] floating enable
+for_window [app_id="mpv"] resize set 800 600
 #for_window [class="GParted"] floating enable border normal
 #+end_src
 
