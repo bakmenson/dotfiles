@@ -5,19 +5,41 @@
 #+property: header-args:conf :tangle-mode (identity #o555)
 
 * Table of Contents :toc_2:
+- [[#i3wm][i3wm]]
+  - [[#variables][Variables]]
+  - [[#desktop-layout][Desktop Layout]]
+  - [[#fonts][Fonts]]
+  - [[#mouse][Mouse]]
+  - [[#borders][Borders]]
+  - [[#windows][Windows]]
+  - [[#workspaces][Workspaces]]
+  - [[#terminal][Terminal]]
+  - [[#program-launcher][Program launcher]]
+  - [[#start-apps][Start Apps]]
+  - [[#i3][i3]]
+  - [[#audio-controls][Audio controls]]
+  - [[#for_window][for_window]]
+  - [[#autostart-applications][Autostart applications]]
+  - [[#polybar][Polybar]]
+  - [[#theme-colors][Theme colors]]
+  - [[#gaps][Gaps]]
+- [[#polybar-1][Polybar]]
+  - [[#config][config]]
+  - [[#polybarsh][polybar.sh]]
+- [[#picom][Picom]]
 - [[#waybar][Waybar]]
   - [[#waybar-config][waybar config]]
   - [[#waybar-style][waybar style]]
 - [[#sway][Sway]]
-  - [[#variables][Variables]]
+  - [[#variables-1][Variables]]
   - [[#output-configuration][Output configuration]]
   - [[#idle][Idle]]
   - [[#input-configuration][Input configuration]]
   - [[#key-bindings][Key bindings]]
   - [[#status-bar][Status Bar:]]
-  - [[#gaps][Gaps]]
-  - [[#borders][Borders]]
-  - [[#open-specific-applications-in-floating-mode][Open specific applications in floating mode]]
+  - [[#gaps-1][Gaps]]
+  - [[#borders-1][Borders]]
+  - [[#for_window-1][For_Window]]
   - [[#colors][Colors]]
   - [[#themes][Themes]]
   - [[#cursor][Cursor]]
@@ -32,7 +54,7 @@
   - [[#zshrc][zshrc]]
   - [[#zsh-theme][zsh-theme]]
   - [[#zshenv][zshenv]]
-- [[#terminal][Terminal]]
+- [[#terminal-1][Terminal]]
   - [[#alacritty][Alacritty]]
 - [[#ideavimrc][Ideavimrc]]
   - [[#general][General]]
@@ -41,6 +63,1325 @@
   - [[#gitconfig][gitconfig]]
   - [[#gitignore_global][gitignore_global]]
 - [[#firefox][Firefox]]
+
+* i3wm
+** Variables
+
+#+begin_src conf :tangle ~/.config/i3/config
+#this is test
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+set $alt Mod1
+
+set $terminal gnome-terminal
+#+end_src
+
+** Desktop Layout
+
+#+begin_src conf :tangle ~/.config/i3/config
+# set default desktop layout (default is tiling)
+# workspace_layout tabbed <stacking|tabbed>
+#+end_src
+
+** Fonts
+
+#+begin_src conf :tangle ~/.config/i3/config
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# font xft:URWGothic-Book 11
+font xft:URWGothic-Book 0
+#+end_src
+
+** Mouse
+
+#+begin_src conf :tangle ~/.config/i3/config
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+#+end_src
+
+** Borders
+
+#+begin_src conf :tangle ~/.config/i3/config
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+default_border pixel 2
+default_floating_border normal
+
+# Hide borders
+hide_edge_borders none
+# change borders
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+#+end_src
+
+** Windows
+*** Kill focused
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+q kill
+#+end_src
+
+*** Change focus
+
+#+begin_src  conf :tangle ~/.config/i3/config
+# focus_follows_mouse no
+
+# bindsym $mod+j focus left
+bindsym $alt+h focus left
+bindsym $alt+l focus right
+bindsym $alt+j focus down
+bindsym $alt+k focus up
+# bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+#+end_src
+
+*** Move focused
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+#+end_src
+
+*** Workspace back and forth
+
+#+begin_src  conf :tangle ~/.config/i3/config
+workspace_auto_back_and_forth yes
+bindsym $alt+Tab workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+#+end_src
+
+*** Split orientation
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $alt+q split toggle
+#+end_src
+
+*** Toggle fullscreen mode
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+f fullscreen toggle
+#+end_src
+
+*** Change container layout
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+#+end_src
+
+*** Toggle tiling / floating
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+Shift+space floating toggle
+#+end_src
+
+*** Toggle sticky
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+Shift+s sticky toggle
+#+end_src
+
+*** Scratchpad
+
+#+begin_src  conf :tangle ~/.config/i3/config
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+#+end_src
+
+*** Resize window
+
+#+begin_src conf :tangle ~/.config/i3/config
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym j resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Lock screen
+# bindsym $mod+9 exec --no-startup-id blurlock
+# bindsym $mod+9 exec --no-startup-id gllock
+#+end_src
+
+** Workspaces
+*** names
+
+#+begin_src  conf :tangle ~/.config/i3/config
+# to display names or symbols instead of plain workspace numbers you can use
+# something like: set $ws1 1:mail
+#                 set $ws2 2:
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+#+end_src
+
+*** navigate
+
+#+begin_src conf :tangle ~/.config/i3/config
+bindsym $alt+n workspace next
+bindsym $alt+p workspace prev
+
+# alternatively navigate workspaces next / previous
+#bindsym $alt+Right workspace next
+#bindsym $alt+Left workspace prev
+#+end_src
+
+*** switch
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+#+end_src
+
+*** Move focused container to workspace
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+#+end_src
+
+*** Move to workspace with focused container
+
+#+begin_src  conf :tangle ~/.config/i3/config
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+#+end_src
+
+*** Switch to workspace with urgent window automatically
+
+#+begin_src conf :tangle ~/.config/i3/config
+for_window [urgent=latest] focus
+#+end_src
+
+** Terminal
+
+#+begin_src conf :tangle ~/.config/i3/config
+# start a terminal
+#bindsym $alt+o exec xfce4-terminal
+#bindsym $alt+o exec alacritty
+#bindsym $alt+o exec kitty
+bindsym $alt+o exec $terminal
+#+end_src
+
+** Program launcher
+
+#+begin_src conf :tangle ~/.config/i3/config
+# bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec rofi -show drun -modi drun -display-drun "Run"
+#+end_src
+
+** Start Apps
+
+#+begin_src conf :tangle ~/.config/i3/config
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+# pycharm
+#bindsym $alt+p exec ~/pycharm-community/bin/pycharm.sh
+
+# idea
+bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
+
+# Screenshot active window
+bindsym $mod+Shift+F12 exec --no-startup-id scrot -u
+# Screenshot fullscreen
+bindsym $mod+F12 exec --no-startup-id scrot
+
+# bindsym $alt+c exec --no-startup-id xfce4-terminal -e cmatrix --fullscreen
+# bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
+bindsym $alt+f exec --no-startup-id feh -z -F /run/media/solus/hdd/Pictures/wallpapers/*
+#+end_src
+
+** i3
+
+#+begin_src conf :tangle ~/.config/i3/config
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Set shut down, restart and locking features
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    # bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+#+end_src
+
+** Audio controls
+
+#+begin_src conf :tangle ~/.config/i3/config
+# Pulse Audio controls
+#bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
+#bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
+#bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
+
+bindsym $mod+F2 exec --no-startup-id "amixer -q set Master 3%- unmute"
+bindsym $mod+F3 exec --no-startup-id "amixer -q set Master 3%+ unmute"
+bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
+
+# Switch between speakers and headphones
+bindsym $mod+F5 exec --no-startup-id "amixer -c 0 set 'Auto-Mute Mode' Disabled"
+bindsym $mod+F6 exec --no-startup-id "amixer -c 0 set 'Auto-Mute Mode' Enabled"
+
+#bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q set Master 3%+ unmute"
+#bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q set Master 3%- unmute"
+#bindsym XF86AudioMute exec --no-startup-id "amixer -q set Master toggle"
+#+end_src
+
+** for_window
+
+#+begin_src conf :tangle ~/.config/i3/config
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Transmission-gtk"] floating enable border pixel 1
+for_window [class="terminal"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="Tor"] floating enable
+for_window [class="TelegramDesktop"] floating enable
+for_window [class="TelegramDesktop"] resize set 930 1020
+#+end_src
+
+** Autostart applications
+
+#+begin_src conf :tangle ~/.config/i3/config
+exec_always --no-startup-id setxkbmap -option caps:swapescape
+exec_always --no-startup-id setxkbmap -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll
+
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id xfce4-power-manager
+
+# --bg-fill, --bg-scale
+exec --no-startup-id picom --config ~/.config/picom.conf
+exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
+exec --no-startup-id unclutter
+
+exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec emacs'"
+exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 5; i3-msg 'workspace 4; exec firefox'"
+exec --no-startup-id exec telegram-desktop -startintray
+exec --no-startup-id exec transmission-gtk -m
+#exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
+#exec --no-startup-id "sleep 12; i3-msg 'workspace 2; exec ~/pycharm/bin/pycharm.sh'"
+#exec --no-startup-id "sleep 20; i3-msg 'workspace 2; exec pycharm-community'"
+#exec --no-startup-id "sleep 45; i3-msg 'workspace 3; exec intellij-idea-community'"
+#exec --no-startup-id "sleep 1; i3-msg 'workspace 2; exec emacsclient -c -a emacs'"
+#exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec kitty'"
+#exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec xfce4-terminal'"
+#exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec xfce4-terminal -e vifm'"
+#exec --no-startup-id "sleep 7; i3-msg 'workspace 4; exec qutebrowser'"
+#exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec alacritty'"
+#exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec alacritty -e ranger'"
+#exec --no-startup-id "sleep 3; i3-msg 'workspace 2; exec alacritty -e ~/nvim.appimage'"
+#exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec google-chrome'"
+#exec --no-startup-id "sleep 12; i3-msg 'workspace 5; exec telegram-desktop'"
+#+end_src
+
+** Polybar
+
+#+begin_src conf :tangle ~/.config/i3/config
+exec_always --no-startup-id chmod +x $HOME/.config/polybar/polybar.sh
+exec_always --no-startup-id $HOME/.config/polybar/polybar.sh
+#+end_src
+
+** Theme colors
+
+#+begin_src conf :tangle ~/.config/i3/config
+# class                   border  backgr. text    indic.   child_border
+  client.focused          #556064 #556064 #80FFF9 #FDF6E3
+  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
+  client.unfocused        #282c34 #282c34 #1ABC9C #454948
+  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+  client.placeholder      #000000 #0c0c0c #ffffff #000000
+
+  client.background       #2B2C2B
+#+end_src
+
+** Gaps
+
+#+begin_src conf :tangle ~/.config/i3/config
+# Set inner/outer gaps
+gaps inner 14
+gaps outer -2
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+#+end_src
+
+* Polybar
+** config
+*** colors
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[colors]
+smoke-blue = #222d31
+gruvbox = #282828
+onedark = #282c34
+yellow = #ffb52a
+dark-yellow = #bc8420
+light = #e1d9c4
+
+background = ${colors.onedark}
+background-alt = ${colors.onedark}
+foreground = #dfdfdf
+foreground-alt = ${colors.light}
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+#+end_src
+
+*** bar/example
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[bar/example]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 24
+offset-x = 0
+offset-y = 0
+radius = 0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size =
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = fixed:pixelsize=10;3
+font-1 = unifont:fontformat=truetype:size=10:antialias=false;3
+font-2 = FontAwesome5Free:style=Solid:size=10;3
+font-3 = FontAwesome5Brands:style=Solid:size=11;3
+font-4 = siji:pixelsize=10;3
+
+;pulseaudio powermenu wlan xbacklight bspwm mpd
+;modules-left = i3 windows-count xwindow
+;modules-center =
+;modules-right = xkeyboard alsa filesystem memory cpu eth temperature date check-updates gmail
+
+modules-left = sep filesystem sep memory sep cpu sep eth temperature sep alsa sep
+modules-center = i3
+modules-right = sep xkeyboard date
+
+tray-position = right
+tray-padding = 1
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+#+end_src
+
+*** module/xwindow
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:50:...%
+format-foreground = #e1d9c4
+#+end_src
+
+*** module/xkeyboard
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+;format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+;label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+;label-indicator-underline = ${colors.secondary}
+label-indicator-foreground = ${colors.foreground-alt}
+#+end_src
+
+*** module/filesystem
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+;mount-1 = /media/solus/hdd
+;for arch
+mount-1 = /run/media/solus/hdd
+
+label-mounted =  %free%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+label-mounted-foreground = ${colors.foreground-alt}
+#+end_src
+
+*** module/bspwm
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 3
+
+label-occupied = %index%
+label-occupied-padding = 3
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 3
+
+; Separator in between workspaces
+; label-separator = |
+#+end_src
+
+*** module/i3
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/i3]
+type = internal/i3
+
+;ws-icon-0 = 1;
+;ws-icon-1 = 2;/
+;ws-icon-2 = 3;/
+;ws-icon-3 = 4;/
+;ws-icon-4 = 5;/
+;ws-icon-1 = 2;
+; 
+;ws-icon-1 = 2;
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+label-focused-foreground = ${colors.dark-yellow}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused-foreground = ${colors.foreground-alt}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+; Separator in between workspaces
+; label-separator = |
+#+end_src
+
+*** module/mpd
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+#+end_src
+
+*** module/xbacklight
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL %percentage%%
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+#+end_src
+
+*** module/backlight-acpi
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+#+end_src
+
+*** module/cpu
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+label-foreground = ${colors.foreground-alt}
+;format-underline = #f90000
+label = %percentage:2%%
+#+end_src
+
+*** module/memory
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/memory]
+type = internal/memory
+interval = 3
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+label-foreground = ${colors.foreground-alt}
+;format-underline = #4bffdc
+label = %gb_used%
+#+end_src
+
+*** module/wlan
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/wlan]
+type = internal/network
+interface = net1
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = #9f78e1
+label-connected = %essid%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+#+end_src
+
+*** module/eth
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/eth]
+type = internal/network
+interface = enp3s0
+interval = 3.0
+
+;format-connected-underline = #55aa55
+format-connected-prefix = ""
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected =
+
+;format-disconnected =
+format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+#+end_src
+
+*** module/date
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/date]
+type = internal/date
+interval = 5
+
+date = |    %A, %d %B
+date-alt = " %Y-%m-%d"
+
+;time = |   %l:%M %P  |
+time = |   %H:%M  |
+time-alt = %H:%M:%S
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+label-foreground = ${colors.foreground-alt}
+;format-underline = #0a6cf5
+label = %date% %time%
+#+end_src
+
+*** module/pulseaudio
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = 🔇 muted
+label-muted-foreground = #666
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+#+end_src
+
+*** module/alsa
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/alsa]
+type = internal/alsa
+
+;format-volume = <label-volume> <bar-volume>
+format-volume = <label-volume>
+label-volume =  %percentage%%
+label-volume-foreground = ${colors.foreground-alt}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = 
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+#+end_src
+
+*** module/battery
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #ffb52a
+
+format-discharging = <animation-discharging> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-framerate = 750
+#+end_src
+
+*** module/temperature
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
+warn-temperature = 60
+
+
+format-prefix = ""
+format = <ramp> <label>
+;format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+;format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+format-prefix-foreground = ${colors.foreground-alt}
+label-foreground = ${colors.foreground-alt}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+#+end_src
+
+*** module/powermenu
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+#+end_src
+
+*** settings
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+#+end_src
+
+*** global/wm
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+#+end_src
+
+*** module/check-updates
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+;[module/check-updates]
+;type = custom/script
+;exec = sh ~/.config/polybar/check-updates.sh
+;interval = 3600
+#+end_src
+
+*** module/sep
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/sep]
+type = custom/text
+content = |
+label-separator-foreground = ${colors.foreground-alt}
+#+end_src
+
+** polybar.sh
+
+#+begin_src sh :tangle ~/.config/polybar/polybar.sh
+#!/usr/bin/env bash
+
+# Terminate already running bar instances
+killall -q polybar
+
+# Launch Polybar, using default config location ~/.config/polybar/config
+polybar mybar 2>&1 | tee -a /tmp/polybar.log & disown
+
+echo "Polybar launched..."
+#+end_src
+
+* Picom
+
+#+begin_src conf :tangle ~/.config/picom.conf
+# Thank you code_nomad: http://9m.no/ꪯ鵞
+# and Arch Wiki contributors: https://wiki.archlinux.org/index.php/Compton
+
+#################################
+#
+# Backend
+#
+#################################
+
+# Backend to use: "xrender" or "glx".
+# GLX backend is typically much faster but depends on a sane driver.
+backend = "glx";
+
+#################################
+#
+# GLX backend
+#
+#################################
+
+glx-no-stencil = true;
+
+# GLX backend: Copy unmodified regions from front buffer instead of redrawing them all.
+# My tests with nvidia-drivers show a 10% decrease in performance when the whole screen is modified,
+# but a 20% increase when only 1/4 is.
+# My tests on nouveau show terrible slowdown.
+glx-copy-from-front = false;
+
+# GLX backend: Use MESA_copy_sub_buffer to do partial screen update.
+# My tests on nouveau shows a 200% performance boost when only 1/4 of the screen is updated.
+# May break VSync and is not available on some drivers.
+# Overrides --glx-copy-from-front.
+# glx-use-copysubbuffermesa = true;
+
+# GLX backend: Avoid rebinding pixmap on window damage.
+# Probably could improve performance on rapid window content changes, but is known to break things on some drivers (LLVMpipe).
+# Recommended if it works.
+# glx-no-rebind-pixmap = true;
+
+# GLX backend: GLX buffer swap method we assume.
+# Could be undefined (0), copy (1), exchange (2), 3-6, or buffer-age (-1).
+# undefined is the slowest and the safest, and the default value.
+# copy is fastest, but may fail on some drivers,
+# 2-6 are gradually slower but safer (6 is still faster than 0).
+# Usually, double buffer means 2, triple buffer means 3.
+# buffer-age means auto-detect using GLX_EXT_buffer_age, supported by some drivers.
+# Useless with --glx-use-copysubbuffermesa.
+# Partially breaks --resize-damage.
+# Defaults to undefined.
+#glx-swap-method = "undefined"; #deprecated !
+#use-damage = true
+
+#################################
+#
+# Shadows
+#
+#################################
+
+# Enabled client-side shadows on windows.
+shadow = true;
+# The blur radius for shadows. (default 12)
+shadow-radius = 5;
+# The left offset for shadows. (default -15)
+shadow-offset-x = 1;
+# The top offset for shadows. (default -15)
+shadow-offset-y = 1;
+# The translucency for shadows. (default .75)
+shadow-opacity = 0.3;
+
+# Set if you want different colour shadows
+# shadow-red = 0.0;
+# shadow-green = 0.0;
+# shadow-blue = 0.0;
+
+# The shadow exclude options are helpful if you have shadows enabled. Due to the way picom draws its shadows, certain applications will have visual glitches
+# (most applications are fine, only apps that do weird things with xshapes or argb are affected).
+# This list includes all the affected apps I found in my testing. The "! name~=''" part excludes shadows on any "Unknown" windows, this prevents a visual glitch with the XFWM alt tab switcher.
+shadow-exclude = [
+    "! name~=''",
+    "name = 'Notification'",
+    "name = 'Plank'",
+    "name = 'Docky'",
+    "name = 'Kupfer'",
+    "name = 'xfce4-notifyd'",
+    "name *= 'VLC'",
+    "name *= 'compton'",
+    "name *= 'picom'",
+    "name *= 'Chromium'",
+    "name *= 'Chrome'",
+    "class_g = 'Firefox' && argb",
+    "class_g = 'Conky'",
+    "class_g = 'Kupfer'",
+    "class_g = 'Synapse'",
+    "class_g ?= 'Notify-osd'",
+    "class_g ?= 'Cairo-dock'",
+    "class_g ?= 'Xfce4-notifyd'",
+    "class_g ?= 'Xfce4-power-manager'",
+    "class_g ?= 'Dmenu'",
+#	   "class_g ?= 'Dunst'",
+# disables shadows on i3 frames
+    "class_g ?= 'i3-frame'",
+    "_GTK_FRAME_EXTENTS@:c",
+    "_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+];
+# Avoid drawing shadow on all shaped windows (see also: --detect-rounded-corners)
+shadow-ignore-shaped = false;
+
+#################################
+#
+# Opacity
+#
+#################################
+
+inactive-opacity = 1;
+active-opacity = 1;
+frame-opacity = 1;
+inactive-opacity-override = false;
+
+# Dim inactive windows. (0.0 - 1.0)
+# inactive-dim = 0.2;
+# Do not let dimness adjust based on window opacity.
+# inactive-dim-fixed = true;
+# Blur background of transparent windows. Bad performance with X Render backend. GLX backend is preferred.
+# blur-background = true;
+# Blur background of opaque windows with transparent frames as well.
+# blur-background-frame = true;
+# Do not let blur radius adjust based on window opacity.
+blur-background-fixed = false;
+blur-background-exclude = [
+    "window_type = 'dock'",
+    "window_type = 'desktop'"
+];
+
+#################################
+#
+# Fading
+#
+#################################
+
+# Fade windows during opacity changes.
+fading = false;
+# The time between steps in a fade in milliseconds. (default 10).
+fade-delta = 1;
+# Opacity change between steps while fading in. (default 0.028).
+fade-in-step = 0.03;
+# Opacity change between steps while fading out. (default 0.03).
+fade-out-step = 0.03;
+# Fade windows in/out when opening/closing
+# no-fading-openclose = true;
+
+# Specify a list of conditions of windows that should not be faded.
+fade-exclude = [ ];
+
+#################################
+#
+# Other
+#
+#################################
+
+# Try to detect WM windows and mark them as active.
+mark-wmwin-focused = true;
+# Mark all non-WM but override-redirect windows active (e.g. menus).
+mark-ovredir-focused = true;
+# Use EWMH _NET_WM_ACTIVE_WINDOW to determine which window is focused instead of using FocusIn/Out events.
+# Usually more reliable but depends on a EWMH-compliant WM.
+use-ewmh-active-win = true;
+# Detect rounded corners and treat them as rectangular when --shadow-ignore-shaped is on.
+detect-rounded-corners = true;
+
+# Detect _NET_WM_OPACITY on client windows, useful for window managers not passing _NET_WM_OPACITY of client windows to frame windows.
+# This prevents opacity being ignored for some apps.
+# For example without this enabled my xfce4-notifyd is 100% opacity no matter what.
+detect-client-opacity = true;
+
+# Specify refresh rate of the screen.
+# If not specified or 0, picom will try detecting this with X RandR extension.
+refresh-rate = 0;
+
+# Vertical synchronization: match the refresh rate of the monitor
+#vsync = false;
+vsync = true;
+
+# Enable DBE painting mode, intended to use with VSync to (hopefully) eliminate tearing.
+# Reported to have no effect, though.
+#dbe = false;
+dbe = true;
+
+# Limit picom to repaint at most once every 1 / refresh_rate second to boost performance.
+# This should not be used with --vsync drm/opengl/opengl-oml as they essentially does --sw-opti's job already,
+# unless you wish to specify a lower refresh rate than the actual value.
+#sw-opti = true;
+
+# Unredirect all windows if a full-screen opaque window is detected, to maximize performance for full-screen windows, like games.
+# Known to cause flickering when redirecting/unredirecting windows.
+unredir-if-possible = true;
+
+# Specify a list of conditions of windows that should always be considered focused.
+focus-exclude = [ "class_g = 'Cairo-clock'" ];
+
+# Use WM_TRANSIENT_FOR to group windows, and consider windows in the same group focused at the same time.
+detect-transient = true;
+# Use WM_CLIENT_LEADER to group windows, and consider windows in the same group focused at the same time.
+# WM_TRANSIENT_FOR has higher priority if --detect-transient is enabled, too.
+detect-client-leader = true;
+
+#################################
+#
+# Window type settings
+#
+#################################
+
+wintypes :
+{
+  tooltip :
+  {
+    fade = true;
+    shadow = false;
+    opacity = 0.85;
+    focus = true;
+  };
+  fullscreen :
+  {
+    fade = true;
+    shadow = false;
+    opacity = 1;
+    focus = true;
+  };
+};
+
+######################
+#
+# XSync
+# See: https://github.com/yshui/picom/commit/b18d46bcbdc35a3b5620d817dd46fbc76485c20d
+#
+######################
+
+# Use X Sync fence to sync clients' draw calls. Needed on nvidia-drivers with GLX backend for some users.
+xrender-sync-fence = true;
+
+opacity-rule = [
+#"99:name *?= 'Call'",
+#"99:class_g = 'Chromium'",
+#"99:name *?= 'Conky'",
+#"99:class_g = 'Darktable'",
+#"50:class_g = 'Dmenu'",
+#"99:name *?= 'Event'",
+#"99:class_g = 'Firefox'",
+#"99:class_g = 'GIMP'",
+#"99:name *?= 'Image'",
+#"99:class_g = 'Lazpaint'",
+#"99:class_g = 'Midori'",
+#"99:name *?= 'Minitube'",
+#"99:class_g = 'Mousepad'",
+#"99:name *?= 'MuseScore'",
+#"90:name *?= 'Page Info'",
+#"99:name *?= 'Pale Moon'",
+#"90:name *?= 'Panel'",
+#"99:class_g = 'Pinta'",
+#"90:name *?= 'Restart'",
+#"99:name *?= 'sudo'",
+#"99:name *?= 'Screenshot'",
+#"99:class_g = 'Viewnior'",
+#"99:class_g = 'VirtualBox'",
+#"99:name *?= 'VLC'",
+#"99:name *?= 'Write'",
+#"93:class_g = 'URxvt' && !_NET_WM_STATE@:32a",
+#"0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'",
+#"96:_NET_WM_STATE@:32a *= '_NET_WM_STATE_STICKY'",
+#"90:class_g = 'Xfce4-terminal'",
+#"90:class_g = 'Alacritty'",
+];
+#+end_src
 
 * Waybar
 ** waybar config
@@ -64,12 +1405,12 @@
         "pulseaudio",
         "custom/separator",
         "network",
-        "sway/mode",
+        "sway/mode"
     ],
     "modules-center": ["sway/workspaces"],
     "modules-right": [
-        "custom/update",
-        "custom/separator",
+        // "custom/update",
+        // "custom/separator",
         "sway/language",
         "custom/separator",
         "clock",
@@ -93,7 +1434,7 @@
         }
     },
     "sway/language": {
-        "format": "{}",
+        "format": "{}"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -105,7 +1446,7 @@
     "clock": {
         "timezone": "Europe/Moscow",
         "format": "{: %A, %d %B |  %H:%M}",
-        "tooltip": false,
+        "tooltip": false
     },
     "cpu": {
         "format": " {usage}%",
@@ -177,13 +1518,14 @@
 ** waybar style
 
 #+begin_src css :tangle ~/.config/waybar/style.css
-*{
+,*{
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
+    font-family: "Source Code Pro", "Font Awesome 5 Free";
     /* font-family: "Font Awesome 5 Free", "JetBrains Mono"; */
-    font-family: "Source Code Pro";
-    /*font-family: monospace;*/
+    /* font-family: "Source Code Pro"; */
+    /* font-family: monospace; */
     font-size: 14px;
     min-height: 0;
     background-color: #282c34;
@@ -307,7 +1649,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term gnome-terminal
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -429,7 +1771,7 @@ bindsym $alt+p workspace prev
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
-bindsym $mod+Tab workspace back_and_forth
+bindsym $alt+Tab workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 #+end_src
 
@@ -575,12 +1917,16 @@ smart_borders on
 for_window [tiling] border pixel 2
 #+end_src
 
-** Open specific applications in floating mode
+** For_Window
 
 #+begin_src conf :tangle ~/.config/sway/config
 for_window [app_id="transmission-gtk"] floating enable
 for_window [app_id="mpv"] floating enable
 for_window [app_id="mpv"] resize set 800 600
+for_window [app_id="telegram-desktop_telegram-desktop"] floating enable
+for_window [app_id="telegram-desktop_telegram-desktop"] resize set 930 1020
+for_window [app_id="gnome-terminal-server"] floating enable
+for_window [app_id="gnome-terminal-server"] resize set 1200 800
 #for_window [class="GParted"] floating enable border normal
 #+end_src
 
@@ -634,8 +1980,11 @@ exec wmname LG3D
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id emacs --daemon
 
-# exec --no-startup-id "sleep 1; swaymsg 'workspace 2; exec emacs'"
-# exec --no-startup-id "sleep 5; swaymsg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 1; swaymsg 'workspace 1; exec emacs'"
+#exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 5; swaymsg 'workspace 4; exec firefox'"
+exec --no-startup-id telegram-desktop -startintray
+exec --no-startup-id exec transmission-gtk -m
 # exec --no-startup-id "sleep 10; swaymsg 'workspace 5; exec telegram-desktop'"
 #+end_src
 
@@ -677,6 +2026,7 @@ ENTER cycle fullscreen
 
 * Zsh
 ** zshrc
+*** Common Settings
 
 #+begin_src sh :tangle ~/.zshrc
 # If you come from bash you might have to change your $PATH.
@@ -739,11 +2089,19 @@ ENABLE_CORRECTION="true"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
+#+end_src
 
+*** Custom
+
+#+begin_src sh :tangle ~/.zshrc
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 ZSH_THEME="wezm"
+#+end_src
 
+*** Plugins
+
+#+begin_src sh :tangle ~/.zshrc
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -757,10 +2115,13 @@ plugins=(
 	zsh-autosuggestions
 	poetry
 )
+#+end_src
+
+*** User configuration
+
+#+begin_src sh :tangle ~/.zshrc
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -776,23 +2137,15 @@ source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+#+end_src
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+*** Aliases
+**** Common
 
+#+begin_src sh :tangle ~/.zshrc
+alias tor='sh -c "cd ~/.tor-browser && ./start-tor-browser.desktop" && exit'
 
-#######################################################################3
-
-# arch
-alias i='sudo pacman -S'
-alias remove='sudo pacman -Rs'
-alias upd='sudo pacman -Syu && yay -Sua'
-alias yupd='yay -Syu'
-alias cl='sudo pacman -Scc'
-
-alias c='clear && colorscript random'
+alias c='clear'
 
 alias q='exit'
 
@@ -803,7 +2156,7 @@ alias rb='reboot'
 alias sdn='shutdown now'
 alias sdh='shutdown -h'
 alias sdc='shutdown -c'
-alias sn='sleep 2099 && shutdown now' # 34 min 59 sec
+alias sn='sleep 60 && shutdown now'
 
 alias ss='systemctl suspend'
 # 3600 == one hour
@@ -812,10 +2165,39 @@ alias s45='sleep 2700 && systemctl suspend'
 alias s1='sleep 3600 && systemctl suspend'
 alias s2='sleep 7200 && systemctl suspend'
 alias s3='sleep 10800 && systemctl suspend'
+alias obt="emacs --batch --eval \"(require 'org)\" --eval '(org-babel-tangle-file \"$HOME/dev/dotfiles/README.org\")' && chmod +x $HOME/.config/polybar/polybar.sh"
+#+end_src
 
-# python
-alias pp='pyenv activate python-pyenv'
+**** Arch
+
+#+begin_src sh :tangle no
+alias i='sudo pacman -S'
+alias remove='sudo pacman -Rs'
+alias upd='sudo pacman -Syu && yay -Sua'
+alias yupd='yay -Syu'
+alias cl='sudo pacman -Scc'
+#+end_src
+
+**** Debian based
+
+#+begin_src sh :tangle ~/.zshrc
+alias i='sudo apt install'
+alias remove='sudo apt remove'
+alias purge='sudo apt purge'
+alias autoremove='sudo apt autoremove && sudo apt --purge autoremove'
+alias upd='sudo apt update && sudo apt dist-upgrade && sudo snap refresh'
+alias cl='sudo apt autoclean && sudo apt clean'
+#+end_src
+
+**** Python
+
+#+begin_src sh :tangle ~/.zshrc
 alias py='python3'
+
+# pyenv
+alias pp='pyenv activate python-pyenv'
+
+#ipython
 # alias ipy='ipython'
 alias ipy='python -m IPython'
 # alias ipy='pyenv activate python-pyenv && ipython'
@@ -830,15 +2212,20 @@ alias drs='python manage.py runserver'
 alias dm='python manage.py migrate'
 alias dmm='python manage.py makemigrations'
 alias ds='python manage.py shell'
+#+end_src
 
-# git
+**** Git
+
+#+begin_src sh :tangle ~/.zshrc
 alias gts='git status'
 alias gta='git add .'
 alias gtc='git commit -m'
 alias gtp='git push origin'
+#+end_src
 
-#######################################################################
+**** Exports
 
+#+begin_src sh :tangle ~/.zshrc
 export TERM=xterm-256color
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -856,8 +2243,8 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Java
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
-# export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
+#export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 #+end_src
 
