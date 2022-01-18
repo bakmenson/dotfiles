@@ -68,7 +68,6 @@
 ** Variables
 
 #+begin_src conf :tangle ~/.config/i3/config
-#this is test
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $alt Mod1
@@ -436,12 +435,12 @@ exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 exec --no-startup-id unclutter
 
 exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec emacs'"
-exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 12; i3-msg 'workspace 2; exec ~/pycharm/bin/pycharm.sh'"
+exec --no-startup-id "sleep 50; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 exec --no-startup-id "sleep 5; i3-msg 'workspace 4; exec firefox'"
 exec --no-startup-id exec telegram-desktop -startintray
 exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
-#exec --no-startup-id "sleep 12; i3-msg 'workspace 2; exec ~/pycharm/bin/pycharm.sh'"
 #exec --no-startup-id "sleep 20; i3-msg 'workspace 2; exec pycharm-community'"
 #exec --no-startup-id "sleep 45; i3-msg 'workspace 3; exec intellij-idea-community'"
 #exec --no-startup-id "sleep 1; i3-msg 'workspace 2; exec emacsclient -c -a emacs'"
