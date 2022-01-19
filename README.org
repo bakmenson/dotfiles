@@ -58,7 +58,17 @@
   - [[#alacritty][Alacritty]]
 - [[#ideavimrc][Ideavimrc]]
   - [[#general][General]]
-  - [[#which-key-plugin][Which-Key Plugin]]
+  - [[#buffers][Buffers]]
+  - [[#code][Code]]
+  - [[#debugging][Debugging]]
+  - [[#files][Files]]
+  - [[#projects][Projects]]
+  - [[#toggleopen][Toggle/Open]]
+  - [[#run][Run]]
+  - [[#search][Search]]
+  - [[#ide][IDE]]
+  - [[#windows-1][Windows]]
+  - [[#quit][Quit]]
 - [[#git][Git]]
   - [[#gitconfig][gitconfig]]
   - [[#gitignore_global][gitignore_global]]
@@ -72,7 +82,8 @@
 set $mod Mod4
 set $alt Mod1
 
-set $terminal gnome-terminal
+#set $terminal gnome-terminal
+set $terminal alacritty
 #+end_src
 
 ** Desktop Layout
@@ -416,8 +427,8 @@ for_window [class="Transmission-gtk"] floating enable border pixel 1
 for_window [class="terminal"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="Tor"] floating enable
-for_window [class="TelegramDesktop"] floating enable
-for_window [class="TelegramDesktop"] resize set 930 1020
+for_window [class="TelegramDesktop"] floating enable, resize set 930 1020, move position 525 30
+for_window [class="Alacritty"] floating enable, resize set 1200 800, move position 380 140
 #+end_src
 
 ** Autostart applications
@@ -1095,14 +1106,16 @@ label-separator-foreground = ${colors.foreground-alt}
 
 ** polybar.sh
 
-#+begin_src sh :tangle ~/.config/polybar/polybar.sh
+#+begin_src sh :tangle no
 #!/usr/bin/env bash
+
+# ~/.config/polybar/polybar.sh
 
 # Terminate already running bar instances
 killall -q polybar
 
-# Launch Polybar, using default config location ~/.config/polybar/config
-polybar mybar 2>&1 | tee -a /tmp/polybar.log & disown
+# Launch Polybar, using default config location ~/.config/polybar/config.ini
+polybar example 2>&1 | tee -a /tmp/polybar.log & disown
 
 echo "Polybar launched..."
 #+end_src
@@ -1378,7 +1391,7 @@ opacity-rule = [
 #"0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'",
 #"96:_NET_WM_STATE@:32a *= '_NET_WM_STATE_STICKY'",
 #"90:class_g = 'Xfce4-terminal'",
-#"90:class_g = 'Alacritty'",
+#"80:class_g = 'Alacritty'",
 ];
 #+end_src
 
@@ -2280,7 +2293,7 @@ scrolling:
 
 font:
   normal:
-    family: Fira Code
+    family: Source Code Pro
   size: 9.5
 
 colors:
@@ -2342,6 +2355,9 @@ colors:
     magenta: '#75617b'
     cyan:    '#5b7d78'
     white:   '#828482'
+
+window:
+  opacity: 0.9
 #+end_src
 
 * Ideavimrc
@@ -2373,377 +2389,237 @@ set smartcase
 set surround
 #+end_src
 
-** Which-Key Plugin
-*** General
-
-:TODO: fix move lines in selected mode
+** Buffers
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-set which-key
-
-"set timeoutlen=5000
-set notimeout
-
-let g:WhichKey_DefaultDelay = 1000
-
-let g:WhichKey_ShowVimActions = "true"
-
-nnoremap <leader><Esc> :<Esc>
-
-" Move lines down
-nnoremap <S-j>    $:action MoveLineDown<CR>
-" xnoremap <S-j>    $:action MoveStatementDown<CR>>gv=gv
-
-" Move lines up
-nnoremap <S-k>    $:action MoveLineUp<CR>
-" xnoremap <S-k>    $:action MoveStatementUp<CR>gv=gv
-#+end_src
-
-*** Buffers
-
-#+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_buffers = "<leader>b +buffers"
-
-let g:WhichKeyDesc_buffers_last_buffer = "<leader>bl switch to last buffer"
+"switch to last buffer
 nnoremap <leader>bl <C-S-6>
 
-let g:WhichKeyDesc_buffers_next_buffer = "<leader>bn next buffer"
+"next buffer
 nnoremap <leader>bn :action NextTab<CR>
 
-let g:WhichKeyDesc_buffers_previous_buffer = "<leader>bp previous buffer"
+"previous buffer
 nnoremap <leader>bp :action PreviousTab<CR>
 
-let g:WhichKeyDesc_buffers_bill_buffer = "<leader>bd kill buffer"
+"kill buffer
 nnoremap <leader>bd :action CloseContent<CR>
 
-let g:WhichKeyDesc_buffers_kill_buffer_and_close_window = "<leader>bk kill buffer and close window"
+"kill buffer and close window
 nnoremap <leader>bk :action CloseAllEditors<CR>
 
-let g:WhichKeyDesc_buffers_copy_buffer = "<leader>bY copy buffer"
-nnoremap <leader>bY :%y<CR>
-
-let g:WhichKeyDesc_buffers_kill_other_buffers = "<leader>b<C-d> kill other buffers"
+"kill other buffers
 nnoremap <leader>b<C-d> :action CloseAllEditorsButActive<CR>
-
-nnoremap <leader>b<Esc> :<Esc>
 #+end_src
 
-*** Code
+** Code
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_code = "<leader>c +code"
-
-let g:WhichKeyDesc_code_override_method = "<leader>co override method"
+"override method
 nnoremap <leader>co :action OverrideMethods<CR>
 
-let g:WhichKeyDesc_code_reformat = "<leader>cr reformat code"
+"reformat code
 nnoremap <leader>cr :action ReformatCode<CR>
-
-nnoremap <leader>c<Esc> :<Esc>
 #+end_src
 
-**** Comments
+*** Comments
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_code_comments = "<leader>cc +comments"
-
-let g:WhichKeyDesc_code_comments_collapse_region = "<leader>ccr collapse region"
+"collapse region
 nnoremap <leader>ccr :action CollapseRegion<CR>
 
-let g:WhichKeyDesc_code_comments_expand_region = "<leader>cce expand region"
+"expand region
 nnoremap <leader>cce :action ExpandRegion<CR>
 #+end_src
 
-**** Generate
+*** Generate
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_code_generate = "<leader>cg +generate"
-
-let g:WhichKeyDesc_code_generate_constructor = "<leader>cge generate constructor"
+"generate constructor
 nnoremap <leader>cgc :action GenerateEquals<CR>
 
-let g:WhichKeyDesc_code_generate_getter = "<leader>cgg generate getter"
+"generate getter
 nnoremap <leader>cgg :action GenerateGetter<CR>
 
-let g:WhichKeyDesc_code_generate_setter = "<leader>cgs generate setter"
+"generate setter and getter
 nnoremap <leader>cgs :action GenerateSetter<CR>
 
-let g:WhichKeyDesc_code_generate_equals = "<leader>cge generate equals"
+"generate equals
 nnoremap <leader>cge :action GenerateEquals<CR>
 
-let g:WhichKeyDesc_code_generate_javadoc = "<leader>cge generate javadoc"
+"generate javadoc
 nnoremap <leader>cgd :action GenerateJavadoc<CR>
 #+end_src
 
-**** Jump
+*** Jump
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_code_jump = "<leader>cj +jump"
-
-let g:WhichKeyDesc_code_jump_to_last_change = "<leader>cjc to last change"
+"to last change
 nnoremap <leader>cjc :action JumpToLastChange<CR>
 
-let g:WhichKeyDesc_code_jump_to_last_window = "<leader>cjw to last window"
+"to last window
 nnoremap <leader>cjw :action JumpToLastWindow<CR>
 #+end_src
 
-**** Quick Actions
+*** Quick Actions
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_code_quick_actions = "<leader>ca +quick actions"
-
-let g:WhichKeyDesc_code_quick_actions_quick = "<leader>caq quick actions"
+"quick actions
 nnoremap <leader>caq :action QuickActions<CR>
 
-let g:WhichKeyDesc_code_quick_actions_java_doc = "<leader>caj quick java doc"
+"quick java doc
 nnoremap <leader>caj :action QuickJavaDoc<CR>
 #+end_src
 
-*** Debugging
+** Debugging
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_debug = "<leader>d +debugging"
-
-let g:WhichKeyDesc_debug_toggle_line_breakpoint = "<leader>db toggle line breakpoint"
+"toggle line breakpoint
 nnoremap <leader>db :action ToggleLineBreakpoint<CR>
 
-let g:WhichKeyDesc_debug_toggle_between_impl_and_test_file = "<leader>di toggle between impl and test file"
+"toggle between impl and test file
 nnoremap <leader>di :action GotoTest<CR>
-
-nnoremap <leader>d<Esc> :<Esc>
 #+end_src
 
-*** Files
+** Files
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_files = "<leader>f +files"
-
-let g:WhichKeyDesc_files_goto_file = "<leader>fg find file"
+"find file
 nnoremap <leader>fg :action GotoFile<CR>
 
-let g:WhichKeyDesc_files_rename = "<leader>fR rename file"
+"rename file
 nnoremap <leader>fR :action RenameFile<CR>
 
-let g:WhichKeyDesc_files_recent = "<leader>fr recent file"
+"recent file
 nnoremap <leader>fr :action RecentFiles<CR>
-
-let g:WhichKeyDesc_files_yank_copy = "<leader>fy +Yank/Copy"
-
-let g:WhichKeyDesc_files_yank_copy_file_path = "<leader>fyy copy file path"
-nnoremap <leader>fyy :action CopyAbsolutePath<CR>
-
-nnoremap <leader>f<Esc> :<Esc>
 #+end_src
 
-**** Open
+*** Open
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_files_open = "<leader>fo +open"
-
-let g:WhichKeyDesc_files_menu = "<leader>fom file menu"
+"fom file menu
 nnoremap <leader>fom :action FileMenu<CR>
 
-let g:WhichKeyDesc_files_open_file = "<leader>fof open file"
+"open file
 nnoremap <leader>fo :action OpenFile<CR>
 
-let g:WhichKeyDesc_files_open_in_browser = "<leader>fob open in browser"
+"open in browser
 nnoremap <leader>fob :action OpenInBrowser<CR>
 #+end_src
 
-**** New Files
+** Projects
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_files_languages = "<leader>fn +new files"
-
-let g:WhichKeyDesc_files_new_file = "<leader>fnf new file"
-nnoremap <leader>fnf :action NewFile<CR>
-
-let g:WhichKeyDesc_files_new_java_class = "<leader>fnc new java class"
-nnoremap <leader>fnc :action NewClass<CR>
-
-let g:WhichKeyDesc_files_new_html_file = "<leader>fnh new html file"
-nnoremap <leader>fnh :action NewHtmlFile<CR>
-
-let g:WhichKeyDesc_files_new_js_file = "<leader>fnj new js file"
-nnoremap <leader>fnj :action NewJavaScriptFile<CR>
-
-let g:WhichKeyDesc_files_new_python_file = "<leader>fnp new python file"
-nnoremap <leader>fnp :action NewPythonFile<CR>
-#+end_src
-
-*** Git
-
-#+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_git = "<leader>g +git"
-
-" let g:WhichKeyDesc_code_comments_collapse_region = "<leader>ccr collapse region"
-" nnoremap <leader>ccr :action CollapseRegion<CR>
-
-nnoremap <leader>g<Esc> :<Esc>
-#+end_src
-
-*** Projects
-
-#+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_projects = "<leader>p +projects"
-
-let g:WhichKeyDesc_projects_new_dir = "<leader>pd new dir"
+"new dir
 nnoremap <leader>pd :action NewDir<CR>
 
-let g:WhichKeyDesc_projects_next_project_window = "<leader>pn next project window"
+"next project window
 nnoremap <leader>pn :action NextProjectWindow<CR>
 
-let g:WhichKeyDesc_projects_previous_project_window = "<leader>pp previous project window"
+"previous project window
 nnoremap <leader>pp :action PreviousProjectWindow<CR>
 
-let g:WhichKeyDesc_projects_close_project = "<leader>pc close project"
+"close project
 nnoremap <leader>pc :action CloseProject<CR>
-
-let g:WhichKeyDesc_projects_tasks = "<leader>pt +tasks"
-
-nnoremap <leader>p<Esc> :<Esc>
 #+end_src
 
-*** Toggle/Open
+** Toggle/Open
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_toggle_open = "<leader>t +toggle/open"
-
-let g:WhichKeyDesc_toggle_open_terminal = "<leader>tt +terminal"
-
-let g:WhichKeyDesc_toggle_open_new_terminal = "<leader>ttn open new terminal"
+"open new terminal
 nnoremap <leader>ttn :action Terminal.OpenInTerminal<CR>
 
-let g:WhichKeyDesc_toggle_activate_terminal = "<leader>tto activate terminal"
+"activate terminal
 nnoremap <leader>tto :action ActivateTerminalToolWindow<CR>
 
 " Focus on project window.
 " Sadly when you are inside the project window this key binding does not work
 " anymore. You can use <A-1> if you want to close the window or <Esc> if you
 " want to leave the window opened and focus on the code.
-let g:WhichKeyDesc_toggle_open_project_tool_window = "<leader>tp project tool window"
+"project tool window
 nnoremap <leader>tp :action ActivateProjectToolWindow<CR>
 
 nnoremap <leader>t<Esc> :<Esc>
 #+end_src
 
-*** Run
+** Run
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_run = "<leader>r +run"
-
-let g:WhichKeyDesc_run_menu = "<leader>rm run menu"
+"run menu
 nnoremap <leader>rm :action RunMenu<CR>
 
-let g:WhichKeyDesc_run_run = "<leader>rr run"
+"run
 nnoremap <leader>rr :action Run<CR>
 
-let g:WhichKeyDesc_run_java_class = "<leader>rc run java class"
+"run java class
 nnoremap <leader>rc :action RunClass<CR>
-
-nnoremap <leader>r<Esc> :<Esc>
 #+end_src
 
-*** Search
+** Search
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_search = "<leader>s +search"
-
-let g:WhichKeyDesc_search_clear_highlight = "<leader>sc clear highlight"
+"clear highlight
 nnoremap <leader>sc :nohlsearch<CR>
 
-let g:WhichKeyDesc_search_find_usages = "<leader>sP find usages"
+"find usages
 nnoremap <leader>sP :action FindUsages<CR>
-
-nnoremap <leader>s<Esc> :<Esc>
 #+end_src
 
-*** IDE
+** IDE
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_settings = "<leader>i +IDE"
-
-let g:WhichKeyDesc_settings_show_settings = "<leader>is show settings"
+"show settings
 nnoremap <leader>is :action ShowSettings<CR>
 
-let g:WhichKeyDesc_settings_show_key_bindings = "<leader>ik show key bindings"
+"show key bindings
 nnoremap <leader>ik :map<CR>
 
-let g:WhichKeyDesc_toggle_open_main = "<leader>im +main"
-
-let g:WhichKeyDesc_toggle_open_main_menu = "<leader>imm open main menu"
+"open main menu
 nnoremap <leader>imm :action MainMenu<CR>
 
-let g:WhichKeyDesc_toggle_open_main_toolbar = "<leader>imt open main toolbar"
+"open main toolbar
 nnoremap <leader>imt :action MainToolBar<CR>
-
-nnoremap <leader>i<Esc> :<Esc>
 #+end_src
 
-**** Menu
+*** Menu
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_settings_menu = "<leader>im +tools"
-
-let g:WhichKeyDesc_settings_menu_view = "<leader>imv view menu"
+"view menu
 nnoremap <leader>imv :action ViewMenu<CR>
 
-let g:WhichKeyDesc_settings_menu_tools = "<leader>imt tools menu"
+"tools menu
 nnoremap <leader>imt :action ToolsMenu<CR>
 #+end_src
 
-*** Windows
+** Windows
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_windows = "<leader>w +windows"
-
-let g:WhichKeyDesc_windows_delete_window = "<leader>wc close window"
+"close window
 nnoremap <leader>wc :action CloseAllEditors<CR>
 
-let g:WhichKeyDesc_windows_split_window_below_and_focus = "<leader>ws split window below and focus"
+"split window below and focus
 nnoremap <leader>ws <C-w>s<C-w>j
 
-let g:WhichKeyDesc_windows_split_window_right_and_focus = "<leader>wv split window right and focus"
+"split window right and focus
 nnoremap <leader>wv <C-w>v<C-w>l
 
-let g:WhichKeyDesc_windows_focus_left = "<leader>wh focus window left"
+"focus window left
 nnoremap <leader>wh <C-w>h
 
-let g:WhichKeyDesc_windows_focus_down = "<leader>wj focus window down"
+"focus window down
 nnoremap <leader>wj <C-w>j
 
-let g:WhichKeyDesc_windows_focus_up = "<leader>wk focus window up"
+"focus window up
 nnoremap <leader>wk <C-w>k
 
-let g:WhichKeyDesc_windows_focus_right = "<leader>wl focus window right"
+"focus window right
 nnoremap <leader>wl <C-w>l
-
-nnoremap <leader>w<Esc> :<Esc>
 #+end_src
 
-*** Help
+** Quit
 
 #+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_help = "<leader>h +help"
-
-nnoremap <leader>h<Esc> :<Esc>
-#+end_src
-
-*** Quit
-
-#+begin_src vimrc :tangle ~/.ideavimrc
-let g:WhichKeyDesc_quit = "<leader>q +quit"
-
-let g:WhichKeyDesc_quit_reload_ideavimrc = "<leader>qi reload ideavimrc"
-nnoremap <leader>qi :source ~/.ideavimrc<CR>
-
-let g:WhichKeyDesc_quit_exit = "<leader>qq exit"
-nnoremap <leader>qq :action Exit<CR>
-
-let g:WhichKeyDesc_quit_restart = "<leader>qr restart"
+"restart
 nnoremap <leader>qr :action RestartIde<CR>
-
-nnoremap <leader>q<Esc> :<Esc>
 #+end_src
 
 * Git
