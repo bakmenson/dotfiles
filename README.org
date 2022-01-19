@@ -469,7 +469,6 @@ exec --no-startup-id exec transmission-gtk -m
 ** Polybar
 
 #+begin_src conf :tangle ~/.config/i3/config
-exec_always --no-startup-id chmod +x $HOME/.config/polybar/polybar.sh
 exec_always --no-startup-id $HOME/.config/polybar/polybar.sh
 #+end_src
 
