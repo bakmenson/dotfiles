@@ -5,7 +5,7 @@
 #+property: header-args:conf :tangle-mode (identity #o555)
 
 * Table of Contents :toc_2:
-- [[#i3wm][i3wm]]
+- [[#i3-gaps][i3-gaps]]
   - [[#variables][Variables]]
   - [[#desktop-layout][Desktop Layout]]
   - [[#fonts][Fonts]]
@@ -74,7 +74,7 @@
   - [[#gitignore_global][gitignore_global]]
 - [[#firefox][Firefox]]
 
-* i3wm
+* i3-gaps
 ** Variables
 
 #+begin_src conf :tangle ~/.config/i3/config
