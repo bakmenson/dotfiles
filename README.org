@@ -1106,7 +1106,7 @@ label-separator-foreground = ${colors.foreground-alt}
 #+begin_src sh :tangle no
 #!/usr/bin/env bash
 
-# ~/.config/polybar/polybar.sh
+#:tangle ~/.config/polybar/polybar.sh
 
 # Terminate already running bar instances
 killall -q polybar
