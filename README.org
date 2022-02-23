@@ -444,8 +444,8 @@ exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 exec --no-startup-id unclutter
 
 exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec emacs'"
-exec --no-startup-id "sleep 10; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
-exec --no-startup-id "sleep 5; i3-msg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 17; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 10; i3-msg 'workspace 4; exec firefox'"
 exec --no-startup-id exec telegram-desktop -startintray
 exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
@@ -2165,6 +2165,8 @@ alias q='exit'
 alias t='touch'
 alias mk='mkdir'
 
+alias cd='cd ${1} && ll'
+
 alias rb='reboot'
 alias sdn='shutdown now'
 alias sdh='shutdown -h'
@@ -2236,7 +2238,7 @@ alias gtc='git commit -m'
 alias gtp='git push origin'
 #+end_src
 
-**** Exports
+*** Exports
 
 #+begin_src sh :tangle ~/.zshrc
 export TERM=xterm-256color
@@ -2259,6 +2261,8 @@ export PATH="$HOME/.local/bin:$PATH"
 #export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
+
+export PATH=$HOME/.cask/bin:$PATH
 #+end_src
 
 ** zsh-theme
