@@ -2165,8 +2165,6 @@ alias q='exit'
 alias t='touch'
 alias mk='mkdir'
 
-alias cd='cd ${1} && ll'
-
 alias rb='reboot'
 alias sdn='shutdown now'
 alias sdh='shutdown -h'
