@@ -425,6 +425,7 @@ for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Transmission-gtk"] floating enable border pixel 1
 for_window [class="mpv"] floating enable, resize set 1200 800, move position center
+for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
 for_window [class="Tor"] floating enable, resize set 1600 1020, move position center
 for_window [class="TelegramDesktop"] floating enable, resize set 930 1020, move position center
 for_window [class="Alacritty"] floating enable, resize set 1200 800, move position center
@@ -447,7 +448,7 @@ exec --no-startup-id unclutter
 exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec emacs'"
 exec --no-startup-id "sleep 17; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 exec --no-startup-id "sleep 10; i3-msg 'workspace 4; exec firefox'"
-exec --no-startup-id exec telegram-desktop -startintray
+# exec --no-startup-id exec telegram-desktop -startintray
 exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
 #exec --no-startup-id "sleep 20; i3-msg 'workspace 2; exec pycharm-community'"
