@@ -2727,6 +2727,15 @@ exec dbus-launch --exit-with-session emacs -mm
 
 * Firefox
 
+- =Enable userChrome.css=
+1. about:config
+2. type or paste userprof
+3. double-click the toolkit.legacyUserProfileCustomizations.stylesheets preference to set true
+
+- =userChrome.css=
+1. about:support
+2. :tangle <Profile Directory>/chrome/userChrome.css
+
 #+begin_src css :tangle no
 /* hides the native tabs */
 #TabsToolbar { visibility: collapse; }
