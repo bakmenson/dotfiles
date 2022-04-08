@@ -2552,13 +2552,13 @@ nnoremap <leader>tdm : action ToggleDistractionFreeMode<CR>
 
 #+begin_src vimrc :tangle ~/.ideavimrc
 "run menu
-nnoremap <leader>Rm :action RunMenu<CR>
+nnoremap <leader>rm :action RunMenu<CR>
 
 "run
-nnoremap <leader>r :action Run<CR>
+nnoremap <leader>rr :action Run<CR>
 
 "run java class
-nnoremap <leader>Rc :action RunClass<CR>
+nnoremap <leader>rc :action RunClass<CR>
 #+end_src
 
 ** Search
