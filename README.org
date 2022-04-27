@@ -2740,8 +2740,6 @@ exec dbus-launch --exit-with-session emacs -mm
 /* hides the native tabs */
 #TabsToolbar { visibility: collapse; }
 
-#sidebar-header { display: none; }
-
 /* hide url bar
 #nav-bar { visibility: collapse; } */
 
