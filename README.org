@@ -2180,7 +2180,6 @@ alias s45='sleep 2700 && systemctl suspend'
 alias s1='sleep 3600 && systemctl suspend'
 alias s2='sleep 7200 && systemctl suspend'
 alias s3='sleep 10800 && systemctl suspend'
-alias obt="emacs --batch --eval \"(require 'org)\" --eval '(org-babel-tangle-file \"$HOME/dev/dotfiles/README.org\")' && chmod +x $HOME/.config/polybar/polybar.sh"
 #+end_src
 
 **** Arch
