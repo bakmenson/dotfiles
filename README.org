@@ -2158,8 +2158,6 @@ source $ZSH/oh-my-zsh.sh
 **** Common
 
 #+begin_src sh :tangle ~/.zshrc
-alias tor='sh -c "cd ~/.tor-browser && ./start-tor-browser.desktop" && exit'
-
 alias c='clear'
 
 alias q='exit'
