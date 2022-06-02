@@ -2739,6 +2739,9 @@ exec dbus-launch --exit-with-session emacs -mm
 1. about:support
 2. :tangle <Profile Directory>/chrome/userChrome.css
 
+- =Container Tabs Sidebar=
+  add css style: header { display: none; }
+
 #+begin_src css :tangle no
 /* hides the native tabs */
 #TabsToolbar { visibility: collapse; }
