@@ -344,6 +344,8 @@ bindsym $mod+d exec rofi -show drun -modi drun -display-drun "Run"
 
 ** Start Apps
 
+:TODO: fix screenshot with selection region
+
 #+begin_src conf :tangle ~/.config/i3/config
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
@@ -355,10 +357,12 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 # idea
 bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
 
-# Screenshot active window
-bindsym $mod+Shift+F12 exec --no-startup-id scrot -u
 # Screenshot fullscreen
-bindsym $mod+F12 exec --no-startup-id scrot
+bindsym $mod+Shift+F10 exec --no-startup-id scrot -e 'mv $f ~/Pictures'
+# Select region for screenshot
+bindsym $mod+F10 exec --no-startup-id scrot -s -e 'mv $f ~/Pictures'
+# Screenshot active window
+bindsym $mod+Shift+F12 exec --no-startup-id scrot -u -e 'mv $f ~/Pictures'
 
 # bindsym $alt+c exec --no-startup-id xfce4-terminal -e cmatrix --fullscreen
 # bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
