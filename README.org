@@ -1105,6 +1105,9 @@ label-separator-foreground = ${colors.foreground-alt}
 
 ** polybar.sh
 
+Set :tangle ~/.config/polybar/polybar.sh only after edit and when first installation system
+By default :tangle no
+
 #+begin_src sh :tangle ~/.config/polybar/polybar.sh
 #!/usr/bin/env bash
 
