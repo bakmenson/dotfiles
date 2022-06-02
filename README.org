@@ -449,11 +449,11 @@ exec --no-startup-id picom --config ~/.config/picom.conf
 exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 exec --no-startup-id unclutter
 
-exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec emacs'"
-exec --no-startup-id "sleep 17; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
-exec --no-startup-id "sleep 10; i3-msg 'workspace 4; exec firefox'"
+#exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec emacs'"
+#exec --no-startup-id "sleep 17; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+#exec --no-startup-id "sleep 10; i3-msg 'workspace 4; exec firefox'"
 # exec --no-startup-id exec telegram-desktop -startintray
-exec --no-startup-id exec transmission-gtk -m
+#exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
 #exec --no-startup-id "sleep 20; i3-msg 'workspace 2; exec pycharm-community'"
 #exec --no-startup-id "sleep 12; i3-msg 'workspace 2; exec ~/pycharm/bin/pycharm.sh'"
@@ -1112,7 +1112,7 @@ label-separator-foreground = ${colors.foreground-alt}
 Set :tangle ~/.config/polybar/polybar.sh only after edit and when first installation system
 By default :tangle no
 
-#+begin_src sh :tangle ~/.config/polybar/polybar.sh
+#+begin_src sh :tangle no
 #!/usr/bin/env bash
 
 # Terminate already running bar instances
