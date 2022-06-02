@@ -1105,7 +1105,7 @@ label-separator-foreground = ${colors.foreground-alt}
 
 ** polybar.sh
 
-#+begin_src sh :tangle no
+#+begin_src sh :tangle ~/.config/polybar/polybar.sh
 #!/usr/bin/env bash
 
 #:tangle ~/.config/polybar/polybar.sh
