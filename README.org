@@ -2296,7 +2296,7 @@ scrolling:
 
 font:
   normal:
-    family: Source Code Pro
+    family: JetBrains Mono
   size: 9.5
 
 colors:
