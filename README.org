@@ -1114,7 +1114,7 @@ label-separator-foreground = ${colors.foreground-alt}
 killall -q polybar
 
 # Launch Polybar, using default config location ~/.config/polybar/config.ini
-polybar example 2>&1 | tee -a /tmp/polybar.log & disown
+polybar --config=$HOME/.config/polybar/config.ini example 2>&1 | tee -a /tmp/polybar.log & disown
 
 echo "Polybar launched..."
 #+end_src
