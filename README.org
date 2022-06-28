@@ -43,6 +43,7 @@
   - [[#colors][Colors]]
   - [[#themes][Themes]]
   - [[#cursor][Cursor]]
+  - [[#font-for-window-titles][Font for window titles]]
   - [[#transparency][Transparency]]
   - [[#support-java-apps][Support Java apps]]
   - [[#autostart-apps][Autostart apps]]
@@ -73,6 +74,7 @@
   - [[#gitconfig][gitconfig]]
   - [[#gitignore_global][gitignore_global]]
 - [[#xinitrc][xinitrc]]
+- [[#dunst][Dunst]]
 - [[#firefox][Firefox]]
 
 * i3-gaps
@@ -364,6 +366,7 @@ bindsym $mod+F10 exec --no-startup-id scrot -s -e 'mv $f ~/Pictures'
 # Screenshot active window
 bindsym $mod+Shift+F12 exec --no-startup-id scrot -u -e 'mv $f ~/Pictures'
 
+bindsym $alt+c exec --no-startup-id exec emacsclient -c -n
 # bindsym $alt+c exec --no-startup-id xfce4-terminal -e cmatrix --fullscreen
 # bindsym $alt+c exec --no-startup-id xfce4-terminal -e asciiquarium --fullscreen
 bindsym $alt+f exec --no-startup-id feh -z -F /run/media/solus/hdd/Pictures/wallpapers/*
@@ -438,7 +441,6 @@ for_window [class="Alacritty"] floating enable, resize set 1200 800, move positi
 ** Autostart applications
 
 #+begin_src conf :tangle ~/.config/i3/config
-#exec_always --no-startup-id setxkbmap -option caps:swapescape
 exec_always --no-startup-id setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -448,10 +450,14 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id picom --config ~/.config/picom.conf
 exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 exec --no-startup-id unclutter
+exec --no-startup-id emacs --fg-daemon
 
-#exec --no-startup-id "sleep 1; i3-msg 'workspace 1; exec emacs'"
-#exec --no-startup-id "sleep 17; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
-#exec --no-startup-id "sleep 10; i3-msg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 10; i3-msg 'workspace 1; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(dired nil)\"'"
+exec --no-startup-id "sleep 13; i3-msg 'workspace 2; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(bk/switch-to-dashboard)\"'"
+# exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec ~/idea_new_ui/bin/idea.sh'"
+exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 15; i3-msg 'workspace 5; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(telega)\"'"
 # exec --no-startup-id exec telegram-desktop -startintray
 #exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
@@ -607,14 +613,14 @@ font-4 = siji:pixelsize=10;3
 ;modules-right = xkeyboard alsa filesystem memory cpu eth temperature date check-updates gmail
 
 modules-left = sep filesystem sep memory sep cpu sep eth temperature sep alsa sep
-modules-center = i3
+modules-center = bspwm
 modules-right = sep xkeyboard date
 
 tray-position = right
 tray-padding = 1
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 ;override-redirect = true
@@ -683,24 +689,44 @@ label-mounted-foreground = ${colors.foreground-alt}
 [module/bspwm]
 type = internal/bspwm
 
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 3
+; label-focused = %name%
+; label-focused-background = ${colors.background-alt}
+; label-focused-underline= ${colors.primary}
+; label-focused-padding = 3
 
-label-occupied = %index%
-label-occupied-padding = 3
+; ; label-occupied = %index%
+; label-occupied = %name%
+; label-occupied-padding = 3
 
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 3
+; label-urgent = %name%
+; label-urgent-background = ${colors.alert}
+; label-urgent-padding = 3
 
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 3
+; label-empty = %name%
+; label-empty-foreground = ${colors.foreground-alt}
+; label-empty-padding = 3
 
 ; Separator in between workspaces
 ; label-separator = |
+
+
+
+label-focused = %name%
+label-focused-foreground = ${colors.dark-yellow}
+label-focused-padding = 2
+
+; label-occupied = %index%
+label-occupied = %name%
+label-occupied-padding = 3
+label-occupied-foreground = ${colors.foreground-alt}
+
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty =
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 3
 #+end_src
 
 *** module/i3
@@ -1426,7 +1452,7 @@ opacity-rule = [
     "modules-center": ["sway/workspaces"],
     "modules-right": [
         // "custom/update",
-        // "custom/separator",
+        "custom/separator",
         "sway/language",
         "custom/separator",
         "clock",
@@ -1677,8 +1703,8 @@ set $menu dmenu_path | wofi --show drun | xargs swaymsg exec --
 
 #+begin_src conf :tangle ~/.config/sway/config
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
-output * bg /run/media/solus/hdd/Pictures/wallpapers/18.jpg fill
+output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
+# output * bg /run/media/solus/hdd/Pictures/wallpapers/18.jpg fill
 
 #
 # Example configuration:
@@ -1718,7 +1744,8 @@ input * {
 
 #+begin_src conf :tangle ~/.config/sway/config
 # Start a terminal
-bindsym $mod+Return exec $term
+# bindsym $mod+Return exec $term
+bindsym $mod+Return exec /home/solus/.cargo/bin/alacritty
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -1810,7 +1837,8 @@ bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
-bindsym $mod+Shift+space floating toggle
+# bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle; resize set 1900 1035; move position center
 
 # Swap focus between the tiling area and the floating area
 bindsym $mod+space focus mode_toggle
@@ -1862,22 +1890,26 @@ bindsym $mod+r mode "resize"
 *** Audio controls
 
 #+begin_src conf :tangle ~/.config/sway/config
-bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
-bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
-bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
+# bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
+# bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
+# bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym $mod+F2 exec --no-startup-id "amixer -q set Master 3%- unmute"
+bindsym $mod+F3 exec --no-startup-id "amixer -q set Master 3%+ unmute"
+bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
 #+end_src
 
 *** Launch apps 
 
 #+begin_src conf :tangle ~/.config/sway/config
 # Emacs
-bindsym $alt+e exec --no-startup-id emacsclient -c
+bindsym $alt+e exec --no-startup-id emacsclient -c -n
+bindsym $alt+v exec --no-startup-id emacsclient -c -n -e "(multi-vterm)"
 
 # Slide show in fullscreen instead of lock screen
 bindsym $alt+f exec --no-startup-id imv -f -t 10 /run/media/solus/hdd/Pictures/wallpapers
 
 # IDEA
-bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
+bindsym $alt+i exec --no-startup-id ~/idea_new_ui/bin/idea.sh
 #+end_src
 
 *** Take screenshots
@@ -1931,15 +1963,17 @@ smart_gaps on
 #+begin_src conf :tangle ~/.config/sway/config
 default_border pixel
 smart_borders on
-#hide_edge_borders none
+# hide_edge_borders none
 #for_window [tiling] border pixel
 #+end_src
 
 ** For_Window
 
 #+begin_src conf :tangle ~/.config/sway/config
-for_window [app_id="transmission-gtk"] floating enable, move position center
-for_window [app_id="mpv"] floating enable, resize set 800 600, move position center
+for_window [app_id="transmission-gtk"] floating enable, resize set 1200 800 move position center
+for_window [app_id="mpv"] floating enable, resize set 1200 800, move position center
+for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
+for_window [class="Emacs"] floating enable, resize set 1200 800, move position center
 #for_window [app_id="telegram-desktop_telegram-desktop"] floating enable, resize set 930 1020
 for_window [app_id="Alacritty"] floating enable, resize set 1200 800
 #for_window [app_id="gnome-terminal-server"] floating enable, resize set 1200 800, move position center
@@ -1976,6 +2010,15 @@ exec_always {
 seat * hide_cursor 1000
 #+end_src
 
+** Font for window titles
+
+#+begin_src conf :tangle ~/.config/sway/config
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# font xft:URWGothic-Book 11
+font xft:URWGothic-Book 0
+#+end_src
+
 ** Transparency
 
 #+begin_src conf :tangle ~/.config/sway/config
@@ -1994,18 +2037,26 @@ exec wmname LG3D
 
 ** Autostart apps
 
+fix mako: Failed to acquire service name: Permission denied
+
 #+begin_src conf :tangle ~/.config/sway/config
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec --no-startup-id emacs --daemon
+# exec --no-startup-id mako
+exec --no-startup-id dunst -mouse_left_click
+exec --no-startup-id emacs --fg-daemon
 
-exec --no-startup-id "sleep 1; swaymsg 'workspace 1; exec emacs'"
-#exec --no-startup-id "sleep 12; i3-msg 'workspace 2; exec ~/pycharm/bin/pycharm.sh'"
-exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
-#exec --no-startup-id "sleep 50; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
-exec --no-startup-id "sleep 5; swaymsg 'workspace 4; exec firefox'"
-exec --no-startup-id "sleep 10; swaymsg 'workspace 5; exec telegram-desktop'"
+# exec --no-startup-id "sleep 10; swaymsg 'workspace 1; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(dired nil)\"'"
+# exec --no-startup-id "sleep 13; swaymsg 'workspace 2; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(bk/switch-to-dashboard)\"'"
+# exec --no-startup-id "sleep 18; swaymsg 'workspace 3; exec ~/idea_new_ui/bin/idea.sh'"
+exec --no-startup-id "sleep 10; swaymsg 'workspace 3; exec ~/idea_new_ui/bin/idea.sh'"
+exec --no-startup-id "sleep 2; swaymsg 'workspace 4; exec firefox'"
+# exec --no-startup-id "sleep 15; swaymsg 'workspace 5; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(telega)\"'"
+
+exec --no-startup-id python3 ~/squad.py
+
+# exec --no-startup-id "sleep 7; swaymsg 'workspace 5; exec telegram-desktop'"
 #exec --no-startup-id telegram-desktop -startintray
-exec --no-startup-id exec transmission-gtk -m
+# exec --no-startup-id exec transmission-gtk -m
 #+end_src
 
 ** Include
@@ -2726,6 +2777,217 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Finally launch emacs.
 exec dbus-launch --exit-with-session emacs -mm
+
+# exec sxhkd &
+# exec bspwm
+# exec qtile start
+#+end_src
+
+* Dunst
+
+#+begin_src conf :tangle ~/.config/dunst/dunstrc
+[global]
+    ### Display ###
+    monitor = 0
+
+    # The geometry of the window:
+    #   [{width}]x{height}[+/-{x}+/-{y}]
+    geometry = "500x10-10+50"
+
+    # Show how many messages are currently hidden (because of geometry).
+    indicate_hidden = yes
+
+    # Shrink window if it's smaller than the width.  Will be ignored if
+    # width is 0.
+    shrink = no
+
+    # The transparency of the window.  Range: [0; 100].
+    transparency = 10
+
+    # The height of the entire notification.  If the height is smaller
+    # than the font height and padding combined, it will be raised
+    # to the font height and padding.
+    notification_height = 0
+
+    # Draw a line of "separator_height" pixel height between two
+    # notifications.
+    # Set to 0 to disable.
+    separator_height = 1
+    separator_color = frame
+
+    # Padding between text and separator.
+    padding = 8
+
+    # Horizontal padding.
+    horizontal_padding = 8
+
+    # Defines width in pixels of frame around the notification window.
+    # Set to 0 to disable.
+    frame_width = 2
+
+    # Defines color of the frame around the notification window.
+    frame_color = "#89AAEB"
+
+    # Sort messages by urgency.
+    sort = yes
+
+    # Don't remove messages, if the user is idle (no mouse or keyboard input)
+    # for longer than idle_threshold seconds.
+    idle_threshold = 120
+
+    ### Text ###
+
+    font = Cantarell 20
+
+    # The spacing between lines.  If the height is smaller than the
+    # font height, it will get raised to the font height.
+    line_height = 0
+    markup = full
+
+    # The format of the message.  Possible variables are:
+    #   %a  appname
+    #   %s  summary
+    #   %b  body
+    #   %i  iconname (including its path)
+    #   %I  iconname (without its path)
+    #   %p  progress value if set ([  0%] to [100%]) or nothing
+    #   %n  progress value if set without any extra characters
+    #   %%  Literal %
+    # Markup is allowed
+    format = "<b>%s</b>\n%b"
+
+    # Alignment of message text.
+    # Possible values are "left", "center" and "right".
+    alignment = left
+
+    # Show age of message if message is older than show_age_threshold
+    # seconds.
+    # Set to -1 to disable.
+    show_age_threshold = 60
+
+    # Split notifications into multiple lines if they don't fit into
+    # geometry.
+    word_wrap = yes
+
+    # When word_wrap is set to no, specify where to make an ellipsis in long lines.
+    # Possible values are "start", "middle" and "end".
+    ellipsize = middle
+
+    # Ignore newlines '\n' in notifications.
+    ignore_newline = no
+
+    # Stack together notifications with the same content
+    stack_duplicates = true
+
+    # Hide the count of stacked notifications with the same content
+    hide_duplicate_count = false
+
+    # Display indicators for URLs (U) and actions (A).
+    show_indicators = yes
+
+    ### Icons ###
+
+    # Align icons left/right/off
+    icon_position = left
+
+    # Scale larger icons down to this size, set to 0 to disable
+    max_icon_size = 88
+
+    # Paths to default icons.
+    icon_path = /usr/share/icons/Adwaita/96x96/status:/usr/share/icons/Adwaita/96x96/emblems
+
+    ### History ###
+
+    # Should a notification popped up from history be sticky or timeout
+    # as if it would normally do.
+    sticky_history = no
+
+    # Maximum amount of notifications kept in history
+    history_length = 20
+
+    ### Misc/Advanced ###
+
+    # Browser for opening urls in context menu.
+    browser = qutebrowser
+
+    # Always run rule-defined scripts, even if the notification is suppressed
+    always_run_script = true
+
+    # Define the title of the windows spawned by dunst
+    title = Dunst
+
+    # Define the class of the windows spawned by dunst
+    class = Dunst
+
+    startup_notification = false
+    verbosity = mesg
+
+    # Define the corner radius of the notification window
+    # in pixel size. If the radius is 0, you have no rounded
+    # corners.
+    # The radius will be automatically lowered if it exceeds half of the
+    # notification height to avoid clipping text and/or icons.
+    corner_radius = 4
+
+    mouse_left_click = close_current
+    mouse_middle_click = do_action
+    mouse_right_click = close_all
+
+# Experimental features that may or may not work correctly. Do not expect them
+# to have a consistent behaviour across releases.
+[experimental]
+    # Calculate the dpi to use on a per-monitor basis.
+    # If this setting is enabled the Xft.dpi value will be ignored and instead
+    # dunst will attempt to calculate an appropriate dpi value for each monitor
+    # using the resolution and physical size. This might be useful in setups
+    # where there are multiple screens with very different dpi values.
+    per_monitor_dpi = false
+
+[shortcuts]
+
+    # Shortcuts are specified as [modifier+][modifier+]...key
+    # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
+    # "mod3" and "mod4" (windows-key).
+    # Xev might be helpful to find names for keys.
+
+    # Close notification.
+    close = ctrl+space
+
+    # Close all notifications.
+    #close_all = ctrl+shift+space
+
+    # Redisplay last message(s).
+    # On the US keyboard layout "grave" is normally above TAB and left
+    # of "1". Make sure this key actually exists on your keyboard layout,
+    # e.g. check output of 'xmodmap -pke'
+    history = ctrl+grave
+
+    # Context menu.
+    context = ctrl+shift+period
+
+[urgency_low]
+    # IMPORTANT: colors have to be defined in quotation marks.
+    # Otherwise the "#" and following would be interpreted as a comment.
+    background = "#222222"
+    foreground = "#888888"
+    timeout = 10
+    # Icon for notifications with low urgency, uncomment to enable
+    #icon = /path/to/icon
+
+[urgency_normal]
+    background = "#1c1f26"
+    foreground = "#ffffff"
+    timeout = 10
+    # Icon for notifications with normal urgency, uncomment to enable
+    #icon = /path/to/icon
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffffff"
+    frame_color = "#ff0000"
+    timeout = 0
+    # Icon for notifications with critical urgency, uncomment to enable
+    #icon = /path/to/icon
 #+end_src
 
 * Firefox
