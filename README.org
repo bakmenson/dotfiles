@@ -1138,7 +1138,7 @@ label-separator-foreground = ${colors.foreground-alt}
 Set :tangle ~/.config/polybar/polybar.sh only after edit and when first installation system
 By default :tangle no
 
-#+begin_src sh :tangle no
+#+begin_src sh :tangle ~/.config/polybar/polybar.sh
 #!/usr/bin/env bash
 
 # Terminate already running bar instances
@@ -1431,20 +1431,34 @@ opacity-rule = [
 #+begin_src conf :tangle ~/.config/waybar/config
 {
     // "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 24, // Waybar height (to be removed for auto height)
+    "position": "left", // Waybar position (top|bottom|left|right)
+    //"height": 24, // Waybar height (to be removed for auto height)
+    //"width": 28, // Waybar width
     // "width": 1280, // Waybar width
     // Choose the order of the modules
     "modules-left": [
-        "disk",
-        "custom/hdd",
         "custom/separator",
+        "disk#icon",
+        "disk",
+        "custom/separator",
+        "disk#icon",
+        "disk#hdd",
+        "custom/separator",
+        "cpu#icon",
         "cpu",
+        "custom/separator",
+        "temperature#icon",
         "temperature",
         "custom/separator",
+        "memory#icon",
         "memory",
         "custom/separator",
-        "pulseaudio",
+        "pulseaudio#output-icon",
+        "pulseaudio#output",
+        //"pulseaudio",
+        //"custom/separator",
+        //"pulseaudio#source-icon",
+        //"pulseaudio#source",
         "custom/separator",
         "network",
         "sway/mode"
@@ -1455,7 +1469,14 @@ opacity-rule = [
         "custom/separator",
         "sway/language",
         "custom/separator",
-        "clock",
+        "clock#cal-icon",
+        "clock#a",
+        "clock#d",
+        "clock#b",
+        "custom/separator",
+        "clock#icon",
+        "clock#H",
+        "clock#M",
         "custom/separator",
         "tray"
     ],
@@ -1487,22 +1508,77 @@ opacity-rule = [
     },
     "clock": {
         "timezone": "Europe/Moscow",
-        "format": "{: %A, %d %B |  %H:%M}",
+        //"format": "{: %A, %d %B |  %H:%M}",
+        "format": "{:%a\n%d\n%b\n\n%H\n%M}",
+        "tooltip": false
+    },
+    "clock#cal-icon": {
+        "timezone": "Europe/Moscow",
+        "format": "",
+        "tooltip": false
+    },
+    "clock#a": {
+        "format": "{:%a}",
+        "tooltip": false
+    },
+    "clock#d": {
+        "timezone": "Europe/Moscow",
+        "format": "{:%d}",
+        "tooltip": false
+    },
+    "clock#b": {
+        "timezone": "Europe/Moscow",
+        "format": "{:%b}",
+        "tooltip": false
+    },
+    "clock#H": {
+        "timezone": "Europe/Moscow",
+        "format": "{:%H}",
+        "tooltip": false
+    },
+    "clock#M": {
+        "timezone": "Europe/Moscow",
+        "format": "{:%M}",
+        "tooltip": false
+    },
+    "clock#icon": {
+        "format": "",
         "tooltip": false
     },
     "cpu": {
-        "format": " {usage}%",
+        //"format": "\n{usage}%",
+        "format": "{usage}%",
+        "tooltip": false
+    },
+    "cpu#icon": {
+        "format": "",
+        "interval": "once",
         "tooltip": false
     },
     "memory": {
-        "format":  " {used:0.2f} GiB"
+        //"format":  " {used:0.2f} GiB"
+        //"format":  "\n{percentage}%"
+        "format":  "{percentage}%"
+    },
+    "memory#icon": {
+        "format": ""
     },
     "temperature": {
         // "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
-        "format-critical": "{icon} {temperatureC}°C",
-        "format": "{icon} {temperatureC}°C",
+        //"format-critical": "{icon} {temperatureC}°C",
+        //"format": "{icon} {temperatureC}°C",
+        "format-critical": "{icon}\n{temperatureC}°C",
+        //"format": "{icon}\n{temperatureC}°C",
+        "format": "{temperatureC}°C",
+        "format-icons": ["", "", ""]
+    },
+    "temperature#icon": {
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{icon}",
+        "format": "{icon}",
         "format-icons": ["", "", ""]
     },
     "network": {
@@ -1511,14 +1587,17 @@ opacity-rule = [
         //"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-ethernet": "",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        //"format-disconnected": "Disconnected ⚠",
+        "format-disconnected": "⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}% {format_source}",
+        //"format": "{icon} {volume}% {format_source}",
+        "format": "{volume}% {format_source}",
+        //"format": "{icon}\n{volume}%",
         "format-bluetooth": "{icon} {volume}% {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-bluetooth-muted": " {icon}  {format_source}",
         "format-muted": " {format_source}",
         "format-source": " {volume}%",
         "format-source-muted": "",
@@ -1529,22 +1608,109 @@ opacity-rule = [
             "phone": "",
             "portable": "",
             "car": "",
+            "space": " ",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "pulseaudio#output-icon": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon}",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "space": " ",
+            "default": ["", "", ""]
+        }
+    },
+    "pulseaudio#output": {
+        // "scroll-step": 1, // %, can be a float
+        //"format": "{icon} {volume}% {format_source}",
+        "format": "{volume}%",
+        //"format": "{icon}\n{volume}%",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " {icon}  {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "space": " ",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "pulseaudio#source-icon": {
+        "format": "",
+        "format-muted": " {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "space": " ",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "pulseaudio#source": {
+        "format": "{format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "space": " ",
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
     },
     "disk": {
         "interval": 30,
-        "format": " {free}",
+        //"format": " {free}",
+        //"format": "\n{percentage_free}%",
+        "format": "{percentage_free}%",
         "path": "/"
     },
-    "custom/hdd": {
+    "disk#hdd": {
         "interval": 30,
-        "format": " {}iB",
-        "exec": "df -H /run/media/solus/hdd | awk '{print $4}' | cut -d $'\n' -f 2"
+        //"format": " {free}",
+        //"format": "\n{percentage_free}%",
+        "format": "{percentage_free}%",
+        "path": "/run/media/solus/hdd"
+    },
+    "disk#icon": {
+        "format": "",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/memory-icon": {
+        "format": "",
+        "interval": "once",
+        "tooltip": false
     },
     "custom/separator": {
-        "format": "|",
+        //"format": "|",
+        "format": " ",
+        //"format": "⸺",
         "interval": "once",
         "tooltip": false
     },
@@ -1569,7 +1735,7 @@ opacity-rule = [
     /* font-family: "Source Code Pro"; */
     /* font-family: monospace; */
     font-size: 14px;
-    min-height: 0;
+    /* min-height: 0; */
     background-color: #282c34;
 }
 
@@ -1580,7 +1746,8 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 7px;
+    /* padding: 0 7px; */
+    padding: 3px 0 3px 0;
     color: #e1d9c4;
 }
 
@@ -1608,10 +1775,12 @@ window#waybar {
 #cpu,
 #memory,
 #disk,
-#custom-hdd,
+#disk.hdd,
 #temperature,
 #network,
 #pulseaudio,
+#pulseaudio.output,
+#pulseaudio.source,
 #custom-media,
 #custom-update,
 #tray,
@@ -1619,14 +1788,35 @@ window#waybar {
 #idle_inhibitor,
 #language,
 #mpd {
-    padding: 0 7px;
+    /* padding: 0 7px; */
+    padding: 0 1px;
     color: #e1d9c4;
     background-color: #282c34;
+    font-size: 12px;
+    /* margin-bottom: 10px; */
+}
+
+#clock.H,
+#clock.a,
+#clock.d {
+    margin-bottom: 3px;
+}
+
+#clock.icon,
+#clock.cal-icon,
+#cpu.icon,
+#memory.icon,
+#disk.icon,
+#temperature.icon,
+#pulseaudio.output-icon,
+#pulseaudio.source-icon {
+    margin-bottom: 5px;
 }
 
 #window,
 #workspaces {
-    margin: 0 4px;
+    /* margin: 0 10px; */
+    margin: 0 7px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -1659,6 +1849,10 @@ label:focus {
     background-color: #eb4d4b;
 }
 
+#tray {
+    margin-bottom: 5px;
+}
+
 #keyboard-state {
     padding: 0 0px;
     margin: 0 5px;
@@ -1674,7 +1868,9 @@ label:focus {
 }
 
 #custom-separator {
-    color: #e1d9c4;
+    /* color: #e1d9c4; */
+    background-color: #e1d9c4;
+	box-shadow: 0px 0px 0px 8.5px #282c34 inset;
 }
 #+end_src
 
@@ -1691,7 +1887,9 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+# set $term alacritty
+# set $term /home/solus/.cargo/bin/alacritty
+set $term emacsclient -c -n -e "(multi-vterm)"
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -1703,8 +1901,8 @@ set $menu dmenu_path | wofi --show drun | xargs swaymsg exec --
 
 #+begin_src conf :tangle ~/.config/sway/config
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
-# output * bg /run/media/solus/hdd/Pictures/wallpapers/18.jpg fill
+# output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
+output * bg /run/media/solus/hdd/Pictures/wallpapers/27.jpg fill
 
 #
 # Example configuration:
@@ -1744,11 +1942,10 @@ input * {
 
 #+begin_src conf :tangle ~/.config/sway/config
 # Start a terminal
-# bindsym $mod+Return exec $term
-bindsym $mod+Return exec /home/solus/.cargo/bin/alacritty
+bindsym $mod+Return exec $term
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # Start your launcher
 bindsym $mod+d exec $menu
@@ -1903,13 +2100,14 @@ bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
 #+begin_src conf :tangle ~/.config/sway/config
 # Emacs
 bindsym $alt+e exec --no-startup-id emacsclient -c -n
-bindsym $alt+v exec --no-startup-id emacsclient -c -n -e "(multi-vterm)"
 
 # Slide show in fullscreen instead of lock screen
 bindsym $alt+f exec --no-startup-id imv -f -t 10 /run/media/solus/hdd/Pictures/wallpapers
 
 # IDEA
-bindsym $alt+i exec --no-startup-id ~/idea_new_ui/bin/idea.sh
+bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
+
+bindsym $mod+Shift+t exec --no-startup-id sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
 #+end_src
 
 *** Take screenshots
@@ -1973,7 +2171,7 @@ smart_borders on
 for_window [app_id="transmission-gtk"] floating enable, resize set 1200 800 move position center
 for_window [app_id="mpv"] floating enable, resize set 1200 800, move position center
 for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
-for_window [class="Emacs"] floating enable, resize set 1200 800, move position center
+# for_window [class="Emacs"] floating enable, resize set 1200 800, move position center
 #for_window [app_id="telegram-desktop_telegram-desktop"] floating enable, resize set 930 1020
 for_window [app_id="Alacritty"] floating enable, resize set 1200 800
 #for_window [app_id="gnome-terminal-server"] floating enable, resize set 1200 800, move position center
@@ -2047,12 +2245,11 @@ exec --no-startup-id emacs --fg-daemon
 
 # exec --no-startup-id "sleep 10; swaymsg 'workspace 1; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(dired nil)\"'"
 # exec --no-startup-id "sleep 13; swaymsg 'workspace 2; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(bk/switch-to-dashboard)\"'"
-# exec --no-startup-id "sleep 18; swaymsg 'workspace 3; exec ~/idea_new_ui/bin/idea.sh'"
-exec --no-startup-id "sleep 10; swaymsg 'workspace 3; exec ~/idea_new_ui/bin/idea.sh'"
+exec --no-startup-id "sleep 10; swaymsg 'workspace 3; exec ~/idea/bin/idea.sh'"
 exec --no-startup-id "sleep 2; swaymsg 'workspace 4; exec firefox'"
 # exec --no-startup-id "sleep 15; swaymsg 'workspace 5; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(telega)\"'"
 
-exec --no-startup-id python3 ~/squad.py
+# exec --no-startup-id python3 ~/squad.py
 
 # exec --no-startup-id "sleep 7; swaymsg 'workspace 5; exec telegram-desktop'"
 #exec --no-startup-id telegram-desktop -startintray
@@ -2253,7 +2450,7 @@ alias i='sudo apt install'
 alias remove='sudo apt remove'
 alias purge='sudo apt purge'
 alias autoremove='sudo apt autoremove && sudo apt --purge autoremove'
-alias upd='sudo apt update && sudo apt dist-upgrade && sudo snap refresh'
+alias upd='sudo apt update && sudo apt full-upgrade && sudo snap refresh'
 alias cl='sudo apt autoclean && sudo apt clean'
 #+end_src
 
