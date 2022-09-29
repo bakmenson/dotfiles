@@ -1888,8 +1888,8 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 # set $term alacritty
-# set $term /home/solus/.cargo/bin/alacritty
-set $term emacsclient -c -n -e "(multi-vterm)"
+set $term /home/solus/.cargo/bin/alacritty
+# set $term emacsclient -c -n -e "(multi-vterm)"
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -2168,15 +2168,15 @@ smart_borders on
 ** For_Window
 
 #+begin_src conf :tangle ~/.config/sway/config
-for_window [app_id="transmission-gtk"] floating enable, resize set 1200 800 move position center
+for_window [app_id="transmission-gtk"] floating enable, resize set 1200 800, move position center
 for_window [app_id="mpv"] floating enable, resize set 1200 800, move position center
 for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
 # for_window [class="Emacs"] floating enable, resize set 1200 800, move position center
-#for_window [app_id="telegram-desktop_telegram-desktop"] floating enable, resize set 930 1020
-for_window [app_id="Alacritty"] floating enable, resize set 1200 800
-#for_window [app_id="gnome-terminal-server"] floating enable, resize set 1200 800, move position center
+# for_window [app_id="telegram-desktop_telegram-desktop"] floating enable, resize set 930 1020
+for_window [class="Alacritty"] floating enable, resize set 1200 800
+# for_window [app_id="gnome-terminal-server"] floating enable, resize set 1200 800, move position center
 for_window [class="Tor"] floating enable, resize set 1600 1020, move position center
-#for_window [class="GParted"] floating enable border normal
+# for_window [class="GParted"] floating enable border normal
 #+end_src
 
 ** Colors
@@ -2245,13 +2245,14 @@ exec --no-startup-id emacs --fg-daemon
 
 # exec --no-startup-id "sleep 10; swaymsg 'workspace 1; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(dired nil)\"'"
 # exec --no-startup-id "sleep 13; swaymsg 'workspace 2; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(bk/switch-to-dashboard)\"'"
-exec --no-startup-id "sleep 10; swaymsg 'workspace 3; exec ~/idea/bin/idea.sh'"
+# exec --no-startup-id "sleep 10; swaymsg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 13; swaymsg 'workspace 3; exec intellij-idea-community'"
 exec --no-startup-id "sleep 2; swaymsg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 9; swaymsg 'workspace 5; exec telegram-desktop'"
 # exec --no-startup-id "sleep 15; swaymsg 'workspace 5; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(telega)\"'"
 
 # exec --no-startup-id python3 ~/squad.py
 
-# exec --no-startup-id "sleep 7; swaymsg 'workspace 5; exec telegram-desktop'"
 #exec --no-startup-id telegram-desktop -startintray
 # exec --no-startup-id exec transmission-gtk -m
 #+end_src
