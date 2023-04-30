@@ -106,6 +106,8 @@
 - [[#xinitrc][xinitrc]]
 - [[#dunst][Dunst]]
 - [[#firefox][Firefox]]
+- [[#scripts][Scripts]]
+  - [[#before-sleep][before sleep]]
 
 * i3
 ** Variables
@@ -4875,4 +4877,35 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 /* leaves space for the window buttons */
 #nav-bar { margin-top: -1px; }
+#+end_src
+
+* Scripts
+** before sleep
+
+#+begin_src shell :tangle ~/.before_sleep.sh
+#!/bin/sh
+
+s20=1200
+s30=1800
+s45=2700
+s1=3600
+s2=7200
+s3=10800
+
+sleep_time_seconds=$s30
+sleep_time_min=$((sleep_time_seconds / 60))
+
+if [[ $(pamac checkupdates -q | wc -l) -gt 0 ]]
+then
+    # TODO: add processing if Y/n selected n
+    sudo pacman -Syu \
+        && echo "Packages updates! I will sleep" $sleep_time_min "min before shutdown." \
+        && sleep $sleep_time_seconds \
+        && shutdown now
+else
+    echo "There are no updates. I will sleep" $sleep_time_min "min before suspend." \
+        && sleep $sleep_time_seconds \
+        && killall mpv \
+        && systemctl suspend
+fi
 #+end_src
