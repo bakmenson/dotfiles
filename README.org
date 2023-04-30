@@ -79,6 +79,8 @@
   - [[#zshrc][zshrc]]
   - [[#zsh-theme][zsh-theme]]
   - [[#zshenv][zshenv]]
+- [[#fish][Fish]]
+  - [[#aliases][Aliases]]
 - [[#rofi][Rofi]]
   - [[#config-2][config]]
   - [[#colors-1][colors]]
@@ -1358,7 +1360,7 @@ bspc rule -a Alacritty state=floating follow=off rectangle=1200x800+355+150
 bspc rule -a TelegramDesktop follow=off desktop='^5'
 # bspc rule -a TelegramDesktop state=floating follow=off rectangle=420x900+1450+90 desktop='^5'
 # bspc rule -a Steam state=floating follow=off rectangle=1350x900+285+90 desktop='^6'
-bspc rule -a Transmission-gtk state=floating follow=off rectangle=1200x800+355+150
+bspc rule -a transmission-qt state=floating follow=off rectangle=1200x800+355+150
 bspc rule -a mpv state=floating rectangle=1350x900+285+90 follow=off
 # bspc rule -a ffplay state=floating rectangle=1350x900+285+90 follow=off
 # bspc rule -a dmenu rectangle=900x22+610+90
@@ -1409,7 +1411,7 @@ firefox &
 
 killall telegram-desktop
 telegram-desktop &
-transmission-gtk -m &
+transmission-qt -m &
 #+end_src
 
 ** sxhkd
@@ -3686,6 +3688,95 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 # export _JAVA_AWT_WM_NONREPARENTING=1
 
 . "$HOME/.cargo/env"
+#+end_src
+
+* Fish
+
+#+begin_src conf :tangle ~/.config/fish/config.fish
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
+pyenv init - | source
+
+alias c='clear'
+
+alias q='exit'
+
+alias t='touch'
+alias mk='mkdir'
+
+alias rb='reboot'
+alias sdn='shutdown now'
+alias sdh='shutdown -h'
+alias sdc='shutdown -c'
+alias sn='sleep 60 && shutdown now'
+
+alias ss='systemctl suspend'
+# 3600 == one hour
+alias s30='sleep 1800 && systemctl suspend'
+alias s45='sleep 2700 && systemctl suspend'
+alias s1='sleep 3600 && systemctl suspend'
+alias s2='sleep 7200 && systemctl suspend'
+alias s3='sleep 10800 && systemctl suspend'
+
+alias i='sudo pacman -S'
+alias remove='sudo pacman -Rs'
+# alias upd='sudo pacman -Syu && yay -Sua'
+alias upd='sudo pacman -Syu'
+alias yupd='yay -Syu'
+alias cl='sudo pacman -Scc'
+
+alias gts='git status'
+alias gta='git add .'
+alias gtc='git commit -m'
+alias gtp='git push origin'
+#+end_src
+
+** Aliases
+*** Common
+
+#+begin_src sh :tangle ~/.config/fish/config.fish
+alias c='clear'
+
+alias q='exit'
+
+alias t='touch'
+alias mk='mkdir'
+
+alias rb='reboot'
+alias sdn='shutdown now'
+alias sdh='shutdown -h'
+alias sdc='shutdown -c'
+alias sn='sleep 60 && shutdown now'
+
+alias ss='systemctl suspend'
+# 3600 == one hour
+alias s30='sleep 1800 && systemctl suspend'
+alias s45='sleep 2700 && systemctl suspend'
+alias s1='sleep 3600 && systemctl suspend'
+alias s2='sleep 7200 && systemctl suspend'
+alias s3='sleep 10800 && systemctl suspend'
+#+end_src
+
+*** Arch
+
+#+begin_src sh :tangle ~/.config/fish/config.fish
+alias i='sudo pacman -S'
+alias remove='sudo pacman -Rs'
+# alias upd='sudo pacman -Syu && yay -Sua'
+alias upd='sudo pacman -Syu'
+alias yupd='yay -Syu'
+alias cl='sudo pacman -Scc'
+#+end_src
+
+*** Git
+
+#+begin_src sh :tangle ~/.config/fish/config.fish
+alias gts='git status'
+alias gta='git add .'
+alias gtc='git commit -m'
+alias gtp='git push origin'
 #+end_src
 
 * Rofi
