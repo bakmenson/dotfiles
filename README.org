@@ -490,7 +490,7 @@ exec --no-startup-id unclutter
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id emacs --fg-daemon
 
-# exec --no-startup-id python3 ~/squad.py
+# exec --no-startup-id python3 ~/.squats.py
 
 exec --no-startup-id "sleep 10; i3-msg 'workspace 1; exec emacsclient -c -n -a \"\"'"
 exec --no-startup-id "sleep 13; i3-msg 'workspace 2; exec emacsclient -c -n -a \"\"'"
@@ -1280,7 +1280,7 @@ emacsclient -c -n &
 sleep 3
 hyprctl keyword windowrule "workspace unset,Emacs"
 
-python3 $HOME/squad.py &
+python3 $HOME/.squats.py &
 #+end_src
 
 * Bspwm
@@ -1625,7 +1625,7 @@ super + ctrl + t
     sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
 
 super + ctrl + s
-    alacritty -e ~/.sunset.sh
+    alacritty -e ~/.before_sleep.sh
 
 super + {F2,F3,F4}
     {amixer -q set Master 2%- unmute,amixer -q set Master 2%+ unmute,amixer -q set Master toggle}
