@@ -1387,7 +1387,7 @@ unclutter &
 killall emacs
 emacs --fg-daemon &
 
-pkill -f squats.py
+pkill -f .squats.py
 python3 $HOME/.squats.py &
 
 # sleep 1
