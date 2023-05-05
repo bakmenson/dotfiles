@@ -4887,16 +4887,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #+begin_src shell :tangle ~/.before_sleep.sh
 #!/bin/sh
 
-s10=600
-s20=1200
-s30=1800
-s45=2700
-s1=3600
-s2=7200
-s3=10800
-
-sleep_time_seconds=$s10
-sleep_time_min=$((sleep_time_seconds / 60))
+sleep_time_min=$1
+sleep_time_seconds=$((sleep_time_min * 60))
 
 if [[ $(pamac checkupdates -q | wc -l) -gt 0 ]]
 then
