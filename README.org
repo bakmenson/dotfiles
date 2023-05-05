@@ -3702,39 +3702,6 @@ if status is-interactive
 end
 
 pyenv init - | source
-
-alias c='clear'
-
-alias q='exit'
-
-alias t='touch'
-alias mk='mkdir'
-
-alias rb='reboot'
-alias sdn='shutdown now'
-alias sdh='shutdown -h'
-alias sdc='shutdown -c'
-alias sn='sleep 60 && shutdown now'
-
-alias ss='systemctl suspend'
-# 3600 == one hour
-alias s30='sleep 1800 && systemctl suspend'
-alias s45='sleep 2700 && systemctl suspend'
-alias s1='sleep 3600 && systemctl suspend'
-alias s2='sleep 7200 && systemctl suspend'
-alias s3='sleep 10800 && systemctl suspend'
-
-alias i='sudo pacman -S'
-alias remove='sudo pacman -Rs'
-# alias upd='sudo pacman -Syu && yay -Sua'
-alias upd='sudo pacman -Syu'
-alias yupd='yay -Syu'
-alias cl='sudo pacman -Scc'
-
-alias gts='git status'
-alias gta='git add .'
-alias gtc='git commit -m'
-alias gtp='git push origin'
 #+end_src
 
 ** Aliases
