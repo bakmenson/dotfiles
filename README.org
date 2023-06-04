@@ -1415,6 +1415,9 @@ firefox &
 killall telegram-desktop
 telegram-desktop &
 transmission-qt -m &
+
+sleep 10
+bspc desktop -f ^1
 #+end_src
 
 ** sxhkd
