@@ -987,7 +987,11 @@ include /etc/sway/config.d/*
 
 #+begin_src conf :tangle ~/.config/hypr/hyprland.conf
 # See https://wiki.hyprland.org/Configuring/Monitors/
-monitor=,preferred,auto,1
+# monitor=,preferred,auto,1
+monitor=VGA-1, 1920x1080, 1366x0, 1
+monitor=LVDS-1, 1366x768, 0x0, 1, transform, 1
+# monitor=VGA-1, preferred, 1366x0, 1
+# monitor=LVDS-1, preferred, 0x0, 1, transform, 1
 #+end_src
 
 ** Apps at launch
@@ -996,7 +1000,8 @@ monitor=,preferred,auto,1
 exec-once=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec-once = emacs --fg-daemon
 # exec-once = swaybg -i /run/media/solus/hdd/Pictures/wallpapers/27.jpg -m fill
-exec-once = swaybg -o \* -i `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` -m fill
+# exec-once = swaybg -o \* -i `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` -m fill
+exec-once = swaybg -o \* -i `find /home/solus/Pictures -type f | shuf -n 1` -m fill
 exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = waybar
@@ -1067,10 +1072,13 @@ general {
 decoration {
 
     rounding = 10
-    blur = no
-    blur_size = 3
-    blur_passes = 1
-    blur_new_optimizations = on
+
+    blur {
+        enabled = false
+        size = 3
+        passes = 1
+        new_optimizations = true
+    }
 
     drop_shadow = yes
     shadow_range = 4
@@ -1170,12 +1178,12 @@ windowrulev2 = float, class:^(mpv)$
 windowrulev2 = size 1200 800, class:^(mpv)$
 windowrulev2 = center, class:^(mpv)$
 
-windowrulev2 = workspace 3, class:^(jetbrains-idea-ce)$
-windowrulev2 = workspace 4, class:^(firefox)$
-windowrulev2 = workspace 4, class:^(qutebrowser)$
+windowrulev2 = monitor:VGA-1, workspace 4, class:^(jetbrains-idea-ce)$
+windowrulev2 = monitor:VGA-1, workspace 5, class:^(firefox)$
+windowrulev2 = monitor:VGA-1, workspace 5, class:^(qutebrowser)$
 # windowrulev2 = workspace 5 silent, class:^(telegramdesktop)$
-windowrulev2 = workspace 5 silent, class:^(org.telegram.desktop)$
-windowrulev2 = opacity 0.97 0.97, class:^(Emacs)$
+windowrulev2 = monitor:VGA-1, workspace 6 silent, class:^(org.telegram.desktop)$
+windowrulev2 = monitor:VGA-1, opacity 0.97 0.97, class:^(Emacs)$
 #+end_src
 
 ** Binds
@@ -1270,10 +1278,10 @@ sleep 10
 
 telegram-desktop &
 
-hyprctl keyword windowrule "workspace 1 silent,Emacs"
-emacsclient -c -n &
-sleep 3
-hyprctl keyword windowrule "workspace unset,Emacs"
+# hyprctl keyword windowrule "workspace 1 silent,Emacs"
+# emacsclient -c -n &
+# sleep 3
+# hyprctl keyword windowrule "workspace unset,Emacs"
 
 hyprctl keyword windowrule "workspace 2 silent,Emacs"
 emacsclient -c -n &
@@ -1405,6 +1413,7 @@ copyq &
 
 sleep 3
 emacsclient -c -n -a "" &
+sleep 2
 bspc node -d ^2
 
 # sleep 3
@@ -2016,6 +2025,8 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
     "height": 24, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
+    "output": "VGA-1",
+    //"output": ["VGA-1,", "LVDS-1"],
     "modules-left": [
         "disk",
         "custom/hdd",
@@ -2286,6 +2297,8 @@ label:focus {
     //"width": 28, // Waybar width
     // "width": 1280, // Waybar width
     // Choose the order of the modules
+    "output": "VGA-1",
+    //"output": ["VGA-1,", "LVDS-1"],
     "modules-left": [
         "custom/separator",
         "disk#icon",
@@ -2311,13 +2324,16 @@ label:focus {
         //"pulseaudio#source",
         "custom/separator",
         "network",
-        "sway/mode"
+        "hyprland/mode"
+        //"sway/mode"
     ],
-    "modules-center": ["sway/workspaces"],
+    //"modules-center": ["sway/workspaces"],
+    "modules-center": ["wlr/workspaces"],
     "modules-right": [
         // "custom/update",
         "custom/separator",
-        "sway/language",
+        //"sway/language",
+        "hyprland/language",
         "custom/separator",
         "clock#cal-icon",
         "clock#a",
@@ -2331,7 +2347,8 @@ label:focus {
         "tray"
     ],
     // Modules configuration
-    "sway/workspaces": {
+    //"sway/workspaces": {
+    "wlr/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "format": "{icon}",
@@ -2346,10 +2363,12 @@ label:focus {
             "default": ""
         }
     },
-    "sway/language": {
+    //"sway/language": {
+    "hyprland/language": {
         "format": "{}"
     },
-    "sway/mode": {
+    //"sway/mode": {
+    "hyprland/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
     "tray": {
