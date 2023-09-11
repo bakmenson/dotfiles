@@ -1007,7 +1007,10 @@ exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRE
 exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = waybar
 exec-once = firefox
-exec-once = copyq --start-server
+# exec-once = env QT_QPA_PLATFORM=xcb copyq --start-server
+# exec-once = copyq --start-server
+exec-once = copyq
+# Exec=env QT_QPA_PLATFORM=xcb copyq
 # exec-once = qutebrowser
 # exec-once = /home/solus/idea/bin/idea.sh
 # exec-once = transmission-qt -m
@@ -1287,7 +1290,7 @@ bindm = $mainMod, mouse:273, resizewindow
 ** startup
 
 #+begin_src shell :tangle ~/.config/hypr/startup.sh
-sleep 10
+# sleep 10
 
 telegram-desktop &
 
