@@ -990,8 +990,6 @@ include /etc/sway/config.d/*
 # monitor=,preferred,auto,1
 monitor=LVDS-1, 1366x768, 0x0, 1, transform, 1
 monitor=VGA-1, 1920x1080, 768x0, 1
-# monitor=VGA-1, preferred, 1366x0, 1
-# monitor=LVDS-1, preferred, 0x0, 1, transform, 1
 #+end_src
 
 ** Apps at launch
@@ -1210,6 +1208,7 @@ bind = $mainMod, F4, exec, amixer -q set Master toggle
 bind = ALT, o, exec, alacritty
 bind = $mainMod, q, killactive
 bind = ALT, e, exec, emacsclient -c -n -a ""
+bind = ALT, i, exec, /home/solus/idea/bin/idea.sh
 bind = $mainMod, M, exit
 bind = $mainMod, Space, togglefloating
 bind = $mainMod, D, exec, wofi --show drun
@@ -1217,7 +1216,10 @@ bind = $mainMod, P, pseudo # dwindle
 bind = $mainMod, J, togglesplit # dwindle
 bind = $mainMod SHIFT, T, exec, sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
 
-bind = ALT, F10, exec, copyq toggle
+bind = ALT, c, exec, copyq toggle
+
+# Turn Off monitor LVDS-1
+bind = $mainMod SHIFT, O, exec, hyprctl dispatch dpms off LVDS-1
 
 # Whole screen
 bind = $mainMod SHIFT, F10, exec, grim
@@ -1289,8 +1291,6 @@ bindm = $mainMod, mouse:273, resizewindow
 #+begin_src shell :tangle ~/.config/hypr/startup.sh
 sleep 10
 
-telegram-desktop &
-
 # hyprctl keyword windowrule "workspace 1 silent,Emacs"
 # emacsclient -c -n &
 # sleep 3
@@ -1302,6 +1302,8 @@ sleep 3
 hyprctl keyword windowrule "workspace unset,Emacs"
 
 python3 $HOME/.squats.py &
+
+telegram-desktop &
 #+end_src
 
 * Bspwm
@@ -2058,10 +2060,12 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
     "modules-center": ["hyprland/workspaces"],
     //"modules-center": ["sway/workspaces"],
     "modules-right": [
-        // "custom/update",
+        "custom/update",
         "custom/separator",
         "hyprland/language",
         //"sway/language",
+        "custom/separator",
+        "battery",
         "custom/separator",
         "clock",
         "custom/separator",
@@ -2181,6 +2185,29 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "exec-if": "[ $(checkupdates | wc -l) -ne 0 ]",
         "exec": "checkupdates | wc -l",
         "tooltip": false
+    },
+    "battery": {
+        "bat": "BAT0",
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        //"format": "{capacity}% {icon}",
+
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        //"format-charging": " {capacity}%",
+        //"format-plugged": " {capacity}%",
+
+        //"format-alt": "{time} {icon}",
+        //"format-full": " {capacity}%",
+
+        "format-icons": ["", "", "", "", ""],
+        //"format-icons": ["", "", ""]
+
+        "max-length": 25
     }
 }
 #+end_src
