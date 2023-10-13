@@ -606,8 +606,8 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
-# set $term /home/solus/.cargo/bin/alacritty
+# set $term alacritty
+set $term /home/solus/.cargo/bin/alacritty
 # set $term emacsclient -c -n -e "(multi-vterm)"
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -620,14 +620,15 @@ set $menu dmenu_path | wofi --show drun | xargs swaymsg exec --
 
 #+begin_src conf :tangle ~/.config/sway/config
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
+# output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
 # output * bg /run/media/solus/hdd/Pictures/wallpapers/27.jpg fill
+output * bg `find /home/solus/Pictures -type f | shuf -n 1` fill
 
 #
 # Example configuration:
 #
-#output VGA-1 resolution 1920x1080 position 1920,0
-#output LVDS-1 disable
+output VGA-1 resolution 1920x1080 position 1920,0
+output LVDS-1 disable
 #+end_src
 
 ** Idle
@@ -826,6 +827,9 @@ bindsym $alt+f exec --no-startup-id imv -f -t 10 /run/media/solus/hdd/Pictures/w
 # IDEA
 bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
 
+# --to-code for for in cyrillic layout
+bindsym --to-code $alt+c exec --no-startup-id copyq toggle
+
 bindsym $mod+Shift+t exec --no-startup-id sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
 #+end_src
 
@@ -887,15 +891,27 @@ smart_borders on
 ** For_Window
 
 #+begin_src conf :tangle ~/.config/sway/config
+# for_window [app_id="transmission-gtk"] floating enable, resize set 1200 800, move position center
+# for_window [app_id="mpv"] floating enable, resize set 1200 800, move position center
+# for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
+# # for_window [class="Emacs"] floating enable, resize set 1200 800, move position center
+# # for_window [app_id="telegram-desktop_telegram-desktop"] floating enable, resize set 930 1020
+# for_window [app_id="Alacritty"] floating enable, resize set 1200 800, move position center
+# # for_window [app_id="gnome-terminal-server"] floating enable, resize set 1200 800, move position center
+# for_window [class="Tor"] floating enable, resize set 1600 1020, move position center
+# # for_window [class="GParted"] floating enable border normal
+
+
 for_window [app_id="transmission-gtk"] floating enable, resize set 1200 800, move position center
 for_window [app_id="mpv"] floating enable, resize set 1200 800, move position center
 for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
 # for_window [class="Emacs"] floating enable, resize set 1200 800, move position center
 # for_window [app_id="telegram-desktop_telegram-desktop"] floating enable, resize set 930 1020
-for_window [app_id="Alacritty"] floating enable, resize set 1200 800, move position center
+for_window [class="Alacritty"] floating enable, resize set 1200 800, move position center
+for_window [app_id="copyq"] floating enable, resize set 1000 990, move position center
 # for_window [app_id="gnome-terminal-server"] floating enable, resize set 1200 800, move position center
 for_window [class="Tor"] floating enable, resize set 1600 1020, move position center
-# for_window [class="GParted"] floating enable border normal
+
 #+end_src
 
 ** Colors
@@ -962,15 +978,18 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id dunst -mouse_left_click
 exec --no-startup-id emacs --fg-daemon
 
-exec --no-startup-id "sleep 10; swaymsg 'workspace 1; exec emacsclient -c -n -a \"\"'"
-exec --no-startup-id "sleep 13; swaymsg 'workspace 2; exec emacsclient -c -n -a \"\"'"
-exec --no-startup-id "sleep 15; swaymsg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 13; swaymsg 'workspace 1; exec emacsclient -c -n -a \"\"'"
+exec --no-startup-id "sleep 15; swaymsg 'workspace 2; exec emacsclient -c -n -a \"\"'"
+# exec --no-startup-id "sleep 15; swaymsg 'workspace 3; exec ~/idea/bin/idea.sh'"
 # exec --no-startup-id "sleep 13; swaymsg 'workspace 3; exec intellij-idea-community'"
 exec --no-startup-id "sleep 2; swaymsg 'workspace 4; exec firefox'"
 exec --no-startup-id "sleep 7; swaymsg 'workspace 5; exec telegram-desktop'"
 # exec --no-startup-id "sleep 15; swaymsg 'workspace 5; exec /snap/bin/emacsclient -c -n -a \"\" -e \"(telega)\"'"
 
 exec --no-startup-id python3 ~/squad.py
+
+# exec --no-startup-id env QT_QPA_PLATFORM=xcb copyq
+exec --no-startup-id copyq --start-server
 
 #exec --no-startup-id telegram-desktop -startintray
 # exec --no-startup-id exec transmission-gtk -m
@@ -1313,6 +1332,7 @@ telegram-desktop &
 #! /bin/bash
 
 bspc monitor VGA-1 -d        
+# bspc monitor -d        
 #+end_src
 
 ** borders and gaps
@@ -1370,25 +1390,27 @@ bspc config automatic_scheme	spiral
 ** rules
 
 #+begin_src shell :tangle ~/.config/bspwm/bspwmrc
-bspc rule -a jetbrains-idea-ce follow=off desktop='^4'
-# bspc rule -a jetbrains-idea-ce follow=off desktop='^3'
-bspc rule -a firefox follow=off desktop='^5'
-bspc rule -a Tor* follow=off desktop='^7'
+# bspc rule -a jetbrains-idea-ce follow=off desktop='^4'
+bspc rule -a jetbrains-idea-ce follow=off desktop='^3'
+bspc rule -a firefox follow=off desktop='^4'
+bspc rule -a Tor* follow=off desktop='^6'
 # bspc rule -a qutebrowser follow=off desktop='^4'
 # bspc rule -a emacs follow=off
 bspc rule -a Emacs state=tiled
 # bspc rule -a Emacs state=floating follow=off rectangle=1350x900+285+110
 # bspc rule -a Emacs state=tiled follow=off desktop='^1'
 # bspc rule -a Emacs:media state=tiled follow=off desktop='^1'
-bspc rule -a Alacritty state=floating follow=off rectangle=1200x800+1123+150
-bspc rule -a copyq state=floating follow=off rectangle=1200x950+1123+77
+# bspc rule -a Alacritty state=floating follow=off rectangle=1200x800+1123+150
+bspc rule -a Alacritty state=floating follow=off rectangle=1010x713+465+167
+bspc rule -a copyq state=floating follow=off rectangle=957x1026+509+33
 # bspc rule -a TelegramDesktop state=tiled follow=off desktop='^5'
 # bspc rule -a TelegramDesktop state=floating follow=off desktop='^5'
-bspc rule -a TelegramDesktop follow=off desktop='^6'
+bspc rule -a TelegramDesktop follow=off desktop='^5'
 # bspc rule -a TelegramDesktop state=floating follow=off rectangle=420x900+1450+90 desktop='^5'
 # bspc rule -a Steam state=floating follow=off rectangle=1350x900+285+90 desktop='^6'
-bspc rule -a transmission-qt state=floating follow=off rectangle=1200x800+355+150
-bspc rule -a mpv state=floating rectangle=1350x900+1053+90 follow=off
+# bspc rule -a transmission-qt state=floating follow=off rectangle=1200x800+355+150
+bspc rule -a transmission-qt state=floating follow=off rectangle=976x628+205+74
+bspc rule -a mpv state=floating rectangle=1350x900+295+86 follow=off
 # bspc rule -a ffplay state=floating rectangle=1350x900+285+90 follow=off
 # bspc rule -a dmenu rectangle=900x22+610+90
 #+end_src
@@ -1396,8 +1418,8 @@ bspc rule -a mpv state=floating rectangle=1350x900+1053+90 follow=off
 ** autostarts
 
 #+begin_src shell :tangle ~/.config/bspwm/bspwmrc
-xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --mode 1366x768 --rotate left --left-of VGA-1
-# xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --off
+# xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --mode 1366x768 --rotate left --left-of VGA-1
+xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --off
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 # numlockx &
@@ -1429,7 +1451,8 @@ copyq &
 sleep 3
 emacsclient -c -n -a "" &
 sleep 2
-bspc node -d ^2
+# bspc node -d ^2
+bspc node -d ^1
 
 # sleep 3
 # emacsclient -c -n -a "" &
@@ -1448,7 +1471,8 @@ killall telegram-desktop
 telegram-desktop &
 
 sleep 10
-bspc desktop -f ^2
+# bspc desktop -f ^2
+bspc desktop -f ^1
 transmission-qt -m &
 #+end_src
 
@@ -1667,6 +1691,9 @@ super + {F2,F3,F4}
 
 alt + i
     $HOME/idea/bin/idea.sh
+
+alt + c
+   copyq toggle
 #+end_src
 
 * Qtile
@@ -2057,13 +2084,13 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "hyprland/mode"
         //"sway/mode"
     ],
-    "modules-center": ["hyprland/workspaces"],
-    //"modules-center": ["sway/workspaces"],
+    //"modules-center": ["hyprland/workspaces"],
+    "modules-center": ["sway/workspaces"],
     "modules-right": [
         "custom/update",
         "custom/separator",
-        "hyprland/language",
-        //"sway/language",
+        //"hyprland/language",
+        "sway/language",
         "custom/separator",
         "battery",
         "custom/separator",
@@ -2072,23 +2099,23 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "tray"
     ],
     // Modules configuration
-    "hyprland/workspaces": {
-    //"sway/workspaces": {
+    //"hyprland/workspaces": {
+    "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate",
         "format": "{icon}",
         "format-icons": {
-            //"1": "",
-            //"2": "",
-            //"3": "",
-            //"4": "",
-            //"5": "",
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            //"1": "",
+            //"2": "",
+            //"3": "",
+            //"4": "",
+            //"5": "",
             "6": "",
             "urgent": "",
             "focused": "",
@@ -2096,15 +2123,15 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         },
         "tooltip": false
     },
-    "hyprland/language": {
-    //"sway/language": {
+    //"hyprland/language": {
+    "sway/language": {
         "format": "{}",
         "format-en": "en",
         "format-ru": "ru",
         "tooltip": false
     },
-    "hyprland/mode": {
-    //"sway/mode": {
+    //"hyprland/mode": {
+    "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
     "tray": {
@@ -2244,8 +2271,8 @@ window#waybar {
     text-shadow: inherit;
 }
 
-#workspaces button.active {
-/* #workspaces button.focused { */
+/* #workspaces button.active { */
+#workspaces button.focused {
     color: #bc8420;
 }
 
@@ -2815,8 +2842,9 @@ alert = #bd2c40
 
 #+begin_src conf :tangle ~/.config/polybar/config.ini
 [bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
+; monitor = ${env:MONITOR:HDMI-1}
 monitor = VGA-1
+; monitor = LVDS-1
 width = 100%
 height = 20
 offset-x = 0
@@ -2853,7 +2881,7 @@ tray-position = right
 tray-padding = 1
 ;tray-background = #0063ff
 
-wm-restack = bspwm
+;wm-restack = bspwm
 ;wm-restack = i3
 
 ;override-redirect = true
@@ -2941,7 +2969,6 @@ type = internal/bspwm
 
 ; Separator in between workspaces
 ; label-separator = |
-
 
 
 label-focused = %name%
