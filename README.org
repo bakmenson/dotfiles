@@ -20,7 +20,6 @@
   - [[#audio-controls][Audio controls]]
   - [[#for_window][for_window]]
   - [[#autostart-applications][Autostart applications]]
-  - [[#polybar][Polybar]]
   - [[#theme-colors][Theme colors]]
   - [[#gaps][Gaps]]
 - [[#sway][Sway]]
@@ -60,6 +59,7 @@
   - [[#scheme][scheme]]
   - [[#rules-1][rules]]
   - [[#autostarts][autostarts]]
+  - [[#scripts][scripts]]
   - [[#sxhkd][sxhkd]]
 - [[#qtile][Qtile]]
   - [[#config][config]]
@@ -68,7 +68,7 @@
 - [[#waybar][Waybar]]
   - [[#top][top]]
   - [[#left][left]]
-- [[#polybar-1][Polybar]]
+- [[#polybar][Polybar]]
   - [[#config-1][config]]
   - [[#polybarsh][polybar.sh]]
 - [[#picom][Picom]]
@@ -106,7 +106,7 @@
 - [[#xinitrc][xinitrc]]
 - [[#dunst][Dunst]]
 - [[#firefox][Firefox]]
-- [[#scripts][Scripts]]
+- [[#scripts-1][Scripts]]
   - [[#before-sleep][before sleep]]
   - [[#squats][squats]]
 
@@ -118,7 +118,7 @@
 set $mod Mod4
 set $alt Mod1
 
-set $terminal alacritty
+set $terminal /home/solus/.cargo/bin/alacritty
 #+end_src
 
 ** Desktop Layout
@@ -158,7 +158,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel 2
 # bindsym $mod+n border normal
 
-border_radius 10
+# border_radius 10
 #+end_src
 
 ** Windows
@@ -213,7 +213,7 @@ bindsym $mod+Shift+Right move right
 #+begin_src  conf :tangle ~/.config/i3/config
 workspace_auto_back_and_forth yes
 bindsym $alt+Tab workspace back_and_forth
-bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+# bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 #+end_src
 
 *** Split orientation
@@ -290,6 +290,19 @@ mode "resize" {
 #+end_src
 
 ** Workspaces
+*** output
+
+#+begin_src  conf :tangle ~/.config/i3/config
+workspace 1 output HDMI-A-0
+workspace 2 output HDMI-A-0
+workspace 3 output HDMI-A-0
+workspace 4 output HDMI-A-0
+workspace 5 output HDMI-A-0
+workspace 6 output HDMI-A-0
+workspace 7 output HDMI-A-0
+workspace 8 output HDMI-A-0
+#+end_src
+
 *** names
 
 #+begin_src  conf :tangle ~/.config/i3/config
@@ -406,6 +419,12 @@ bindsym $alt+e exec --no-startup-id exec emacsclient -c -n -a "" -e "(bk/switch-
 # bindsym $alt+f exec --no-startup-id feh -z -F /run/media/solus/hdd/Pictures/wallpapers/*
 
 bindsym $alt+f exec dunstctl close
+
+bindsym $alt+c exec copyq toggle
+
+bindsym $mod+Shift+t exec --no-startup-id sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
+
+bindsym $mod+Shift+b exec "bluetoothctl disconnect C7:2F:B7:16:A5:57; bluetoothctl connect C7:2F:B7:16:A5:57"
 #+end_src
 
 ** i3
@@ -447,13 +466,16 @@ mode "$mode_system" {
 #bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
 #bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
 
-bindsym $mod+F2 exec --no-startup-id "amixer -q set Master 2%- unmute"
-bindsym $mod+F3 exec --no-startup-id "amixer -q set Master 2%+ unmute"
-bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
+# bindsym $mod+F2 exec --no-startup-id "amixer -q set Master 2%- unmute"
+# bindsym $mod+F3 exec --no-startup-id "amixer -q set Master 2%+ unmute"
+# bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
+bindsym $mod+F2 exec --no-startup-id "amixer -D pulse sset Master 2%-"
+bindsym $mod+F3 exec --no-startup-id "amixer -D pulse sset Master 2%+"
+bindsym $mod+F4 exec --no-startup-id "amixer -D pulse sset Master toogle"
 
 # Switch between speakers and headphones
-bindsym $mod+F5 exec --no-startup-id "amixer -c 0 set 'Auto-Mute Mode' Disabled"
-bindsym $mod+F6 exec --no-startup-id "amixer -c 0 set 'Auto-Mute Mode' Enabled"
+# bindsym $mod+F5 exec --no-startup-id "amixer -c 0 set 'Auto-Mute Mode' Disabled"
+# bindsym $mod+F6 exec --no-startup-id "amixer -c 0 set 'Auto-Mute Mode' Enabled"
 
 #bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q set Master 3%+ unmute"
 #bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q set Master 3%- unmute"
@@ -473,33 +495,41 @@ for_window [class="ffplay"] floating enable, resize set 1200 800, move position 
 for_window [class="Tor"] floating enable, resize set 1600 1020, move position center
 # for_window [class="TelegramDesktop"] floating enable, resize set 930 1020, move position center
 for_window [class="Alacritty"] floating enable, resize set 1200 800, move position center
+for_window [class="copyq"] floating enable, resize set 1025 1026, move position center
 #+end_src
 
 ** Autostart applications
 
 #+begin_src conf :tangle ~/.config/i3/config
-exec_always --no-startup-id setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll
-
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
 
-# --bg-fill, --bg-scale
+exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
+
+exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
 exec --no-startup-id picom --config ~/.config/picom.conf
-exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
+# --bg-fill, --bg-scale
+# exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
+exec_always feh --randomize --bg-fill /home/solus/Pictures/wallpapers/*
+exec_always --no-startup-id $HOME/.config/polybar/polybar.sh
 exec --no-startup-id unclutter
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id emacs --fg-daemon
+exec --no-startup-id copyq
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
 
 # exec --no-startup-id python3 ~/.squats.py
 
-exec --no-startup-id "sleep 10; i3-msg 'workspace 1; exec emacsclient -c -n -a \"\"'"
-exec --no-startup-id "sleep 13; i3-msg 'workspace 2; exec emacsclient -c -n -a \"\"'"
+exec --no-startup-id "sleep 18; i3-msg 'workspace 2; exec emacsclient -c -n -a \"\"'"
+exec --no-startup-id "sleep 16; i3-msg 'workspace 1; exec emacsclient -c -n -a \"\"'"
 # exec --no-startup-id "sleep 15; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 # exec --no-startup-id "sleep 15; i3-msg 'workspace 3; exec idea'"
+exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec chromium'"
 exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec firefox'"
 exec --no-startup-id "sleep 7; i3-msg 'workspace 5; exec telegram-desktop'"
 # exec --no-startup-id exec telegram-desktop -startintray
-exec --no-startup-id exec transmission-gtk -m
+# exec --no-startup-id exec transmission-gtk -m
 #exec --no-startup-id "sleep 15; i3-msg 'workspace 6; exec virtualbox'"
 #exec --no-startup-id "sleep 20; i3-msg 'workspace 2; exec pycharm-community'"
 #exec --no-startup-id "sleep 12; i3-msg 'workspace 2; exec ~/pycharm/bin/pycharm.sh'"
@@ -515,12 +545,6 @@ exec --no-startup-id exec transmission-gtk -m
 # exec --no-startup-id "sleep 12; i3-msg 'workspace 1; exec alacritty -e nnn -S'"
 #exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec google-chrome'"
 #exec --no-startup-id "sleep 12; i3-msg 'workspace 5; exec telegram-desktop'"
-#+end_src
-
-** Polybar
-
-#+begin_src conf :tangle ~/.config/i3/config
-exec_always --no-startup-id $HOME/.config/polybar/polybar.sh
 #+end_src
 
 ** Theme colors
@@ -622,13 +646,13 @@ set $menu dmenu_path | wofi --show drun | xargs swaymsg exec --
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` fill
 # output * bg /run/media/solus/hdd/Pictures/wallpapers/27.jpg fill
-output * bg `find /home/solus/Pictures -type f | shuf -n 1` fill
+output * bg `find /home/solus/Pictures/wallpapers -type f | shuf -n 1` fill
 
 #
 # Example configuration:
 #
-output VGA-1 resolution 1920x1080 position 1920,0
-output LVDS-1 disable
+output HDMI-A-1 resolution 1920x1080 position 1920,0
+output eDP-1 disable
 #+end_src
 
 ** Idle
@@ -907,7 +931,7 @@ for_window [app_id="mpv"] floating enable, resize set 1200 800, move position ce
 for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
 # for_window [class="Emacs"] floating enable, resize set 1200 800, move position center
 # for_window [app_id="telegram-desktop_telegram-desktop"] floating enable, resize set 930 1020
-for_window [class="Alacritty"] floating enable, resize set 1200 800, move position center
+for_window [app_id="Alacritty"] floating enable, resize set 1200 800, move position center
 for_window [app_id="copyq"] floating enable, resize set 1000 990, move position center
 # for_window [app_id="gnome-terminal-server"] floating enable, resize set 1200 800, move position center
 for_window [class="Tor"] floating enable, resize set 1600 1020, move position center
@@ -1007,8 +1031,13 @@ include /etc/sway/config.d/*
 #+begin_src conf :tangle ~/.config/hypr/hyprland.conf
 # See https://wiki.hyprland.org/Configuring/Monitors/
 # monitor=,preferred,auto,1
-monitor=LVDS-1, 1366x768, 0x0, 1, transform, 1
-monitor=VGA-1, 1920x1080, 768x0, 1
+# monitor=LVDS-1, 1366x768, 0x0, 1, transform, 1
+
+monitor=eDP-1, disabled
+monitor=HDMI-A-1, 1920x1080, auto, 1
+# monitor=,preferred,auto,1
+# monitor=HDMI-A-1, disabled
+# monitor=eDP-1, 1920x1080, auto, 1
 #+end_src
 
 ** Apps at launch
@@ -1023,8 +1052,11 @@ exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRE
 # exec-once=dbus-update-activation-environment --all
 exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = waybar
+exec-once = nm-applet
 exec-once = firefox
-exec-once = copyq --start-server
+# exec-once = copyq --start-server
+exec-once = env QT_QPA_PLATFORM=xcb copyq --start-server
+exec-once = wl-paste --watch cliphist store
 # exec-once = qutebrowser
 # exec-once = /home/solus/idea/bin/idea.sh
 # exec-once = transmission-qt -m
@@ -1147,6 +1179,7 @@ dwindle {
 master {
     new_is_master = true
     no_gaps_when_only = true
+    inherit_fullscreen = true
 }
 #+end_src
 
@@ -1176,15 +1209,16 @@ $mainMod = SUPER
 # Example windowrule v1
 # windowrule = float, ^(kitty)$
 
-workspace = name:1, monitor:LVDS-1
-workspace = name:2, monitor:VGA-1
-workspace = name:3, monitor:VGA-1
-workspace = name:4, monitor:VGA-1
-workspace = name:5, monitor:VGA-1
-workspace = name:6, monitor:VGA-1
-workspace = name:7, monitor:VGA-1
-workspace = name:8, monitor:VGA-1
-workspace = name:9, monitor:VGA-1
+# workspace = name:1, monitor:LVDS-1
+# workspace = name:1, monitor:VGA-1
+# workspace = name:2, monitor:VGA-1
+# workspace = name:3, monitor:VGA-1
+# workspace = name:4, monitor:VGA-1
+# workspace = name:5, monitor:VGA-1
+# workspace = name:6, monitor:VGA-1
+# workspace = name:7, monitor:VGA-1
+# workspace = name:8, monitor:VGA-1
+# workspace = name:9, monitor:VGA-1
 
 # Example windowrule v2
 # windowrulev2 = float, size 1200 800, class:^(Alacritty)$
@@ -1200,28 +1234,48 @@ windowrulev2 = float, class:^(transmission-qt)$
 windowrulev2 = size 1200 800, class:^(transmission-qt)$
 windowrulev2 = center, class:^(transmission-qt)$
 
-windowrulev2 = float, class:^(com.github.hluk.copyq)$
-windowrulev2 = size 1200 950, class:^(com.github.hluk.copyq)$
-windowrulev2 = center, class:^(com.github.hluk.copyq)$
+# windowrulev2 = float, class:^(com.github.hluk.copyq)$
+# windowrulev2 = size 957 1026, class:^(com.github.hluk.copyq)$
+# windowrulev2 = center, class:^(com.github.hluk.copyq)$
+windowrulev2 = float, class:^(copyq)$
+windowrulev2 = size 1025 1026, class:^(copyq)$
+windowrulev2 = center, class:^(copyq)$
 
 windowrulev2 = float, class:^(mpv)$
 windowrulev2 = size 1200 800, class:^(mpv)$
 windowrulev2 = center, class:^(mpv)$
 
-windowrulev2 = workspace 4, class:^(jetbrains-idea-ce)$
-windowrulev2 = workspace 5, class:^(firefox)$
-windowrulev2 = workspace 5, class:^(qutebrowser)$
+windowrulev2 = workspace 3, class:^(jetbrains-idea-ce)$
+windowrulev2 = workspace 4, class:^(firefox)$
+windowrulev2 = workspace 4, class:^(qutebrowser)$
 # windowrulev2 = workspace 5 silent, class:^(telegramdesktop)$
-windowrulev2 = workspace 6 silent, class:^(org.telegram.desktop)$
+windowrulev2 = workspace 5 silent, class:^(org.telegram.desktop)$
 windowrulev2 = opacity 0.97 0.97, class:^(Emacs)$
 #+end_src
 
 ** Binds
 
 #+begin_src conf :tangle ~/.config/hypr/hyprland.conf
-bind = $mainMod, F2, exec, amixer -q set Master 2%- unmute
-bind = $mainMod, F3, exec, amixer -q set Master 2%+ unmute
-bind = $mainMod, F4, exec, amixer -q set Master toggle
+#pulse
+# bind = $mainMod, F2, exec, amixer -q set Master 2%- unmute
+# bind = $mainMod, F3, exec, amixer -q set Master 2%+ unmute
+# bind = $mainMod, F4, exec, amixer -q set Master toggle
+# bind = $mainMod, XF86AudioLowerVolume, exec, amixer -q set Master 2%- unmute
+# bind = $mainMod, XF86AudioRaiseVolume, exec, amixer -q set Master 2%+ unmute
+# bind = $mainMod, XF86AudioMute, exec, amixer -q set Master toggle
+
+#pipewire
+bind = $mainMod, XF86AudioMute, exec, pactl set-sink-mute 0 toggle
+bind = $mainMod, XF86AudioLowerVolume, exec, pactl set-sink-volume 0 -2%
+bind = $mainMod, XF86AudioRaiseVolume, exec, pactl set-sink-volume 0 +2%
+bind = $mainMod, F1, exec, pactl set-sink-mute 0 toggle
+bind = $mainMod, F2, exec, pactl set-sink-volume 0 -2%
+bind = $mainMod, F3, exec, pactl set-sink-volume 0 +2%
+#mic
+# pactl set-source-volume 0 +2%
+# pactl set-source-volume 0 -2%
+# pactl set-source-mute 0 1 #mute
+# pactl set-source-mute 0 0 #unmute
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 bind = ALT, o, exec, alacritty
@@ -1233,12 +1287,16 @@ bind = $mainMod, Space, togglefloating
 bind = $mainMod, D, exec, wofi --show drun
 bind = $mainMod, P, pseudo # dwindle
 bind = $mainMod, J, togglesplit # dwindle
+bind = $mainMod, F, fullscreen, 1 # dwindle
 bind = $mainMod SHIFT, T, exec, sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
 
 bind = ALT, c, exec, copyq toggle
+# bind = $mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy
+# bind = $mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | ydotool type "`wl-paste`"
+bind= $mainMod, V, exec, cliphist list | wofi --show dmenu -H 1025 -W 1026| cliphist decode | wl-copy && wtype -M ctrl -P v -m ctrl
 
 # Turn Off monitor LVDS-1
-bind = $mainMod SHIFT, O, exec, hyprctl dispatch dpms off LVDS-1
+# bind = $mainMod SHIFT, O, exec, hyprctl dispatch dpms off LVDS-1
 
 # Whole screen
 bind = $mainMod SHIFT, F10, exec, grim
@@ -1310,15 +1368,15 @@ bindm = $mainMod, mouse:273, resizewindow
 #+begin_src shell :tangle ~/.config/hypr/startup.sh
 sleep 10
 
-# hyprctl keyword windowrule "workspace 1 silent,Emacs"
-# emacsclient -c -n &
-# sleep 3
-# hyprctl keyword windowrule "workspace unset,Emacs"
-
-hyprctl keyword windowrule "workspace 2 silent,Emacs"
+hyprctl keyword windowrule "workspace 1 silent,Emacs"
 emacsclient -c -n &
 sleep 3
 hyprctl keyword windowrule "workspace unset,Emacs"
+
+# hyprctl keyword windowrule "workspace 2 silent,Emacs"
+# emacsclient -c -n &
+# sleep 3
+# hyprctl keyword windowrule "workspace unset,Emacs"
 
 python3 $HOME/.squats.py &
 
@@ -1331,7 +1389,27 @@ telegram-desktop &
 #+begin_src shell :tangle ~/.config/bspwm/bspwmrc
 #! /bin/bash
 
-bspc monitor VGA-1 -d        
+INTERNAL_MONITOR="eDP"
+EXTERNAL_MONITOR="HDMI-A-0"
+
+if [[ "$1" = 0 ]]; then
+  if [[ $(xrandr -q | grep "${EXTERNAL_MONITOR} connected") ]]; then
+    xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
+    bspc monitor "$INTERNAL_MONITOR" -r
+    bspc monitor "$EXTERNAL_MONITOR" -d        
+    # xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --mode 1366x768 --rotate left --left-of VGA-1
+    # xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --off
+    # xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
+  else
+    xrandr --output eDP --primary --mode 1920x1080 --rotate normal --output HDMI-A-0 --off
+    bspc monitor "$INTERNAL_MONITOR" -d        
+  fi
+fi
+
+# bspc monitor eDP -d        
+# bspc monitor eDP -r
+# bspc monitor HDMI-A-0 -d        
+# bspc monitor VGA-1 -d        
 # bspc monitor -d        
 #+end_src
 
@@ -1390,7 +1468,7 @@ bspc config automatic_scheme	spiral
 ** rules
 
 #+begin_src shell :tangle ~/.config/bspwm/bspwmrc
-# bspc rule -a jetbrains-idea-ce follow=off desktop='^4'
+bspc rule -a jetbrains-idea-ce follow=off desktop='^4'
 bspc rule -a jetbrains-idea-ce follow=off desktop='^3'
 bspc rule -a firefox follow=off desktop='^4'
 bspc rule -a Tor* follow=off desktop='^6'
@@ -1402,7 +1480,7 @@ bspc rule -a Emacs state=tiled
 # bspc rule -a Emacs:media state=tiled follow=off desktop='^1'
 # bspc rule -a Alacritty state=floating follow=off rectangle=1200x800+1123+150
 bspc rule -a Alacritty state=floating follow=off rectangle=1010x713+465+167
-bspc rule -a copyq state=floating follow=off rectangle=957x1026+509+33
+bspc rule -a copyq state=floating follow=off rectangle=1025x1046+467+20
 # bspc rule -a TelegramDesktop state=tiled follow=off desktop='^5'
 # bspc rule -a TelegramDesktop state=floating follow=off desktop='^5'
 bspc rule -a TelegramDesktop follow=off desktop='^5'
@@ -1411,15 +1489,13 @@ bspc rule -a TelegramDesktop follow=off desktop='^5'
 # bspc rule -a transmission-qt state=floating follow=off rectangle=1200x800+355+150
 bspc rule -a transmission-qt state=floating follow=off rectangle=976x628+205+74
 bspc rule -a mpv state=floating rectangle=1350x900+295+86 follow=off
-# bspc rule -a ffplay state=floating rectangle=1350x900+285+90 follow=off
-# bspc rule -a dmenu rectangle=900x22+610+90
+bspc rule -a ffplay state=floating rectangle=1350x900+285+90 follow=off
+bspc rule -a dmenu rectangle=900x22+610+90
 #+end_src
 
 ** autostarts
 
 #+begin_src shell :tangle ~/.config/bspwm/bspwmrc
-# xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --mode 1366x768 --rotate left --left-of VGA-1
-xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --off
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 # numlockx &
@@ -1444,6 +1520,9 @@ sleep 2
 setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll &
 
 $HOME/.config/polybar/polybar.sh &
+
+killall nm-applet
+nm-applet &
 
 killall copyq
 copyq &
@@ -1473,7 +1552,66 @@ telegram-desktop &
 sleep 10
 # bspc desktop -f ^2
 bspc desktop -f ^1
-transmission-qt -m &
+# transmission-qt -m &
+#+end_src
+
+** scripts
+*** switch monitors
+
+#+begin_src shell :tangle ~/.config/bspwm/switch_monitors.sh
+#! /bin/bash
+
+INTERNAL_MONITOR="eDP"
+EXTERNAL_MONITOR="HDMI-A-0"
+CURRENT_DESKTOP="$(bspc query -D -d focused)"
+
+if [[ $(xrandr --listactivemonitors | grep "${EXTERNAL_MONITOR}") ]]; then
+    # xrandr --output eDP --primary --mode 1920x1080 --rotate normal --output HDMI-A-0 --off
+
+    bspc monitor "$INTERNAL_MONITOR" -d        
+    # for desktop in $(bspc query -D -m "$EXTERNAL_MONITOR");	do
+    #     bspc desktop "$desktop" --to-monitor "$INTERNAL_MONITOR"
+    # done
+
+    # bspc desktop Desktop --remove
+
+    bspc desktop "$CURRENT_DESKTOP" --to-monitor "$INTERNAL_MONITOR"
+    bspc monitor "$EXTERNAL_MONITOR" -r
+
+
+else
+    # xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
+
+    bspc monitor "$EXTERNAL_MONITOR" -d        
+    # for desktop in $(bspc query -D -m "$INTERNAL_MONITOR");	do
+    #     bspc desktop "$desktop" --to-monitor "$EXTERNAL_MONITOR"
+    # done
+
+    # bspc desktop Desktop --remove
+
+    bspc desktop "$CURRENT_DESKTOP" --to-monitor "$EXTERNAL_MONITOR"
+
+    bspc monitor "$INTERNAL_MONITOR" -r
+
+fi
+
+
+
+# SELECTED_DESKTOP="$(bspc query -D -d "$1")"
+# SELECTED_MONITOR="$(bspc query -M -d "$1")"
+# CURRENT_DESKTOP="$(bspc query -D -d focused)"
+# CURRENT_MONITOR="$(bspc query -M -d focused)"
+
+# if [ "$SELECTED_MONITOR" == "$CURRENT_MONITOR" ]; then
+#   bspc desktop "$SELECTED_DESKTOP" -f
+# else
+#   ACTIVE_OTHER="$(bspc query -D -m "$SELECTED_MONITOR" -d .active)"
+#   [ "$ACTIVE_OTHER" == "$SELECTED_DESKTOP" ] && ACTIVE_OTHER="$CURRENT_DESKTOP"
+#   bspc desktop "$CURRENT_DESKTOP" --to-monitor "$SELECTED_MONITOR"
+#   bspc desktop "$SELECTED_DESKTOP" --to-monitor "$CURRENT_MONITOR"
+#   bspc desktop "$ACTIVE_OTHER" -f
+#   bspc desktop "$SELECTED_DESKTOP" -f
+# fi
 #+end_src
 
 ** sxhkd
@@ -1689,11 +1827,17 @@ super + ctrl + s
 super + {F2,F3,F4}
     {amixer -q set Master 2%- unmute,amixer -q set Master 2%+ unmute,amixer -q set Master toggle}
 
+{XF86AudioRaiseVolume, XF86AudioLowerVolume, XF86AudioMute}
+    {amixer -q set Master 2%+ unmute,amixer -q set Master 2%- unmute,amixer -q set Master toggle}
+
 alt + i
     $HOME/idea/bin/idea.sh
 
 alt + c
    copyq toggle
+
+super + ctrl + m
+    $HOME/.config/bspwm/switch_monitors.sh
 #+end_src
 
 * Qtile
@@ -1807,6 +1951,8 @@ keys = [
     # Emacs
     Key([alt], "e", lazy.spawn("emacsclient -c -n")),
 
+    Key([alt], "c", lazy.spawn("copyq toggle")),
+
     # Screenshots
     # fullscreen
     Key([mod, "shift"], "F10", lazy.spawn("scrot -e 'mv $f ~/Pictures'")),
@@ -1898,14 +2044,14 @@ screens = [
                     format="{uf}{m}",
                     foreground="#e1d9c4",
                 ),
-                widget.Sep(padding=15, size_percent=55, foreground="#e1d9c4"),
-                widget.TextBox(fmt="", font="FontAwesome6Free", foreground="#e1d9c4"),
-                widget.DF(
-                    visible_on_warn=False,
-                    partition="/run/media/solus/hdd",
-                    format="{uf}{m}",
-                    foreground="#e1d9c4",
-                ),
+                # widget.Sep(padding=15, size_percent=55, foreground="#e1d9c4"),
+                # widget.TextBox(fmt="", font="FontAwesome6Free", foreground="#e1d9c4"),
+                # widget.DF(
+                #     visible_on_warn=False,
+                #     partition="/run/media/solus/hdd",
+                #     format="{uf}{m}",
+                #     foreground="#e1d9c4",
+                # ),
                 widget.Sep(padding=15, size_percent=55, foreground="#e1d9c4"),
                 widget.TextBox(fmt="", font="FontAwesome6Free", foreground="#e1d9c4"),
                 widget.Memory(measure_mem="G", format="{MemUsed:.2f}{mm}", foreground="#e1d9c4"),
@@ -1916,7 +2062,8 @@ screens = [
                 widget.TextBox(fmt="", font="FontAwesome6Free", foreground="#e1d9c4",),
                 widget.ThermalZone(
                     format="{temp}°C",
-                    zone="/sys/class/thermal/thermal_zone2/temp",
+                    # zone="/sys/class/thermal/thermal_zone2/temp",
+                    zone="/sys/class/thermal/thermal_zone0/temp",
                     fgcolor_normal="#e1d9c4"
                 ),
                 widget.Sep(padding=15, size_percent=55, foreground="#e1d9c4"),
@@ -1941,6 +2088,8 @@ screens = [
                 widget.Spacer(),
                 widget.Spacer(length=bar.STRETCH),
                 widget.KeyboardLayout(configured_keyboards=["en", "ru"], foreground="#e1d9c4"),
+                widget.Sep(padding=15, size_percent=55, foreground="#e1d9c4"),
+                widget.Battery(battery="BAT0", charge_char="", discharge_char="",format = "{char}  {percent:2.0%} {hour:d}:{min:02d}", foreground="#e1d9c4"),
                 widget.Sep(padding=15, size_percent=55, foreground="#e1d9c4"),
                 widget.TextBox(fmt="", font="FontAwesome6Free", foreground="#e1d9c4"),
                 widget.Clock(format="%A, %d %B", foreground="#e1d9c4"),
@@ -1977,7 +2126,7 @@ cursor_warp = False
 floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
+        ,*layout.Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
@@ -2006,7 +2155,7 @@ def startup_once():
 
 @hook.subscribe.startup
 def startup_every_time():
-    path_to_script = path.expanduser("~/.config/qtile/startup_every_time.sh")
+    path_to_script = path.expanduser("~/.config/qtile/startup_everytime.sh")
     run([path_to_script])
 
 @hook.subscribe.client_new
@@ -2041,6 +2190,8 @@ emacs --fg-daemon &
 xfce4-power-manager &
 firefox &
 telegram-desktop &
+copyq &
+nm-applet &
 # transmission-gtk -m &
 # python3 $HOME/squad.py &
 $HOME/idea/bin/idea.sh &
@@ -2051,7 +2202,17 @@ $HOME/idea/bin/idea.sh &
 #+begin_src shell :tangle ~/.config/qtile/startup_everytime.sh
 #!/bin/sh
 
-xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal --output LVDS-1 --mode 1366x768 --rotate left --left-of VGA-1
+INTERNAL_MONITOR="eDP"
+EXTERNAL_MONITOR="HDMI-A-0"
+
+xrandr --output "$EXTERNAL_MONITOR" --primary --mode 1920x1080 --rotate normal --output "$INTERNAL_MONITOR" --off
+# if [[ "$1" = 0 ]]; then
+#   if [[ $(xrandr -q | grep "${EXTERNAL_MONITOR} connected") ]]; then
+#     xrandr --output "$EXTERNAL_MONITOR" --primary --mode 1920x1080 --rotate normal --output "$INTERNAL_MONITOR" --off
+#   else
+#     xrandr --output "$INTERNAL_MONITOR" --primary --mode 1920x1080 --rotate normal --output "$EXTERNAL_MONITOR" --off
+#   fi
+# fi
 
 setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll &
 #+end_src
@@ -2067,8 +2228,9 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
     "height": 24, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "output": "VGA-1",
-    //"output": ["LVDS-1", "VGA-1,"],
+    //"output": "HDMI-A-1",
+    "output": ["eDP-1", "HDMI-A-1"],
+    //"output": ["LVDS-1", "VGA-1,", "eDP-1", "HDMI-A-1"],
     "modules-left": [
         "disk",
         //"custom/hdd",
@@ -2080,9 +2242,9 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "custom/separator",
         "pulseaudio",
         "custom/separator",
-        "network",
-        "hyprland/mode"
-        //"sway/mode"
+        //"network",
+        //"hyprland/mode"
+        "sway/mode"
     ],
     //"modules-center": ["hyprland/workspaces"],
     "modules-center": ["sway/workspaces"],
@@ -2116,7 +2278,7 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
             //"3": "",
             //"4": "",
             //"5": "",
-            "6": "",
+            //"6": "",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -2152,8 +2314,9 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "tooltip": false
     },
     "temperature": {
-        // "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        //"thermal-zone": 2,
+        //"hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "hwmon-path": "/sys/class/thermal/thermal_zone0/temp",
         "critical-threshold": 80,
         "format-critical": "{icon} {temperatureC}°C",
         "format": "{icon} {temperatureC}°C",
@@ -2213,30 +2376,54 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "exec": "checkupdates | wc -l",
         "tooltip": false
     },
+    //"battery": {
+    //    "bat": "BAT0",
+    //    "interval": 60,
+    //    "states": {
+    //        "warning": 30,
+    //        "critical": 15
+    //    },
+    //    "format": "{icon} {capacity}%",
+    //    //"format": "{capacity}% {icon}",
+
+    //    //"format-charging": " {capacity}%",
+    //    //"format-plugged": " {capacity}%",
+    //    //"format-charging": " {capacity}%",
+    //    //"format-plugged": " {capacity}%",
+    //    "format-charging": "{icon} {capacity}%",
+    //    "format-plugged": "{icon}",
+
+    //    //"format-alt": "{time} {icon}",
+    //    "format-full": " {capacity}%",
+
+    //    "format-icons": ["", "", "", "", ""],
+    //    "format-icons": {
+    //        //"discharging": ["", "", "", "", "", ""],
+    //        //"charging": ["", "", "", "", "", ""],
+    //        "discharging": ["", "", "", "", "", ""],
+    //        "charging": ["", "", "", "", "", ""],
+    //        "plugged": "ﮣ"
+    //    },
+    //    //"format-icons": ["", "", ""]
+
+    //    "max-length": 25
+    //}
     "battery": {
-        "bat": "BAT0",
-        "interval": 60,
-        "states": {
-            "warning": 30,
-            "critical": 15
+            "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% - {time}",
+            "format-icons": ["", "", "", "", ""],
+            "format-time": "{H}h{M}m",
+            "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% - {time}",
+            "format-full": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  Charged",
+            "bat": "BAT0",
+            "interval": 30,
+            "states": {
+                "warning": 25,
+                "critical": 10
+            },
+            "tooltip": false,
+            "on-click": "2"
         },
-        "format": "{icon} {capacity}%",
-        //"format": "{capacity}% {icon}",
-
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        //"format-charging": " {capacity}%",
-        //"format-plugged": " {capacity}%",
-
-        //"format-alt": "{time} {icon}",
-        //"format-full": " {capacity}%",
-
-        "format-icons": ["", "", "", "", ""],
-        //"format-icons": ["", "", ""]
-
-        "max-length": 25
     }
-}
 #+end_src
 
 *** waybar style
@@ -2825,14 +3012,15 @@ gruvbox = #282828
 onedark = #282c34
 yellow = #ffb52a
 dark-yellow = #bc8420
+light-yellow = #e1d9c4
 light = #e1d9c4
 light1 = #e5e9f0
 
 background = ${colors.onedark}
 background-alt = ${colors.onedark}
 # foreground = #dfdfdf
-foreground = ${colors.light1}
-foreground-alt = ${colors.light1}
+foreground = ${colors.light-yellow}
+foreground-alt = ${colors.light-yellow}
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
@@ -2843,7 +3031,9 @@ alert = #bd2c40
 #+begin_src conf :tangle ~/.config/polybar/config.ini
 [bar/example]
 ; monitor = ${env:MONITOR:HDMI-1}
-monitor = VGA-1
+; monitor = eDP
+; monitor = HDMI-A-0
+; monitor = VGA-1
 ; monitor = LVDS-1
 width = 100%
 height = 20
@@ -2873,18 +3063,18 @@ font-2 = FontAwesome6Brands:style=Solid:size=10;3
 
 ; modules-left = sep filesystem sep memory sep cpu sep eth sep temperature sep alsa sep
 modules-left = sep filesystem sep memory sep cpu sep temperature sep alsa sep
-;modules-center = i3
-modules-center = bspwm
-modules-right = sep xkeyboard date battery sep
+modules-center = i3
+; modules-center = bspwm
+modules-right = sep xkeyboard sep battery date
 
 tray-position = right
 tray-padding = 1
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
-;wm-restack = i3
+; wm-restack = bspwm
+wm-restack = i3
 
-;override-redirect = true
+; override-redirect = true
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -3432,19 +3622,21 @@ format-discharging = <ramp-capacity> <label-discharging>
 ;   %percentage_raw%
 ;   %time%
 ;   %consumption% (shows current charge rate in watts)
-label-charging = Charging %percentage%%
+; label-charging = Charging %percentage%%
+label-charging =  %percentage%%
 
 ; Available tokens:
 ;   %percentage% (default) - is set to 100 if full-at is reached
 ;   %percentage_raw%
 ;   %time%
 ;   %consumption% (shows current discharge rate in watts)
-label-discharging = Discharging %percentage%%
+; label-discharging = Discharging %percentage%%
+label-discharging = %percentage%%
 
 ; Available tokens:
 ;   %percentage% (default) - is set to 100 if full-at is reached
 ;   %percentage_raw%
-label-full = Fully charged
+label-full = Charged
 
 ; Available tokens:
 ;   %percentage% (default) - is set to 100 if full-at is reached
@@ -3496,7 +3688,8 @@ animation-low-framerate = 200
 type = internal/temperature
 thermal-zone = 0
 ; hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
+; hwmon-path = /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp1_input
+hwmon-path = /sys/class/thermal/thermal_zone0/temp
 warn-temperature = 60
 
 
@@ -3595,7 +3788,7 @@ label-separator-foreground = ${colors.foreground-alt}
 Set :tangle ~/.config/polybar/polybar.sh only after edit and when first installation system
 By default :tangle no
 
-#+begin_src sh :tangle ~/.config/polybar/polybar.sh
+#+begin_src sh :tangle no
 #!/usr/bin/env bash
 
 # Terminate already running bar instances
@@ -3624,7 +3817,7 @@ rounded-corners-exclude = [
 ];
 round-borders = 10;
 round-borders-exclude = [
-  #"class_g = 'TelegramDesktop'",
+  # "class_g = 'TelegramDesktop'",
 ];
 
 shadow = true;
@@ -4007,7 +4200,7 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-pyenv init - | source
+# pyenv init - | source
 #+end_src
 
 ** Aliases
@@ -4361,6 +4554,7 @@ font:
   normal:
     family: JetBrains Mono
   size: 9.5
+  #size: 6
 
 colors:
   primary:
@@ -5187,6 +5381,4 @@ from subprocess import run
 for i in range(1, 11):
     sleep(3600)
     run(["notify-send", f"Do Squats!!! {i}th set."])
-
-run(["pkill", "-f", "/home/solus/.squats.py"])
 #+end_src
