@@ -4035,7 +4035,7 @@ alias dmm='python manage.py makemigrations'
 alias ds='python manage.py shell'
 #+end_src
 
-**** git
+**** Git
 
 #+begin_src sh :tangle ~/.zshrc
 alias gts='git status'
