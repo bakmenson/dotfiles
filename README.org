@@ -340,6 +340,8 @@ bindsym $alt+c exec copyq toggle
 bindsym $mod+Shift+t exec --no-startup-id sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
 
 bindsym $mod+Shift+b exec "bluetoothctl disconnect C7:2F:B7:16:A5:57; bluetoothctl connect C7:2F:B7:16:A5:57"
+
+bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/polybar/polybar.sh
 #+end_src
 
 ** i3
@@ -422,7 +424,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
 
 exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
-exec --no-startup-id picom --config ~/.config/picom.conf
+exec_always picom --config ~/.config/picom.conf
 # --bg-fill, --bg-scale
 # exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
 exec_always feh --randomize --bg-fill /home/solus/Pictures/wallpapers/*
@@ -436,12 +438,13 @@ exec --no-startup-id blueman-applet
 
 # exec --no-startup-id python3 ~/.squats.py
 
-exec --no-startup-id "sleep 18; i3-msg 'workspace 2; exec emacsclient -c -n -a \"\"'"
+exec --no-startup-id "sleep 25; i3-msg 'workspace 2; exec emacsclient -c -n -a \"\"'"
 exec --no-startup-id "sleep 16; i3-msg 'workspace 1; exec emacsclient -c -n -a \"\"'"
-# exec --no-startup-id "sleep 15; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 # exec --no-startup-id "sleep 15; i3-msg 'workspace 3; exec idea'"
-exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec chromium'"
-exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec firefox'"
+# exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec chromium'"
+# exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec firefox'"
+exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec yandex-browser'"
 exec --no-startup-id "sleep 7; i3-msg 'workspace 5; exec telegram-desktop'"
 # exec --no-startup-id exec telegram-desktop -startintray
 # exec --no-startup-id exec transmission-gtk -m
