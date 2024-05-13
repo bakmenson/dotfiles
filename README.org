@@ -17,6 +17,7 @@
 - [[#zsh][Zsh]]
 - [[#fish][Fish]]
 - [[#rofi][Rofi]]
+- [[#wofi][Wofi]]
 - [[#terminal][Terminal]]
 - [[#ideavimrc][Ideavimrc]]
 - [[#git][Git]]
@@ -33,7 +34,9 @@
 set $mod Mod4
 set $alt Mod1
 
-set $terminal /home/solus/.cargo/bin/alacritty
+# set $terminal /home/solus/.cargo/bin/alacritty
+# set $terminal alacritty
+set $terminal kitty
 #+end_src
 
 ** Desktop Layout
@@ -73,6 +76,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel 2
 # bindsym $mod+n border normal
 
+# wait adding border radius feature
 # border_radius 10
 #+end_src
 
@@ -93,6 +97,10 @@ bindsym $alt+h focus left
 bindsym $alt+l focus right
 bindsym $alt+j focus down
 bindsym $alt+k focus up
+# bindsym Shift+h focus left
+# bindsym Shift+l focus right
+# bindsym Shift+j focus down
+# bindsym Shift+k focus up
 # bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -336,10 +344,12 @@ bindsym $alt+e exec --no-startup-id exec emacsclient -c -n -a "" -e "(bk/switch-
 bindsym $alt+f exec dunstctl close
 
 bindsym $alt+c exec copyq toggle
+# bindsym $mod+V exec --no-startup-id $terminal -e "$SHELL" -c "i3-msg 'floating enable' && clipse"
+# bindsym $alt+c exec --no-startup-id $terminal clipse
 
 bindsym $mod+Shift+t exec --no-startup-id sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
 
-bindsym $mod+Shift+b exec "bluetoothctl disconnect C7:2F:B7:16:A5:57; bluetoothctl connect C7:2F:B7:16:A5:57"
+# bindsym $mod+Shift+b exec "bluetoothctl disconnect C7:2F:B7:16:A5:57; bluetoothctl connect C7:2F:B7:16:A5:57"
 
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/polybar/polybar.sh
 #+end_src
@@ -406,12 +416,14 @@ for_window [class="^.*"] border pixel 2
 for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Transmission-gtk"] floating enable border pixel 1
+# for_window [class="Transmission-gtk"] floating enable border pixel 1
+for_window [class="Transmission"] floating enable border pixel 1
 for_window [class="mpv"] floating enable, resize set 1200 800, move position center
 for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
 for_window [class="Tor"] floating enable, resize set 1600 1020, move position center
 # for_window [class="TelegramDesktop"] floating enable, resize set 930 1020, move position center
 for_window [class="Alacritty"] floating enable, resize set 1200 800, move position center
+for_window [class="kitty"] floating enable, resize set 1200 800, move position center
 for_window [class="copyq"] floating enable, resize set 1025 1026, move position center
 #+end_src
 
@@ -421,7 +433,8 @@ for_window [class="copyq"] floating enable, resize set 1025 1026, move position 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
 
-exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
+# exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
+# exec --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output eDP-1 --off
 
 exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
 exec_always picom --config ~/.config/picom.conf
@@ -436,6 +449,9 @@ exec --no-startup-id copyq
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 
+# https://github.com/savedra1/clipse.git
+# exec --no-startup-id clipse -listen
+
 # exec --no-startup-id python3 ~/.squats.py
 
 exec --no-startup-id "sleep 25; i3-msg 'workspace 2; exec emacsclient -c -n -a \"\"'"
@@ -444,7 +460,8 @@ exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
 # exec --no-startup-id "sleep 15; i3-msg 'workspace 3; exec idea'"
 # exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec chromium'"
 # exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec firefox'"
-exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec yandex-browser'"
+# exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec yandex-browser'"
+exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec yandex-browser-stable'"
 exec --no-startup-id "sleep 7; i3-msg 'workspace 5; exec telegram-desktop'"
 # exec --no-startup-id exec telegram-desktop -startintray
 # exec --no-startup-id exec transmission-gtk -m
@@ -624,6 +641,10 @@ bindsym $mod+Shift+c reload
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+bindsym $alt+f exec dunstctl close
+
+bindsym $mod+Shift+b exec "bluetoothctl disconnect C7:2F:B7:16:A5:57; bluetoothctl connect C7:2F:B7:16:A5:57"
 #+end_src
 
 *** Moving around
@@ -675,7 +696,7 @@ bindsym $alt+p workspace prev
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
 bindsym $alt+Tab workspace back_and_forth
-bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+# bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 #+end_src
 
 *** Layout stuff
@@ -752,9 +773,16 @@ bindsym $mod+r mode "resize"
 # bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
 # bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
 # bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
-bindsym $mod+F2 exec --no-startup-id "amixer -q set Master 3%- unmute"
-bindsym $mod+F3 exec --no-startup-id "amixer -q set Master 3%+ unmute"
-bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
+
+# bindsym $mod+F2 exec --no-startup-id "amixer -q set Master 3%- unmute"
+# bindsym $mod+F3 exec --no-startup-id "amixer -q set Master 3%+ unmute"
+# bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
+
+# ubuntu sway
+bindsym $mod+F2 exec --no-startup-id "amixer -D pulse sset Master 2%-"
+bindsym $mod+F3 exec --no-startup-id "amixer -D pulse sset Master 2%+"
+bindsym $mod+F4 exec --no-startup-id "amixer -D pulse sset Master toogle"
+
 #+end_src
 
 *** Launch apps 
@@ -764,7 +792,7 @@ bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
 bindsym $alt+e exec --no-startup-id emacsclient -c -n
 
 # Slide show in fullscreen instead of lock screen
-bindsym $alt+f exec --no-startup-id imv -f -t 10 /run/media/solus/hdd/Pictures/wallpapers
+# bindsym $alt+f exec --no-startup-id imv -f -t 10 /run/media/solus/hdd/Pictures/wallpapers
 
 # IDEA
 bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
@@ -953,7 +981,9 @@ include /etc/sway/config.d/*
 
 monitor=eDP-1, disabled
 monitor=HDMI-A-1, 1920x1080, auto, 1
+
 # monitor=,preferred,auto,1
+
 # monitor=HDMI-A-1, disabled
 # monitor=eDP-1, 1920x1080, auto, 1
 #+end_src
@@ -964,19 +994,22 @@ monitor=HDMI-A-1, 1920x1080, auto, 1
 exec-once=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec-once = emacs --fg-daemon
 # exec-once = swaybg -i /run/media/solus/hdd/Pictures/wallpapers/27.jpg -m fill
-# exec-once = swaybg -o \* -i `find /run/media/solus/hdd/Pictures/wallpapers -type f | shuf -n 1` -m fill
-exec-once = swaybg -o \* -i `find /home/solus/Pictures -type f | shuf -n 1` -m fill
-exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = swaybg -o \* -i $(find /home/solus/Pictures/wallpapers -type f | shuf -n 1) -m fill
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # exec-once=dbus-update-activation-environment --all
-exec-once=systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = dunst -mouse_left_click
 exec-once = waybar
+# exec-once = wireplumber
 exec-once = nm-applet
-exec-once = firefox
+exec-once = blueman-applet
+# exec-once = firefox
+exec-once = yandex-browser-stable
 # exec-once = copyq --start-server
 exec-once = env QT_QPA_PLATFORM=xcb copyq --start-server
-exec-once = wl-paste --watch cliphist store
+# exec-once = wl-paste --watch cliphist store
 # exec-once = qutebrowser
-# exec-once = /home/solus/idea/bin/idea.sh
+exec-once = /home/solus/idea/bin/idea.sh
 # exec-once = transmission-qt -m
 
 exec-once=/home/solus/.config/hypr/startup.sh
@@ -1027,7 +1060,7 @@ general {
 
     layout = dwindle
 
-    max_fps=60
+    # max_fps=60
 
     cursor_inactive_timeout = 1
 }
@@ -1144,6 +1177,10 @@ windowrulev2 = float, class:^(Alacritty)$
 windowrulev2 = size 1200 800, class:^(Alacritty)$
 windowrulev2 = center, class:^(Alacritty)$
 
+windowrulev2 = float, class:^(kitty)$
+windowrulev2 = size 1200 800, class:^(kitty)$
+windowrulev2 = center, class:^(kitty)$
+
 windowrulev2 = float, class:^(Tor Browser)$
 windowrulev2 = size 1600 1020, class:^(Tor Browser)$
 windowrulev2 = move 160 42, class:^(Tor Browser)$
@@ -1164,7 +1201,8 @@ windowrulev2 = size 1200 800, class:^(mpv)$
 windowrulev2 = center, class:^(mpv)$
 
 windowrulev2 = workspace 3, class:^(jetbrains-idea-ce)$
-windowrulev2 = workspace 4, class:^(firefox)$
+# windowrulev2 = workspace 4, class:^(firefox)$
+windowrulev2 = workspace 4, class:^(Yandex-browser)$
 windowrulev2 = workspace 4, class:^(qutebrowser)$
 # windowrulev2 = workspace 5 silent, class:^(telegramdesktop)$
 windowrulev2 = workspace 5 silent, class:^(org.telegram.desktop)$
@@ -1175,28 +1213,33 @@ windowrulev2 = opacity 0.97 0.97, class:^(Emacs)$
 
 #+begin_src conf :tangle ~/.config/hypr/hyprland.conf
 #pulse
-# bind = $mainMod, F2, exec, amixer -q set Master 2%- unmute
-# bind = $mainMod, F3, exec, amixer -q set Master 2%+ unmute
-# bind = $mainMod, F4, exec, amixer -q set Master toggle
-# bind = $mainMod, XF86AudioLowerVolume, exec, amixer -q set Master 2%- unmute
-# bind = $mainMod, XF86AudioRaiseVolume, exec, amixer -q set Master 2%+ unmute
-# bind = $mainMod, XF86AudioMute, exec, amixer -q set Master toggle
+bind = $mainMod, F2, exec, amixer -q set Master 2%- unmute
+bind = $mainMod, F3, exec, amixer -q set Master 2%+ unmute
+bind = $mainMod, F4, exec, amixer -q set Master toggle
+bind = $mainMod, XF86AudioLowerVolume, exec, amixer -q set Master 2%- unmute
+bind = $mainMod, XF86AudioRaiseVolume, exec, amixer -q set Master 2%+ unmute
+bind = $mainMod, XF86AudioMute, exec, amixer -q set Master toggle
 
 #pipewire
-bind = $mainMod, XF86AudioMute, exec, pactl set-sink-mute 0 toggle
-bind = $mainMod, XF86AudioLowerVolume, exec, pactl set-sink-volume 0 -2%
-bind = $mainMod, XF86AudioRaiseVolume, exec, pactl set-sink-volume 0 +2%
-bind = $mainMod, F1, exec, pactl set-sink-mute 0 toggle
-bind = $mainMod, F2, exec, pactl set-sink-volume 0 -2%
-bind = $mainMod, F3, exec, pactl set-sink-volume 0 +2%
+# bind = $mainMod, XF86AudioMute, exec, pactl set-sink-mute 0 toggle
+# bind = $mainMod, XF86AudioLowerVolume, exec, pactl set-sink-volume 0 -2%
+# bind = $mainMod, XF86AudioRaiseVolume, exec, pactl set-sink-volume 0 +2%
+# bind = $mainMod, F1, exec, pactl set-sink-mute 0 toggle
+# bind = $mainMod, F2, exec, pactl set-sink-volume 0 -2%
+# bind = $mainMod, F3, exec, pactl set-sink-volume 0 +2%
 #mic
 # pactl set-source-volume 0 +2%
 # pactl set-source-volume 0 -2%
 # pactl set-source-mute 0 1 #mute
 # pactl set-source-mute 0 0 #unmute
 
+# brightness
+bind = , XF86MonBrightnessUp, exec, brightnessctl s +5%
+bind = , XF86MonBrightnessDown, exec, brightnessctl s 5%-
+
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = ALT, o, exec, alacritty
+# bind = ALT, o, exec, alacritty
+bind = ALT, o, exec, kitty
 bind = $mainMod, q, killactive
 bind = ALT, e, exec, emacsclient -c -n -a ""
 bind = ALT, i, exec, /home/solus/idea/bin/idea.sh
@@ -1208,7 +1251,12 @@ bind = $mainMod, J, togglesplit # dwindle
 bind = $mainMod, F, fullscreen, 1 # dwindle
 bind = $mainMod SHIFT, T, exec, sh -c '$HOME/.tor-browser/Browser/start-tor-browser' --detach
 
+# bindsym $mod+Shift+b exec "bluetoothctl disconnect C7:2F:B7:16:A5:57; bluetoothctl connect C7:2F:B7:16:A5:57"
+
+bind = ALT, f, exec, dunstctl close
+
 bind = ALT, c, exec, copyq toggle
+
 # bind = $mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy
 # bind = $mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | ydotool type "`wl-paste`"
 bind= $mainMod, V, exec, cliphist list | wofi --show dmenu -H 1025 -W 1026| cliphist decode | wl-copy && wtype -M ctrl -P v -m ctrl
@@ -1291,12 +1339,12 @@ emacsclient -c -n &
 sleep 3
 hyprctl keyword windowrule "workspace unset,Emacs"
 
-# hyprctl keyword windowrule "workspace 2 silent,Emacs"
-# emacsclient -c -n &
-# sleep 3
-# hyprctl keyword windowrule "workspace unset,Emacs"
+hyprctl keyword windowrule "workspace 2 silent,Emacs"
+emacsclient -c -n &
+sleep 3
+hyprctl keyword windowrule "workspace unset,Emacs"
 
-python3 $HOME/.squats.py &
+# python3 $HOME/.squats.py &
 
 telegram-desktop &
 #+end_src
@@ -2141,8 +2189,8 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
 
 #+begin_src conf :tangle ~/.config/waybar/config
 {
-    "layer": "top", // Waybar at top layer
-    //"position": "top", // Waybar position (top|bottom|left|right)
+    //"layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
     "height": 24, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
@@ -2159,18 +2207,19 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "memory",
         "custom/separator",
         "pulseaudio",
+        //"wireplumber",
         "custom/separator",
         //"network",
         //"hyprland/mode"
         "sway/mode"
     ],
-    //"modules-center": ["hyprland/workspaces"],
-    "modules-center": ["sway/workspaces"],
+    "modules-center": ["hyprland/workspaces"],
+    //"modules-center": ["sway/workspaces"],
     "modules-right": [
         "custom/update",
         "custom/separator",
-        //"hyprland/language",
-        "sway/language",
+        "hyprland/language",
+        //"sway/language",
         "custom/separator",
         "battery",
         "custom/separator",
@@ -2179,8 +2228,8 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "tray"
     ],
     // Modules configuration
-    //"hyprland/workspaces": {
-    "sway/workspaces": {
+    "hyprland/workspaces": {
+    //"sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate",
@@ -2203,15 +2252,15 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         },
         "tooltip": false
     },
-    //"hyprland/language": {
-    "sway/language": {
+    "hyprland/language": {
+    //"sway/language": {
         "format": "{}",
         "format-en": "en",
         "format-ru": "ru",
         "tooltip": false
     },
-    //"hyprland/mode": {
-    "sway/mode": {
+    "hyprland/mode": {
+    //"sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
     "tray": {
@@ -2220,7 +2269,8 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
     },
     "clock": {
         "timezone": "Europe/Moscow",
-        "format": "{: %A, %d %B |  %H:%M}",
+        //"format": "{: %A, %d %B |  %H:%M}",
+        "format": "{:%A, %d %B | %H:%M}",
         "tooltip": false
     },
     "cpu": {
@@ -2232,7 +2282,7 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         "tooltip": false
     },
     "temperature": {
-        //"thermal-zone": 2,
+        "thermal-zone": 2,
         //"hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "hwmon-path": "/sys/class/thermal/thermal_zone0/temp",
         "critical-threshold": 80,
@@ -2269,6 +2319,12 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
         },
         "on-click": "pavucontrol",
         "tooltip": false
+    },
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": "",
+        //"on-click": "helvum",
+        "format-icons": ["", "", ""]
     },
     "disk": {
         "interval": 30,
@@ -2327,21 +2383,21 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
     //    "max-length": 25
     //}
     "battery": {
-            "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% - {time}",
-            "format-icons": ["", "", "", "", ""],
-            "format-time": "{H}h{M}m",
-            "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% - {time}",
-            "format-full": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  Charged",
-            "bat": "BAT0",
-            "interval": 30,
-            "states": {
-                "warning": 25,
-                "critical": 10
-            },
-            "tooltip": false,
-            "on-click": "2"
+        "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% - {time}",
+        "format-icons": ["", "", "", "", ""],
+        "format-time": "{H}h{M}m",
+        "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% - {time}",
+        "format-full": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  Charged",
+        "bat": "BAT0",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
         },
-    }
+        "tooltip": false,
+        "on-click": "2"
+    },
+}
 #+end_src
 
 *** waybar style
@@ -2376,8 +2432,8 @@ window#waybar {
     text-shadow: inherit;
 }
 
-/* #workspaces button.active { */
-#workspaces button.focused {
+#workspaces button.active {
+/* #workspaces button.focused { */
     color: #bc8420;
 }
 
@@ -2398,6 +2454,7 @@ window#waybar {
 #temperature,
 #network,
 #pulseaudio,
+#wireplumber,
 /* #custom-media, */
 #custom-update,
 #tray,
@@ -2980,7 +3037,7 @@ font-1 = FontAwesome6Free:style=Solid:size=10;3
 font-2 = FontAwesome6Brands:style=Solid:size=10;3
 
 ; modules-left = sep filesystem sep memory sep cpu sep eth sep temperature sep alsa sep
-modules-left = sep filesystem sep memory sep cpu sep temperature sep alsa sep
+modules-left = sep filesystem sep memory sep cpu sep temperature sep alsa system-bluetooth-bluetoothctl sep
 modules-center = i3
 ; modules-center = bspwm
 modules-right = sep xkeyboard sep battery date
@@ -3468,6 +3525,16 @@ bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 #+end_src
 
+*** module/system-bluetooth
+
+#+begin_src conf :tangle ~/.config/polybar/config.ini
+[module/system-bluetooth-bluetoothctl]
+type = custom/script
+exec = ~/.config/polybar/system-bluetooth.sh
+tail = true
+click-left = ~/.config/polybar/system-bluetooth.sh --toggle &
+#+end_src
+
 *** module/battery
 
 #+begin_src conf :tangle ~/.config/polybar/config.ini
@@ -3716,6 +3783,89 @@ killall -q polybar
 polybar --config=$HOME/.config/polybar/config.ini example 2>&1 | tee -a /tmp/polybar.log & disown
 
 echo "Polybar launched..."
+#+end_src
+
+** system-bluetooth.sh
+
+#+begin_src sh :tangle ~/.config/polybar/system-bluetooth.sh
+#!/bin/sh
+
+bluetooth_print() {
+    bluetoothctl | grep --line-buffered 'Device\|#' | while read -r REPLY; do
+        if [ "$(systemctl is-active "bluetooth.service")" = "active" ]; then
+            # printf '#1'
+
+            devices_paired=$(bluetoothctl devices Paired | grep Device | cut -d ' ' -f 2)
+            counter=0
+
+            for device in $devices_paired; do
+                device_info=$(bluetoothctl info "$device")
+
+                if echo "$device_info" | grep -q "Connected: yes"; then
+                    device_output=$(echo "$device_info" | grep "Alias" | cut -d ' ' -f 2-)
+                    device_battery_percent=$(echo "$device_info" | grep "Battery Percentage" | awk -F'[()]' '{print $2}')
+
+                    if [ -n "$device_battery_percent" ]; then
+                        if [ "$device_battery_percent" -gt 90 ]; then
+                            device_battery_icon=""
+                        elif [ "$device_battery_percent" -gt 75 ]; then
+                            device_battery_icon=""
+                        elif [ "$device_battery_percent" -gt 50 ]; then
+                            device_battery_icon=""
+                        elif [ "$device_battery_percent" -gt 25 ]; then
+                            device_battery_icon=""
+                        else
+                            device_battery_icon=""
+                        fi
+
+                        # device_output="$device_output $device_battery_icon $device_battery_percent%"
+                        device_output=" $device_battery_icon $device_battery_percent%"
+                    fi
+
+                    if [ $counter -gt 0 ]; then
+                        printf ", %s" "$device_output"
+                    else
+                        printf " %s" "$device_output"
+                    fi
+
+                    counter=$((counter + 1))
+                fi
+            done
+
+            printf '\n'
+        else
+            echo "#2"
+        fi
+    done
+}
+
+bluetooth_toggle() {
+    if bluetoothctl show | grep -q "Powered: no"; then
+        bluetoothctl power on >> /dev/null
+        sleep 1
+
+        devices_paired=$(bluetoothctl devices Paired | grep Device | cut -d ' ' -f 2)
+        echo "$devices_paired" | while read -r line; do
+            bluetoothctl connect "$line" >> /dev/null
+        done
+    else
+        devices_paired=$(bluetoothctl devices Paired | grep Device | cut -d ' ' -f 2)
+        echo "$devices_paired" | while read -r line; do
+            bluetoothctl disconnect "$line" >> /dev/null
+        done
+
+        bluetoothctl power off >> /dev/null
+    fi
+}
+
+case "$1" in
+    --toggle)
+        bluetooth_toggle
+        ;;
+    *)
+        bluetooth_print
+        ;;
+esac
 #+end_src
 
 * Picom
@@ -4119,6 +4269,12 @@ if status is-interactive
 end
 
 # pyenv init - | source
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Java
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+export PATH="$JAVA_HOME/bin:$PATH"
 #+end_src
 
 ** Aliases
@@ -4461,81 +4617,293 @@ error-message {
 }
 #+end_src
 
+* Wofi
+** config
+
+#+begin_src conf :tangle ~/.config/wofi/config
+width=600
+height=365
+location=center
+show=drun
+prompt=Search...
+filter_rate=100
+allow_markup=true
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+insensitive=true
+allow_images=true
+image_size=40
+gtk_dark=true
+layer=overlay
+#+end_src
+
+** style
+
+#+begin_src conf :tangle ~/.config/wofi/style.css
+window {
+    margin: 0px;
+    border: 2px solid #bc8420;
+    background-color: #282a36;
+    border-radius: 18px;
+}
+
+#input {
+    margin: 5px;
+    border: none;
+    color: #f8f8f2;
+    border-radius: 15px;
+    background-color: #44475a;
+}
+
+#inner-box {
+    margin: 5px;
+    border: none;
+    border-radius: 15px;
+    background-color: #282a36;
+}
+
+#outer-box {
+    margin: 5px;
+    border: none;
+    border-radius: 15px;
+    background-color: #282a36;
+}
+
+#scroll {
+    margin: 0px;
+    border-radius: 15px;
+    border: none;
+}
+
+#text {
+    border-radius: 15px;
+    margin: 5px;
+    border: none;
+    color: #f8f8f2;
+}
+
+#entry.activatable #text {
+    color: #282a36;
+}
+
+#entry > * {
+    color: #f8f8f2;
+}
+
+entry:selected {
+    border-radius: 15px;
+    background-color: #44475a;
+}
+
+entry:selected #text {
+    border-radius: 15px;
+}
+#+end_src
+
+** menu
+
+#+begin_src conf :tangle ~/.config/wofi/menu.txt
+# Config for wofi-wifi-menu
+
+# position values:
+# 1 2 3
+# 8 0 4
+# 7 6 5
+POSITION=3
+
+#y-offset
+YOFF=15
+
+#x-offset
+XOFF=-30
+
+#fields to be displayed
+FIELDS=SSID,IN-USE,BARS,SECURITY
+#+end_src
+
 * Terminal
 ** Alacritty
 
-#+begin_src yaml :tangle ~/.config/alacritty.yml
-scrolling:
-  history: 10000
+#+begin_src yaml :tangle ~/.config/alacritty.toml
 
-font:
-  normal:
-    family: JetBrains Mono
-  size: 9.5
-  #size: 6
+## yaml
+#scrolling:
+#  history: 10000
+#
+#font:
+#  normal:
+#    family: JetBrains Mono
+#  size: 9.5
+#  #size: 6
+#
+#colors:
+#  primary:
+#    background: '#282c34'
+#    foreground: '#d8d8d8'
+#
+#  cursor:
+#    text: '#000000'
+#    cursor: '#1ABB9B'
+#
+#  selection:
+#    text: CellBackground
+#    background: CellForeground
+#
+#  search:
+#    matches:
+#      foreground: '#000000'
+#      background: '#ffffff'
+#
+#    footer_bar:
+#      background: '#c5c8c6'
+#      foreground: '#1d1f21'
+#
+#  # Normal colors
+#  normal:
+#    black:   '#1d1f21'
+#    #red:     '#cc6666'
+#    #green:   '#b5bd68'
+#    red:     '#ef5240'
+#    green:   '#fabd2f'
+#    yellow:  '#f0c674'
+#    blue:    '#81a2be'
+#    magenta: '#b294bb'
+#    cyan:    '#8abeb7'
+#    white:   '#c5c8c6'
+#
+#  # Bright colors
+#  bright:
+#    black:   '#666666'
+#    red:     '#d54e53'
+#    green:   '#b9ca4a'
+#    yellow:  '#e7c547'
+#    blue:    '#7aa6da'
+#    magenta: '#c397d8'
+#    cyan:    '#70c0b1'
+#    white:   '#eaeaea'
+#
+#  # Dim colors
+#  #
+#  # If the dim colors are not set, they will be calculated automatically based
+#  # on the `normal` colors.
+#  dim:
+#    black:   '#131415'
+#    red:     '#864343'
+#    green:   '#777c44'
+#    yellow:  '#9e824c'
+#    blue:    '#556a7d'
+#    magenta: '#75617b'
+#    cyan:    '#5b7d78'
+#    white:   '#828482'
+#
+#window:
+#  opacity: 0.95
 
-colors:
-  primary:
-    background: '#282c34'
-    foreground: '#d8d8d8'
 
-  cursor:
-    text: '#000000'
-    cursor: '#1ABB9B'
 
-  selection:
-    text: CellBackground
-    background: CellForeground
 
-  search:
-    matches:
-      foreground: '#000000'
-      background: '#ffffff'
 
-    footer_bar:
-      background: '#c5c8c6'
-      foreground: '#1d1f21'
+ [colors.bright]
+black = "#666666"
+blue = "#7aa6da"
+cyan = "#70c0b1"
+green = "#b9ca4a"
+magenta = "#c397d8"
+red = "#d54e53"
+white = "#eaeaea"
+yellow = "#e7c547"
 
-  # Normal colors
-  normal:
-    black:   '#1d1f21'
-    #red:     '#cc6666'
-    #green:   '#b5bd68'
-    red:     '#ef5240'
-    green:   '#fabd2f'
-    yellow:  '#f0c674'
-    blue:    '#81a2be'
-    magenta: '#b294bb'
-    cyan:    '#8abeb7'
-    white:   '#c5c8c6'
+[colors.cursor]
+cursor = "#1ABB9B"
+text = "#000000"
 
-  # Bright colors
-  bright:
-    black:   '#666666'
-    red:     '#d54e53'
-    green:   '#b9ca4a'
-    yellow:  '#e7c547'
-    blue:    '#7aa6da'
-    magenta: '#c397d8'
-    cyan:    '#70c0b1'
-    white:   '#eaeaea'
+[colors.dim]
+black = "#131415"
+blue = "#556a7d"
+cyan = "#5b7d78"
+green = "#777c44"
+magenta = "#75617b"
+red = "#864343"
+white = "#828482"
+yellow = "#9e824c"
 
-  # Dim colors
-  #
-  # If the dim colors are not set, they will be calculated automatically based
-  # on the `normal` colors.
-  dim:
-    black:   '#131415'
-    red:     '#864343'
-    green:   '#777c44'
-    yellow:  '#9e824c'
-    blue:    '#556a7d'
-    magenta: '#75617b'
-    cyan:    '#5b7d78'
-    white:   '#828482'
+[colors.normal]
+black = "#1d1f21"
+blue = "#81a2be"
+cyan = "#8abeb7"
+green = "#fabd2f"
+magenta = "#b294bb"
+red = "#ef5240"
+white = "#c5c8c6"
+yellow = "#f0c674"
 
-window:
-  opacity: 0.95
+[colors.primary]
+background = "#282c34"
+foreground = "#d8d8d8"
+
+# [colors.search.footer_bar]
+# background = "#c5c8c6"
+# foreground = "#1d1f21"
+
+[colors.search.matches]
+background = "#ffffff"
+foreground = "#000000"
+
+[colors.selection]
+background = "CellForeground"
+text = "CellBackground"
+
+[font]
+#size = 9.5
+size = 6
+
+[font.normal]
+family = "JetBrains Mono"
+
+[scrolling]
+history = 10000
+
+[window]
+opacity = 0.95
+#+end_src
+
+** kitty
+
+#+begin_src conf :tangle ~/.config/kitty/kitty.conf
+#: Fonts {{{
+
+font_family      JetBrains Mono
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+
+font_size 10.0
+
+# }}}
+
+
+#: Cursor customization {{{
+
+cursor #1ABB9B
+cursor_text_color #000000
+cursor_shape block
+
+# }}}
+
+
+#: Color scheme {{{
+
+background #282c34
+foreground #d8d8d8
+
+#: The foreground and background colors.
+
+background_opacity 0.95
+
+#: }}}
+
 #+end_src
 
 * Ideavimrc
@@ -4544,6 +4912,10 @@ window:
 #+begin_src vimrc :tangle ~/.ideavimrc
 set ideajoin
 set number relativenumber
+
+" turn of bell sound
+set visualbell
+set noerrorbells
 
 " <SPC> as the leader key
 let mapleader = " "
@@ -4880,13 +5252,13 @@ qsettings
 #xhost +SI:localuser:$USER
 
 # Set themes, etc.
-gnome-settings-daemon &
+# gnome-settings-daemon &
 
 # Set fallback cursor.
-xsetroot -cursor_name left_ptr
+# xsetroot -cursor_name left_ptr
 
 # Set keyboard repeat rate.
-xset r rate 200 60
+# xset r rate 200 60
 
 # If Emacs is started in server mode, `emacsclient` is a convenient way to
 # edit files in place (used by e.g. `git commit`).
@@ -4899,6 +5271,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # exec sxhkd &
 # exec bspwm
+exec i3
 # exec qtile start
 #+end_src
 
