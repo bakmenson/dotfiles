@@ -216,14 +216,15 @@ mode "resize" {
 *** output
 
 #+begin_src  conf :tangle ~/.config/i3/config
-workspace 1 output HDMI-A-0
-workspace 2 output HDMI-A-0
-workspace 3 output HDMI-A-0
-workspace 4 output HDMI-A-0
-workspace 5 output HDMI-A-0
-workspace 6 output HDMI-A-0
-workspace 7 output HDMI-A-0
-workspace 8 output HDMI-A-0
+workspace 1 output HDMI-1
+workspace 2 output HDMI-1
+workspace 3 output HDMI-1
+workspace 4 output HDMI-1
+workspace 5 output HDMI-1
+workspace 6 output HDMI-1
+workspace 7 output HDMI-1
+# workspace 8 output HDMI-1
+workspace 8 output eDP-1
 #+end_src
 
 *** names
@@ -321,7 +322,7 @@ bindsym $mod+d exec rofi -show drun -modi drun -display-drun "Run"
 
 #+begin_src conf :tangle ~/.config/i3/config
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+# bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # pycharm
@@ -352,6 +353,10 @@ bindsym $mod+Shift+t exec --no-startup-id sh -c '$HOME/.tor-browser/Browser/star
 # bindsym $mod+Shift+b exec "bluetoothctl disconnect C7:2F:B7:16:A5:57; bluetoothctl connect C7:2F:B7:16:A5:57"
 
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/polybar/polybar.sh
+
+
+# toggle monitors
+bindsym $mod+Shift+h exec --no-startup-id $HOME/.toggle-monitors.sh
 #+end_src
 
 ** i3
@@ -421,7 +426,7 @@ for_window [class="Transmission"] floating enable border pixel 1
 for_window [class="mpv"] floating enable, resize set 1200 800, move position center
 for_window [class="ffplay"] floating enable, resize set 1200 800, move position center
 for_window [class="Tor"] floating enable, resize set 1600 1020, move position center
-# for_window [class="TelegramDesktop"] floating enable, resize set 930 1020, move position center
+for_window [class="TelegramDesktop"] floating enable, resize set 1225 970, move position center
 for_window [class="Alacritty"] floating enable, resize set 1200 800, move position center
 for_window [class="kitty"] floating enable, resize set 1200 800, move position center
 for_window [class="copyq"] floating enable, resize set 1025 1026, move position center
@@ -435,8 +440,11 @@ exec --no-startup-id xfce4-power-manager
 
 # exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
 # exec --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output eDP-1 --off
+exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --rotate normal --output HDMI-1 --off
 
-exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
+# exec --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output eDP-1 --auto --left-of HDMI-1
+
+# exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
 exec_always picom --config ~/.config/picom.conf
 # --bg-fill, --bg-scale
 # exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
@@ -480,13 +488,18 @@ exec --no-startup-id "sleep 7; i3-msg 'workspace 5; exec telegram-desktop'"
 # exec --no-startup-id "sleep 12; i3-msg 'workspace 1; exec alacritty -e nnn -S'"
 #exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec google-chrome'"
 #exec --no-startup-id "sleep 12; i3-msg 'workspace 5; exec telegram-desktop'"
+
+
+# exec --no-startup-id "sleep 30; exec xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output
+# eDP-1 --auto --left-of HDMI-1"
+exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
 #+end_src
 
 ** Theme colors
 
 #+begin_src conf :tangle ~/.config/i3/config
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #556064 #556064 #80FFF9 #FDF6E3
+  client.focused          #556064 #bc8420 #80FFF9 #FDF6E3
   client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
   client.unfocused        #282c34 #282c34 #1ABC9C #454948
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
@@ -979,13 +992,17 @@ include /etc/sway/config.d/*
 # monitor=,preferred,auto,1
 # monitor=LVDS-1, 1366x768, 0x0, 1, transform, 1
 
-monitor=eDP-1, disabled
-monitor=HDMI-A-1, 1920x1080, auto, 1
+monitor=HDMI-A-1, disabled
+# monitor=HDMI-A-1, 1920x1080, auto, 1
+# monitor=HDMI-A-1, 1920x1080, 0x0, 1
+# monitor=HDMI-A-1, 1920x1080, 1920x0, 1
 
 # monitor=,preferred,auto,1
 
-# monitor=HDMI-A-1, disabled
-# monitor=eDP-1, 1920x1080, auto, 1
+monitor=eDP-1, 1920x1080, auto, 1
+# monitor=eDP-1, disabled
+# monitor=eDP-1, 1920x1080, 0x0, 1
+# monitor=eDP-1, 1920x1080, 1920x0, 1
 #+end_src
 
 ** Apps at launch
@@ -996,8 +1013,8 @@ exec-once = emacs --fg-daemon
 # exec-once = swaybg -i /run/media/solus/hdd/Pictures/wallpapers/27.jpg -m fill
 exec-once = swaybg -o \* -i $(find /home/solus/Pictures/wallpapers -type f | shuf -n 1) -m fill
 exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-# exec-once=dbus-update-activation-environment --all
-exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once=dbus-update-activation-environment --all
+# exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = dunst -mouse_left_click
 exec-once = waybar
 # exec-once = wireplumber
@@ -1007,7 +1024,11 @@ exec-once = blueman-applet
 exec-once = yandex-browser-stable
 # exec-once = copyq --start-server
 exec-once = env QT_QPA_PLATFORM=xcb copyq --start-server
+
+exec-once = clipse -listen
+# exec-once = wl-clipboard-history -t
 # exec-once = wl-paste --watch cliphist store
+
 # exec-once = qutebrowser
 exec-once = /home/solus/idea/bin/idea.sh
 # exec-once = transmission-qt -m
@@ -1169,7 +1190,7 @@ $mainMod = SUPER
 # workspace = name:6, monitor:VGA-1
 # workspace = name:7, monitor:VGA-1
 # workspace = name:8, monitor:VGA-1
-# workspace = name:9, monitor:VGA-1
+workspace = name:9, monitor:eDP-1
 
 # Example windowrule v2
 # windowrulev2 = float, size 1200 800, class:^(Alacritty)$
@@ -1259,10 +1280,8 @@ bind = ALT, c, exec, copyq toggle
 
 # bind = $mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy
 # bind = $mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | ydotool type "`wl-paste`"
-bind= $mainMod, V, exec, cliphist list | wofi --show dmenu -H 1025 -W 1026| cliphist decode | wl-copy && wtype -M ctrl -P v -m ctrl
-
-# Turn Off monitor LVDS-1
-# bind = $mainMod SHIFT, O, exec, hyprctl dispatch dpms off LVDS-1
+# bind= $mainMod, V, exec, cliphist list | wofi --show dmenu -H 1025 -W 1026| cliphist decode | wl-copy && wtype -M ctrl -P v -m ctrl
+bind = $mainMod, V, exec, kitty -e fish -c 'clipse'
 
 # Whole screen
 bind = $mainMod SHIFT, F10, exec, grim
@@ -2194,9 +2213,9 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
     "height": 24, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    //"output": "HDMI-A-1",
-    "output": ["eDP-1", "HDMI-A-1"],
-    //"output": ["LVDS-1", "VGA-1,", "eDP-1", "HDMI-A-1"],
+    "output": "HDMI-A-1",
+    //"output": "eDP-1",
+    //"output": ["eDP-1", "HDMI-A-1"],
     "modules-left": [
         "disk",
         //"custom/hdd",
@@ -3007,7 +3026,9 @@ alert = #bd2c40
 [bar/example]
 ; monitor = ${env:MONITOR:HDMI-1}
 ; monitor = eDP
+; monitor = eDP-1
 ; monitor = HDMI-A-0
+; monitor = HDMI-1
 ; monitor = VGA-1
 ; monitor = LVDS-1
 width = 100%
@@ -3532,7 +3553,8 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = custom/script
 exec = ~/.config/polybar/system-bluetooth.sh
 tail = true
-click-left = ~/.config/polybar/system-bluetooth.sh --toggle &
+# click-left = ~/.config/polybar/system-bluetooth.sh --toggle &
+interval = 60
 #+end_src
 
 *** module/battery
@@ -4267,6 +4289,13 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
+
+# Start X at login
+# if status is-login
+#    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+#        exec startx -- -keeptty
+#    end
+# end
 
 # pyenv init - | source
 
@@ -5672,4 +5701,19 @@ from subprocess import run
 for i in range(1, 11):
     sleep(3600)
     run(["notify-send", f"Do Squats!!! {i}th set."])
+#+end_src
+
+** toggle monitors
+
+#+begin_src shell :tangle ~/.toggle-monitors.sh
+#!/bin/sh
+
+lenovo="eDP-1"
+lg="HDMI-1"
+
+if (xrandr | grep "$lenovo connected primary"); then
+    xrandr --output $lg --primary --mode 1920x1080 --rotate normal --output $lenovo --off && setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll
+else
+    xrandr --output $lenovo --primary --mode 1920x1080 --rotate normal --output $lg --off && setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll
+fi
 #+end_src
