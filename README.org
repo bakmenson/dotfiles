@@ -329,7 +329,7 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 #bindsym $alt+p exec ~/pycharm-community/bin/pycharm.sh
 
 # idea
-bindsym $alt+i exec --no-startup-id ~/idea/bin/idea.sh
+bindsym $alt+i exec --no-startup-id ~/idea/bin/idea
 
 # Screenshot fullscreen
 bindsym $mod+Shift+F10 exec --no-startup-id scrot -e "mv $f ~/Pictures"
@@ -394,16 +394,17 @@ mode "$mode_system" {
 
 #+begin_src conf :tangle ~/.config/i3/config
 # Pulse Audio controls
-#bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
-#bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
-#bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +2%
+bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -2%
+bindsym $mod+F4 exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # bindsym $mod+F2 exec --no-startup-id "amixer -q set Master 2%- unmute"
 # bindsym $mod+F3 exec --no-startup-id "amixer -q set Master 2%+ unmute"
 # bindsym $mod+F4 exec --no-startup-id "amixer -q set Master toggle"
-bindsym $mod+F2 exec --no-startup-id "amixer -D pulse sset Master 2%-"
-bindsym $mod+F3 exec --no-startup-id "amixer -D pulse sset Master 2%+"
-bindsym $mod+F4 exec --no-startup-id "amixer -D pulse sset Master toogle"
+
+# bindsym $mod+F2 exec --no-startup-id "amixer -D pulse sset Master 2%-"
+# bindsym $mod+F3 exec --no-startup-id "amixer -D pulse sset Master 2%+"
+# bindsym $mod+F4 exec --no-startup-id "amixer -D pulse sset Master toogle"
 
 # Switch between speakers and headphones
 # bindsym $mod+F5 exec --no-startup-id "amixer -c 0 set 'Auto-Mute Mode' Disabled"
@@ -438,13 +439,12 @@ for_window [class="copyq"] floating enable, resize set 1025 1026, move position 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
 
-# exec --no-startup-id xrandr --output HDMI-A-0 --primary --mode 1920x1080 --rotate normal --output eDP --off
 # exec --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output eDP-1 --off
 exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --rotate normal --output HDMI-1 --off
-
 # exec --no-startup-id xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output eDP-1 --auto --left-of HDMI-1
 
-# exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
+exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
+
 exec_always picom --config ~/.config/picom.conf
 # --bg-fill, --bg-scale
 # exec_always feh --randomize --bg-fill /run/media/solus/hdd/Pictures/wallpapers/*
@@ -455,16 +455,18 @@ exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id emacs --fg-daemon
 exec --no-startup-id copyq
 exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
+# exec --no-startup-id blueman-applet
 
 # https://github.com/savedra1/clipse.git
 # exec --no-startup-id clipse -listen
 
 # exec --no-startup-id python3 ~/.squats.py
 
+# exec --no-startup-id "sleep 25; i3-msg 'workspace 2; exec kitty -e yazi'"
 exec --no-startup-id "sleep 25; i3-msg 'workspace 2; exec emacsclient -c -n -a \"\"'"
 exec --no-startup-id "sleep 16; i3-msg 'workspace 1; exec emacsclient -c -n -a \"\"'"
-exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec ~/idea/bin/idea.sh'"
+# exec --no-startup-id "sleep 16; i3-msg 'workspace 1; exec emacs'"
+exec --no-startup-id "sleep 18; i3-msg 'workspace 3; exec ~/idea/bin/idea'"
 # exec --no-startup-id "sleep 15; i3-msg 'workspace 3; exec idea'"
 # exec --no-startup-id "sleep 12; i3-msg 'workspace 3; exec chromium'"
 # exec --no-startup-id "sleep 2; i3-msg 'workspace 4; exec firefox'"
@@ -488,11 +490,6 @@ exec --no-startup-id "sleep 7; i3-msg 'workspace 5; exec telegram-desktop'"
 # exec --no-startup-id "sleep 12; i3-msg 'workspace 1; exec alacritty -e nnn -S'"
 #exec --no-startup-id "sleep 1; i3-msg 'workspace 4; exec google-chrome'"
 #exec --no-startup-id "sleep 12; i3-msg 'workspace 5; exec telegram-desktop'"
-
-
-# exec --no-startup-id "sleep 30; exec xrandr --output HDMI-1 --primary --mode 1920x1080 --rotate normal --output
-# eDP-1 --auto --left-of HDMI-1"
-exec --no-startup-id "sleep 3; setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll"
 #+end_src
 
 ** Theme colors
@@ -992,15 +989,15 @@ include /etc/sway/config.d/*
 # monitor=,preferred,auto,1
 # monitor=LVDS-1, 1366x768, 0x0, 1, transform, 1
 
-monitor=HDMI-A-1, disabled
-# monitor=HDMI-A-1, 1920x1080, auto, 1
+# monitor=HDMI-A-1, disabled
+monitor=HDMI-A-1, 1920x1080, auto, 1
 # monitor=HDMI-A-1, 1920x1080, 0x0, 1
 # monitor=HDMI-A-1, 1920x1080, 1920x0, 1
 
 # monitor=,preferred,auto,1
 
-monitor=eDP-1, 1920x1080, auto, 1
-# monitor=eDP-1, disabled
+# monitor=eDP-1, 1920x1080, auto, 1
+monitor=eDP-1, disabled
 # monitor=eDP-1, 1920x1080, 0x0, 1
 # monitor=eDP-1, 1920x1080, 1920x0, 1
 #+end_src
@@ -1012,17 +1009,22 @@ exec-once=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec-once = emacs --fg-daemon
 # exec-once = swaybg -i /run/media/solus/hdd/Pictures/wallpapers/27.jpg -m fill
 exec-once = swaybg -o \* -i $(find /home/solus/Pictures/wallpapers -type f | shuf -n 1) -m fill
-exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec-once=dbus-update-activation-environment --all
+# exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = dbus-update-activation-environment --all
 # exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = dunst -mouse_left_click
+
+# для корректной работы переключения языка в copyq
+exec-once = setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_toggle,grp_led:scroll
+
 exec-once = waybar
 # exec-once = wireplumber
 exec-once = nm-applet
-exec-once = blueman-applet
+# exec-once = blueman-applet
 # exec-once = firefox
 exec-once = yandex-browser-stable
 # exec-once = copyq --start-server
+# exec-once = env QT_QPA_PLATFORM=wayland copyq --start-server
 exec-once = env QT_QPA_PLATFORM=xcb copyq --start-server
 
 exec-once = clipse -listen
@@ -1030,7 +1032,7 @@ exec-once = clipse -listen
 # exec-once = wl-paste --watch cliphist store
 
 # exec-once = qutebrowser
-exec-once = /home/solus/idea/bin/idea.sh
+exec-once = /home/solus/idea/bin/idea
 # exec-once = transmission-qt -m
 
 exec-once=/home/solus/.config/hypr/startup.sh
@@ -1082,8 +1084,6 @@ general {
     layout = dwindle
 
     # max_fps=60
-
-    cursor_inactive_timeout = 1
 }
 #+end_src
 
@@ -1091,7 +1091,6 @@ general {
 
 #+begin_src conf :tangle ~/.config/hypr/hyprland.conf
 # See https://wiki.hyprland.org/Configuring/Variables/ for more
-# cursor_inactive_timeout = 0
 decoration {
 
     rounding = 10
@@ -1110,6 +1109,15 @@ decoration {
 
     # dim_inactive = 1
     # dim_strength = 0.5
+}
+#+end_src
+
+*** cursor
+
+#+begin_src conf :tangle ~/.config/hypr/hyprland.conf
+# See https://wiki.hyprland.org/Configuring/Variables/ for more
+cursor {
+   inactive_timeout = 1
 }
 #+end_src
 
@@ -1149,7 +1157,7 @@ dwindle {
 #+begin_src conf :tangle ~/.config/hypr/hyprland.conf
 # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
 master {
-    new_is_master = true
+    new_status = master
     no_gaps_when_only = true
     inherit_fullscreen = true
 }
@@ -1190,7 +1198,7 @@ $mainMod = SUPER
 # workspace = name:6, monitor:VGA-1
 # workspace = name:7, monitor:VGA-1
 # workspace = name:8, monitor:VGA-1
-workspace = name:9, monitor:eDP-1
+# workspace = name:9, monitor:eDP-1
 
 # Example windowrule v2
 # windowrulev2 = float, size 1200 800, class:^(Alacritty)$
@@ -1210,9 +1218,12 @@ windowrulev2 = float, class:^(transmission-qt)$
 windowrulev2 = size 1200 800, class:^(transmission-qt)$
 windowrulev2 = center, class:^(transmission-qt)$
 
+# exec-once = env QT_QPA_PLATFORM=wayland copyq --start-server
 # windowrulev2 = float, class:^(com.github.hluk.copyq)$
 # windowrulev2 = size 957 1026, class:^(com.github.hluk.copyq)$
 # windowrulev2 = center, class:^(com.github.hluk.copyq)$
+
+# # exec-once = env QT_QPA_PLATFORM=xcb copyq --start-server
 windowrulev2 = float, class:^(copyq)$
 windowrulev2 = size 1025 1026, class:^(copyq)$
 windowrulev2 = center, class:^(copyq)$
@@ -1223,10 +1234,16 @@ windowrulev2 = center, class:^(mpv)$
 
 windowrulev2 = workspace 3, class:^(jetbrains-idea-ce)$
 # windowrulev2 = workspace 4, class:^(firefox)$
-windowrulev2 = workspace 4, class:^(Yandex-browser)$
+# windowrulev2 = workspace 4, class:^(Yandex-browser)$
+windowrulev2 = workspace 4, title:^(Yandex-browser)$
 windowrulev2 = workspace 4, class:^(qutebrowser)$
+
 # windowrulev2 = workspace 5 silent, class:^(telegramdesktop)$
 windowrulev2 = workspace 5 silent, class:^(org.telegram.desktop)$
+windowrulev2 = float, class:^(org.telegram.desktop)$
+windowrulev2 = size 1225 970, class:^(org.telegram.desktop)$
+windowrulev2 = center, class:^(org.telegram.desktop)$
+
 windowrulev2 = opacity 0.97 0.97, class:^(Emacs)$
 #+end_src
 
@@ -1263,7 +1280,7 @@ bind = , XF86MonBrightnessDown, exec, brightnessctl s 5%-
 bind = ALT, o, exec, kitty
 bind = $mainMod, q, killactive
 bind = ALT, e, exec, emacsclient -c -n -a ""
-bind = ALT, i, exec, /home/solus/idea/bin/idea.sh
+bind = ALT, i, exec, /home/solus/idea/bin/idea
 bind = $mainMod, M, exit
 bind = $mainMod, Space, togglefloating
 bind = $mainMod, D, exec, wofi --show drun
@@ -2213,9 +2230,9 @@ setxkbmap -option caps:swapescape -layout us,ru -variant -option grp:alt_shift_t
     "height": 24, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "output": "HDMI-A-1",
+    //"output": "HDMI-A-1",
     //"output": "eDP-1",
-    //"output": ["eDP-1", "HDMI-A-1"],
+    "output": ["HDMI-A-1", "eDP-1"],
     "modules-left": [
         "disk",
         //"custom/hdd",
@@ -3058,7 +3075,7 @@ font-1 = FontAwesome6Free:style=Solid:size=10;3
 font-2 = FontAwesome6Brands:style=Solid:size=10;3
 
 ; modules-left = sep filesystem sep memory sep cpu sep eth sep temperature sep alsa sep
-modules-left = sep filesystem sep memory sep cpu sep temperature sep alsa system-bluetooth-bluetoothctl sep
+modules-left = sep filesystem sep memory sep cpu sep temperature sep alsa sep
 modules-center = i3
 ; modules-center = bspwm
 modules-right = sep xkeyboard sep battery date
@@ -3809,7 +3826,7 @@ echo "Polybar launched..."
 
 ** system-bluetooth.sh
 
-#+begin_src sh :tangle ~/.config/polybar/system-bluetooth.sh
+#+begin_src sh :tangle no
 #!/bin/sh
 
 bluetooth_print() {
